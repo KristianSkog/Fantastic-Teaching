@@ -8,7 +8,7 @@ session_start();
     <title>Fantastic Teaching</title>
   </head>
   <body>
-Teaching
+<P>Teaching</P>
   </body>
 </html>
 
