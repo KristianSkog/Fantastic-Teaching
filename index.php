@@ -6,6 +6,9 @@ $data= [
 /*'twigvar' => $object->method(),*/
 	];
 
+
+$query = "SELECT id FROM users WHERE users.username = $_GET['username'] AND users.password = $_GET['password']";
+
 //Läser in Twig
 require_once 'Twig/lib/Twig/Autoloader.php';
 Twig_Autoloader::register();
@@ -16,7 +19,6 @@ echo $twig->render('index.html', $data);
 }
 else{
 	echo $twig->render('login.html', $data);
-
 }
 
 //Läser in klasser
