@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+echo "Erik testar";
+
 $data= [
 	'title' => "Titel på sidan"
 /*'twigvar' => $object->method(),*/
