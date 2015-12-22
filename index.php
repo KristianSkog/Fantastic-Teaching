@@ -21,8 +21,8 @@ $data= [
 $mysqli = new mysqli("localhost", "root", "root", "fantastic_teaching");
 
 //Tvättar username och password innan vi skickar fråga till databas
-$cleanUsername = $mysqli->real_escape_string($_GET['username']);//byt till post sedan
-$cleanPassword = $mysqli->real_escape_string($_GET['password']); //byt till post sedan
+$cleanUsername = $mysqli->real_escape_string($_POST['username']);
+$cleanPassword = $mysqli->real_escape_string($_POST['password']);
 
 
 // fråga till sql-db med tvättade variabler
