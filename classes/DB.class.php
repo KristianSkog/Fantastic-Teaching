@@ -9,7 +9,7 @@ class DB{
 
 	public static function getInstance(){
 		if(!self::$instance){
-			self::$instance = new mysqli("localhost","root","","fantastic_teaching");
+			self::$instance = new mysqli("localhost", "root", "root", "fantastic_teaching");
 			return self::$instance;
 		}else{
 			return self::$instance;

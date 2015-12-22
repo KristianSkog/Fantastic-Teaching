@@ -17,8 +17,8 @@ $data= [
 	]; //lista med twig-värden avsluts-tagg
 
 
-// skapa ny uppkoppling till databasen - ska sedan objektorienteras
-$mysqli = new mysqli("localhost", "root", "root", "fantastic_teaching");
+// hämtar instans av uppkoppling till databasen ur klassen DB
+$mysqli = DB::getInstance();
 
 //Tvättar username och password innan vi skickar fråga till databas
 $cleanUsername = $mysqli->real_escape_string($_POST['username']);
