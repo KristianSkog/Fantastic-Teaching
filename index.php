@@ -17,12 +17,13 @@ $data= [
 	]; //lista med twig-värden avsluts-tagg
 
 
-// hämtar instans av uppkoppling till databasen ur klassen DB
+//instans av db-uppkoppling
 $mysqli = DB::getInstance();
 
+
 //Tvättar username och password innan vi skickar fråga till databas
-$cleanUsername = $mysqli->real_escape_string($_POST['username']);
-$cleanPassword = $mysqli->real_escape_string($_POST['password']);
+$cleanUsername = Cleaner::cleanVar($_POST['username']);
+$cleanPassword = Cleaner::cleanVar($_POST['password']);
 
 
 // fråga till sql-db med tvättade variabler
