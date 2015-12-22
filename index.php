@@ -4,9 +4,7 @@ session_start();
 //om logga ut finns i get - unsetta innan något printas på sajten
 if (isset($_GET['logout'])) {
 	unset($_SESSION['userID']);
-	unset($_SESSION['username']);
 }
-
 
 //dynamiskt innehåll twig kan visa
 $data= [
@@ -16,45 +14,22 @@ $data= [
 	*/
 	]; //lista med twig-värden avsluts-tagg
 
-
 //instans av db-uppkoppling
 $mysqli = DB::getInstance();
-
 
 //Tvättar username och password innan vi skickar fråga till databas
 $cleanUsername = Cleaner::cleanVar($_POST['username']);
 $cleanPassword = Cleaner::cleanVar($_POST['password']);
-
-
-// fråga till sql-db med tvättade variabler
-$query = "
-SELECT users.id, users.username
-FROM users 
-WHERE username='".$cleanUsername."' 
-AND password='".$cleanPassword."'
-";
-
-
-//Om resultat finns ur databasen, lagra ID o username i session
-if($result = $mysqli->query($query)){
-	while( $row = $result->fetch_assoc() ){
-		$_SESSION['userID'] = $row['id'];
-		$_SESSION['username'] = $row['username'];
-	}
-}else{
-	echo $mysqli->error;
-}
-
+$user = new User($cleanUsername, $cleanPassword);
 
 //Om inloggad - skriv ut välkommen och logga ut-knapp
 if (isset($_SESSION['userID'])) {
-echo "Välkommen <b>".$_SESSION['username']."</b>";
+echo "Välkommen <b>".$user->getUsername()."</b>";
 echo '
 	<form method="get" action="">
-	<button type="submit" name="logout" value="'.$_SESSION['userID'].'">Logout '.$_SESSION['username'].'</button>
+	<button type="submit" name="logout" value="'.$_SESSION['userID'].'">Logout '.$user->getUsername().'</button>
 	</form>';
 }
-
 
 //Läser in Twig
 require_once 'Twig/lib/Twig/Autoloader.php';
@@ -67,7 +42,6 @@ if (isset($_SESSION['userID'])) {
 else {
 	echo $twig->render('login.html', $data);
 }
-
 
 //Läser in klasser
 function __autoload($x) {
