@@ -26,7 +26,7 @@ if (isset($_SESSION['userID'])) {
 	$data= [
 	'title' => "Titel på sidan",
 	'user' => $user->getUsername(),
-	'sessionName' => $_SESSION['userID']
+	'sessionUserID' => $_SESSION['userID']
 	]; //data-array till twig avslutas
 }
 
