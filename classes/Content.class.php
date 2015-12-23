@@ -9,6 +9,9 @@ class Content{
 
 	    // LÄGGER TILL I DATABASEN PÅ VALDA POSITIONER
 	    $sql="INSERT INTO content (title, text) VALUES ('$title','$text')";
+	    $mysqli->query($sql);
+
+
 	}//stänger addContent
 
 }//stänger klassen
