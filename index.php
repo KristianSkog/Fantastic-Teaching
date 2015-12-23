@@ -2,36 +2,35 @@
 session_start();
 
 //om logga ut finns i get - unsetta innan något printas på sajten
-if (isset($_GET['logout'])) {
-	unset($_SESSION['userID']);
-}
-
-//dynamiskt innehåll twig kan visa
-$data= [
-	'title' => "Titel på sidan"
-/*om man vill lägga in det returnerade värdet ur ett objekts metod skriver man såhär:
-	'twigvar' => $object->method()
-	*/
-	]; //lista med twig-värden avsluts-tagg
+if (isset($_GET['logout'])) unset($_SESSION['userID']);
 
 //instans av db-uppkoppling
 $mysqli = DB::getInstance();
 
 //Tvättar username och password innan vi skickar fråga till databas
-$cleanUsername = Cleaner::cleanVar($_POST['username']);
-$cleanPassword = Cleaner::cleanVar($_POST['password']);
-$user = new User($cleanUsername, $cleanPassword);
+if (isset($_POST['username'])) $cleanUsername = Cleaner::cleanVar($_POST['username']);
+if (isset($_POST['password'])) $cleanPassword = Cleaner::cleanVar($_POST['password']);
+if (isset($cleanUsername)) $user = new User($cleanUsername, $cleanPassword);
 
-//Om inloggad - skriv ut välkommen och logga ut-knapp
-if (isset($_SESSION['userID'])) {
-echo "Välkommen <b>".$user->getUsername()."</b>";
-echo '
-	<form method="get" action="">
-	<button type="submit" name="logout" value="'.$_SESSION['userID'].'">Logout '.$user->getUsername().'</button>
-	</form>';
+//Om vi har inloggad användare - visa detta:
+if (!isset($_SESSION['userID'])) {
+	//data twig använder (i array):
+	$data= [
+	'title' => "Titel på sidan",
+	]; //data-array till twig avslutas
 }
 
-//Läser in Twig
+//Om vi har inloggad användare - visa detta:
+if (isset($_SESSION['userID'])) {
+	//data twig använder (i array):
+	$data= [
+	'title' => "Titel på sidan",
+	'user' => $user->getUsername(),
+	'sessionName' => $_SESSION['userID']
+	]; //data-array till twig avslutas
+}
+
+//Läser in Twig och renderar templates
 require_once 'Twig/lib/Twig/Autoloader.php';
 Twig_Autoloader::register();
 $loader = new Twig_Loader_Filesystem('templates/');
@@ -43,7 +42,7 @@ else {
 	echo $twig->render('login.html', $data);
 }
 
-//Läser in klasser
+//Läser in klass-filer
 function __autoload($x) {
 	include 'classes/'.$x.'.class.php';
 }
