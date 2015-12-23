@@ -27,13 +27,13 @@ INSERT INTO `content` (`title`, `text`, `content_id`) VALUES
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) COLLATE utf8_bin NOT NULL,
-  `password` varchar(30) COLLATE utf8_bin NOT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) COLLATE utf8_bin NOT NULL,
+  `password` char(128) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `users` (`id`, `username`, `password`) VALUES
-(1,	'erik',	'123');
+(1,	'admin',	'admin');
 
--- 2015-12-23 11:05:35
+-- 2015-12-23 11:13:41
