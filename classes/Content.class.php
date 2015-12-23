@@ -1,18 +1,17 @@
 <?php
+class Content{
 
-class content{
+		function addContent($title, $text){
+		//instans av db-uppkoppling
+		$mysqli = DB::getInstance();
+	    $title = $mysqli->real_escape_string($title);
+	    $text = $mysqli->real_escape_string($text);
 
-	private $content;
+	    // LÄGGER TILL I DATABASEN PÅ VALDA POSITIONER
+	    $sql="INSERT INTO content (title, text) VALUES ('$title','$text')";
+	}//stänger addContent
 
-	function __construct($content){
-		$this->content=$content;
+}//stänger klassen
+?>
 
-	}
-
-	function addContent(){
-
-
-	} 
-
-}
 

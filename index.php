@@ -2,17 +2,21 @@
 session_start();
 
 //om logga ut finns i get - unsetta innan något printas på sajten
-if (isset($_GET['logout'])) unset($_SESSION['userID']);
+if (isset($_GET['logout'])){
+	unset($_SESSION['userID']);
+}
 
 //instans av db-uppkoppling
 $mysqli = DB::getInstance();
 
+if (isset($_POST['username'])) {
 //Tvättar username och password innan vi skickar fråga till databas
-if (isset($_POST['username'])) $cleanUsername = Cleaner::cleanVar($_POST['username']);
-if (isset($_POST['password'])) $cleanPassword = Cleaner::cleanVar($_POST['password']);
-if (isset($cleanUsername)) $user = new User($cleanUsername, $cleanPassword);
+	if (isset($_POST['username']))$cleanUsername = Cleaner::cleanVar($_POST['username']);
+	if (isset($_POST['password']))$cleanPassword = Cleaner::cleanVar($_POST['password']);
+	account::logIn($cleanUsername, $cleanPassword);
+}
 
-//Om vi har inloggad användare - visa detta:
+//Om vi inte har inloggad användare - visa detta:
 if (!isset($_SESSION['userID'])) {
 	//data twig använder (i array):
 	$data= [
@@ -25,10 +29,14 @@ if (isset($_SESSION['userID'])) {
 	//data twig använder (i array):
 	$data= [
 	'title' => "Titel på sidan",
-	'user' => $user->getUsername(),
+	'user' => $_SESSION['username'],
 	'sessionUserID' => $_SESSION['userID']
 	]; //data-array till twig avslutas
 }
+
+//anropas från tex index.php:
+if(isset($_POST['postContent'])) $content = new Content();
+if(isset($_POST['postContent'])) $content->addContent($_POST['title'], $_POST['text']);
 
 //Läser in Twig och renderar templates
 require_once 'Twig/lib/Twig/Autoloader.php';
@@ -38,7 +46,7 @@ $twig = new Twig_Environment($loader);
 if (isset($_SESSION['userID'])) {
 	echo $twig->render('index.html', $data);
 }
-else {
+elseif (!isset($_SESSION['userID'])) {
 	echo $twig->render('login.html', $data);
 }
 

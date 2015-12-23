@@ -1,9 +1,9 @@
 <?php
 class Account{
-	private $id;
-	private $username;
+	static private $id;
+	static private $username;
 
-	static function logInControl($cleanUsername, $cleanPassword) {
+	static function logIn($cleanUsername, $cleanPassword) {
 		// fråga till sql-db med tvättade variabler
 		$query = "
 		SELECT users.id, users.username
@@ -16,21 +16,22 @@ class Account{
 		$result = $mysqli->query($query);
 		if($result = $mysqli->query($query)){
 			while( $row = $result->fetch_assoc() ){
-				$this->id = $row['id'];
-				$this->username = $row['username'];
-				$_SESSION['userID'] = $this->id;
+				self::$id = $row['id'];
+				self::$username = $row['username'];
+				$_SESSION['userID'] = self::$id;
+				$_SESSION['username'] = self::$username;
 			}
 		}else{
 			echo $mysqli->error;
 		}
 	}
 
-	function getUserID(){
-		return $this->id;
+	static function getUserID(){
+		return self::$id;
 	}
 
-	function getUsername(){
-		return $this->username;
+	static function getUsername(){
+		return self::$username;
 	}
 }
 ?>
