@@ -24,19 +24,28 @@ if (!isset($_SESSION['userID'])) {
 	]; //data-array till twig avslutas
 }
 
+
+
+//$content är alltid deklarerad nu annars fick man problem med visning.
+$content = new Content();
+if(isset($_POST['postContent'])) $content->addContent($_POST['title'], $_POST['text']);
+
+
+//viewcontent är alltid deklarerad nu. twiggas sedan.	
+$viewcontent = $content->viewContent();
+
 //Om vi har inloggad användare - visa detta:
 if (isset($_SESSION['userID'])) {
 	//data twig använder (i array):
 	$data= [
 	'title' => "Titel på sidan",
+	'viewcontent' => $viewcontent,
 	'user' => $_SESSION['username'],
 	'sessionUserID' => $_SESSION['userID']
 	]; //data-array till twig avslutas
 }
 
-//anropas från tex index.php:
-if(isset($_POST['postContent'])) $content = new Content();
-if(isset($_POST['postContent'])) $content->addContent($_POST['title'], $_POST['text']);
+
 
 //Läser in Twig och renderar templates
 require_once 'Twig/lib/Twig/Autoloader.php';

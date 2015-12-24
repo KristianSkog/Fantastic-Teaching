@@ -31,6 +31,14 @@
 				<br><br>
 				<input type='submit' name='postContent' value='Post'>
 				</form>
+				    {% for row in viewcontent %}
+        			<h4 class="media-heading">{{ row.title|e }}</h4>
+        			<div class="media-body">{{ row.text|e }}</div>
+        			<hr>
+    				{% endfor %}
+
+
+
 			</div>
 		</div><!--MENY & CONTANT FINISH COL-->		
 	</div><!--SHUTS CONTAINER-->
