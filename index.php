@@ -10,7 +10,7 @@ if (isset($_POST['logout'])){
 $mysqli = DB::getInstance();
 
 if (isset($_POST['newUser'])) {
-	Account::createAccount($_POST['newUsername'], $_POST['newPassword']);
+	Account::createAccount($_POST['newUsername'], $_POST['newPassword'], $_POST['allowedEmail']);
 }
 
 if (isset($_POST['login'])) {

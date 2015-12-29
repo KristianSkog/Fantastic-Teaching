@@ -3,19 +3,54 @@ class Account{
 	static private $id;
 	static private $username;
 
-	static function createAccount($dirtyNewUsername, $dirtyNewPassword) {
+	static function createAccount($dirtyNewUsername, $dirtyNewPassword, $dirtyNewEmail) {
+		
 		$cleanNewUsername = Cleaner::cleanVar($dirtyNewUsername);
 		$cleanNewPassword = Cleaner::cleanVar($dirtyNewPassword);
 		$safeNewPassword = hash("sha512", $cleanNewPassword);
 
-		// fråga till sql-db med tvättade säkra variabler
-		$query = "
-		INSERT INTO users (username, password) 
-		VALUES ('$cleanNewUsername','$safeNewPassword')";
-
+		//verify e-mail to match with allowed acoounts
+		$cleanNewEmail = Cleaner::cleanVar($dirtyNewEmail);
+		$safeNewEmail = hash("sha512", $cleanNewEmail);
 		//instans av db-uppkoppling
 		$mysqli = DB::getInstance();
-		$mysqli->query($query);
+		$queryEmailCheck = "
+		SELECT allowed_accounts.email
+		FROM allowed_accounts 
+		WHERE email='".$safeNewEmail."'
+		LIMIT 1
+		";
+
+		$resultEmailCheck = $mysqli->query($queryEmailCheck);
+		$rowEmailCheck = $resultEmailCheck->fetch_assoc();
+
+		//Kontroll - unikt användarnamn
+		//instans av db-uppkoppling
+		$mysqli = DB::getInstance();
+		$queryUsernameCheck = "
+		SELECT username
+		FROM users
+		WHERE username='".$cleanNewUsername."'
+		LIMIT 1
+		";
+
+		$resultUsernameCheck = $mysqli->query($queryUsernameCheck);
+		$rowUsernameCheck = $resultUsernameCheck->fetch_assoc();
+
+		if ($rowEmailCheck == !NULL AND $rowUsernameCheck == NULL) {
+			// fråga till sql-db med tvättade säkra variabler
+			$queryAddUser = "
+			INSERT INTO users (username, password) 
+			VALUES ('$cleanNewUsername','$safeNewPassword')";
+
+			//instans av db-uppkoppling
+			$mysqli = DB::getInstance();
+			$mysqli->query($queryAddUser);
+		}else{
+			echo "Unfortunately your E-mail are not yet approved for signing up in order to use our service.<br>
+			OOOOR:<br>
+			your chosen username is already used by someone else. Some lucky bastard..";
+		}
 	}
 
 	static function logIn($dirtyUsername, $dirtyPassword) {
