@@ -30,7 +30,8 @@ class Content{
 	}
 
 
-	function searchContent($cleanSearch){
+	function searchContent($dirtySearch){
+		$cleanSearch = Cleaner::cleanVar($dirtySearch);
 		$mysqli = DB::getInstance();
 		$query = "
 		SELECT *

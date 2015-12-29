@@ -33,9 +33,8 @@ if(isset($_POST['postContent'])) $content->addContent($_POST['title'], $_POST['t
 	$content->addFile($upload);
 	}
 
-if(isset($_POST['search']))$cleanSearch = Cleaner::cleanVar($_POST['search']);
 if(isset($_POST['search'])){
-	$content = $content->searchContent($cleanSearch);
+	$content = $content->searchContent($_POST['search']);
 	$showBtn = TRUE;
 }elseif (isset($_POST['showAll'])){
 	$content = $content->viewContent();
