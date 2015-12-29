@@ -1,15 +1,17 @@
 <?php
 class Content{
 
-	function addContent($title, $text){
+	function addContent($dirtyTitle, $dirtyText){
 		//instans av db-uppkoppling
 		$mysqli = DB::getInstance();
-	    $title = $mysqli->real_escape_string($title);
-	    $text = $mysqli->real_escape_string($text);
+
+		//Washes those dirty variables
+		$cleanTitle = Cleaner::cleanVar($dirtyTitle);
+		$cleanText = Cleaner::cleanVar($dirtyText);
 
 	    // LÄGGER TILL I DATABASEN PÅ VALDA POSITIONER
-	    $sql="INSERT INTO content (title, text) VALUES ('$title','$text')";
-	    $mysqli->query($sql);
+	    $query = "INSERT INTO content (title, text) VALUES ('$cleanTitle','$cleanText')";
+	    $mysqli->query($query);
 	}
 
 	function viewContent(){

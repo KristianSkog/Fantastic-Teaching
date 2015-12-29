@@ -10,28 +10,20 @@ if (isset($_POST['logout'])){
 $mysqli = DB::getInstance();
 
 if (isset($_POST['newUser'])) {
-//Tvättar username och password innan vi skickar fråga till databas
-	if (isset($_POST['newUsername']))$cleanNewUsername = Cleaner::cleanVar($_POST['newUsername']);
-	if (isset($_POST['newPassword']))$cleanNewPassword = Cleaner::cleanVar($_POST['newPassword']);
-	account::createAccount($cleanNewUsername, $cleanNewPassword);
+	Account::createAccount($_POST['newUsername'], $_POST['newPassword']);
 }
 
-if (isset($_POST['username'])) {
-//Tvättar username och password innan vi skickar fråga till databas
-	if (isset($_POST['username']))$cleanUsername = Cleaner::cleanVar($_POST['username']);
-	if (isset($_POST['password']))$cleanPassword = Cleaner::cleanVar($_POST['password']);
-	account::logIn($cleanUsername, $cleanPassword);
+if (isset($_POST['login'])) {
+	Account::logIn($_POST['username'], $_POST['password']);
 }
 
 //Om vi inte har inloggad användare - visa detta:
 if (!isset($_SESSION['userID'])) {
 	//data twig använder (i array):
 	$data= [
-	'title' => "Titel på sidan",
+	'title' => "Fantastic Teaching",
 	]; //data-array till twig avslutas
 }
-
-
 
 //$content är alltid deklarerad nu annars fick man problem med visning.
 $content = new Content();
@@ -44,7 +36,7 @@ if(isset($_POST['postContent'])) $content->addContent($_POST['title'], $_POST['t
 if(isset($_POST['search']))$cleanSearch = Cleaner::cleanVar($_POST['search']);
 if(isset($_POST['search'])){
 	$content = $content->searchContent($cleanSearch);
-	$showBtn = "<form method='get' action=''><button type='submit' name='showAll'>Show all content</button></form>";
+	$showBtn = TRUE;
 }elseif (isset($_POST['showAll'])){
 	$content = $content->viewContent();
 	$showBtn = NULL;
@@ -53,12 +45,11 @@ if(isset($_POST['search'])){
 	$showBtn = NULL;
 }
 
-
 //Om vi har inloggad användare - visa detta:
 if (isset($_SESSION['userID'])) {
 	//data twig använder (i array):
 	$data= [
-	'title' => "Titel på sidan",
+	'title' => "Fantastic Teaching",
 	'content' => $content,
 	'user' => $_SESSION['username'],
 	'sessionUserID' => $_SESSION['userID'],

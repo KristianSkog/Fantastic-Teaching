@@ -3,7 +3,9 @@ class Account{
 	static private $id;
 	static private $username;
 
-	static function createAccount($cleanNewUsername, $cleanNewPassword) {
+	static function createAccount($dirtyNewUsername, $dirtyNewPassword) {
+		$cleanNewUsername = Cleaner::cleanVar($dirtyNewUsername);
+		$cleanNewPassword = Cleaner::cleanVar($dirtyNewPassword);
 		$safeNewPassword = hash("sha512", $cleanNewPassword);
 
 		// fråga till sql-db med tvättade säkra variabler
@@ -16,7 +18,9 @@ class Account{
 		$mysqli->query($query);
 	}
 
-	static function logIn($cleanUsername, $cleanPassword) {
+	static function logIn($dirtyUsername, $dirtyPassword) {
+		$cleanUsername = Cleaner::cleanVar($dirtyUsername);
+		$cleanPassword = Cleaner::cleanVar($dirtyPassword);
 		$safePassword = hash("sha512", $cleanPassword);
 		
 		// fråga till sql-db med tvättade variabler

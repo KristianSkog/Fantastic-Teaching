@@ -2,58 +2,108 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Fantastic Teaching</title>
+	<title>{{title}}</title>
 	<!-- Latest compiled and minified CSS BOOTSTRAP -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<style type="text/css">
+
+		.user-header{
+			background-color: lightblue;
+		}
+		.row{
+			padding-top: 10px;
+			padding-bottom: 20px;
+		}
+		.invisibleinput, .transparentbtn{
+			border:none;
+			background-color: transparent;
+			background-image: none;
+			text-shadow: none;
+			box-shadow: none;
+		}
+		.transparentbtn:hover{
+			background-color: transparent;
+			color: white;
+		}
+		.transparentbtn:focus{
+			background-color: transparent;
+			background-image: none;
+		}
+		.transparentbtn:active{
+			background-color: transparent;
+			background-image: none;
+		}
+	</style>
 </head>
 <body>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-12">
-				<p><h5>Welcome {{user}}!</h5></p>
+	<div class="container-fluid">
+		<div class="row user-header">
+			<div class="col-sm-4">
+				<h3>Welcome {{user}}!</h3>
 				<form method="post" action="">
-				<button type="submit" name="logout" value="{{sessionUserID}}">Logout {{user}}</button>
+					<div class="form-group">
+						<button class="transparentbtn" type="submit" name="logout" value="{{sessionUserID}}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log out <b>{{user}}</b></button>
+					</div>
+				</form>				 
+				<form method="post" action="">
+					<div class="input-group">
+				      <input required type="text" class="form-control" name="search" placeholder="Search for...">
+				      <span class="input-group-btn">
+				        <button class="btn btn-default" type="button" value="Search">Search</button>
+				      </span>
+					</div>					
 				</form>
 			</div>
-			<div class="col-xs-2">
-				<h1>Meny och annat</h1>
-			</div>
-			<div class="col-xs-10">
-				<h1>Content</h1>
+			<div class="col-sm-8">
+				<h3>Publish new content</h3>
 				<form method='post' action="">
-				<input type='text' name='title' placeholder='Add title...'></textarea>
-				<br><br>
-				<textarea rows='10' cols='60' name='text' placeholder='Write your text...'></textarea>
-				
-				<input type='submit' name='postContent' value='Post'>
+					<div class="form-group">
+						<label for="title">Title:</label>
+						<input class="form-control" type='text' name='title' placeholder='Add title...'></textarea>
+					</div>
+					<div class="form-group">
+						<label for="text">Text:</label>
+						<textarea class="form-control" name='text' placeholder='Write your text...'></textarea>
+					<input class="btn btn-default" type='submit' name='postContent' value='Post'>
+					</div>
 				</form>
 				<form method="post" enctype="multipart/form-data">
-				    Select image to upload:
-				    <input type="file" name="fileToUpload" id="fileToUpload">
-				    <input type="submit" value="Upload Image" name="addFile">
+					<label for="fileToUpload">File:</label>
+					<div class="input-group">
+					   <input class="form-control" type="file" name="fileToUpload" id="fileToUpload">
+						<span class="input-group-btn">
+					   <input class="btn btn-default" type="button" value="Upload Image" name="addFile"></button>
+				      </span>
+				   </div>
 				</form>
-				<br><br>
-				<form action="" method="post">
-				<input required type="text" name="search" placeholder="Search for">
-				<input type="submit" value="Search">
-				</form>
-				<br><br>
-				{% if content %}
-				    {% for row in content %}
-        			<h4 class="media-heading">{{ row.title|e }}</h4>
-        			<div class="media-body">{{ row.text|e }}</div>
-        			<hr>
-    				{% endfor %}
-    			{% endif %}
-    			{% if showBtn %}
-    				{{showBtn| raw}}
-    			{% endif %}
-
-
-
 			</div>
-		</div><!--MENY & CONTANT FINISH COL-->		
-	</div><!--SHUTS CONTAINER-->
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="row">
+					{% if content %}
+					{% for row in content %}
+						<div class="col-sm-6 col-md-4">
+							<div class="thumbnail">
+							{# <img src="..." alt="..."> #}
+								<div class="caption">
+								<h3>{{ row.title|e }}</h3>
+								<p>{{ row.text|e }}</p>
+								{# <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p> #}
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+					{% endif %}
+				</div>
+			{% if showBtn %}
+				<form method='post' action=''>
+					<button class='btn btn-default' type='submit' name='showAll'>Show all content</button>
+				</form>
+			{% endif %}
+			</div>
+		</div><!--row closed-->		
+	</div><!--container closed-->
 </body>
 </html>
