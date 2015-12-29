@@ -24,28 +24,35 @@ if (!isset($_SESSION['userID'])) {
 	]; //data-array till twig avslutas
 }
 
-include "searchbox.php";
+
 
 //$content är alltid deklarerad nu annars fick man problem med visning.
 $content = new Content();
 if(isset($_POST['postContent'])) $content->addContent($_POST['title'], $_POST['text']);
+if(isset($_POST['search']))$cleanSearch = Cleaner::cleanVar($_POST['search']);
+if(isset($_POST['search'])){
+	$content = $content->searchContent($cleanSearch);
+	$showBtn = "<form method='get' action=''><button type='submit' name='showAll'>Show all content</button></form>";
+}elseif (isset($_POST['showAll'])){
+	$content = $content->viewContent();
+	$showBtn = NULL;
+}else{
+	$content = $content->viewContent();
+	$showBtn = NULL;
+}
 
-
-//viewcontent är alltid deklarerad nu. twiggas sedan.	
-$viewcontent = $content->viewContent();
 
 //Om vi har inloggad användare - visa detta:
 if (isset($_SESSION['userID'])) {
 	//data twig använder (i array):
 	$data= [
 	'title' => "Titel på sidan",
-	'viewcontent' => $viewcontent,
+	'content' => $content,
 	'user' => $_SESSION['username'],
-	'sessionUserID' => $_SESSION['userID']
+	'sessionUserID' => $_SESSION['userID'],
+	'showBtn' => $showBtn
 	]; //data-array till twig avslutas
 }
-
-
 
 //Läser in Twig och renderar templates
 require_once 'Twig/lib/Twig/Autoloader.php';
