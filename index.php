@@ -2,12 +2,19 @@
 session_start();
 
 //om logga ut finns i get - unsetta innan något printas på sajten
-if (isset($_GET['logout'])){
+if (isset($_POST['logout'])){
 	unset($_SESSION['userID']);
 }
 
 //instans av db-uppkoppling
 $mysqli = DB::getInstance();
+
+if (isset($_POST['newUser'])) {
+//Tvättar username och password innan vi skickar fråga till databas
+	if (isset($_POST['newUsername']))$cleanNewUsername = Cleaner::cleanVar($_POST['newUsername']);
+	if (isset($_POST['newPassword']))$cleanNewPassword = Cleaner::cleanVar($_POST['newPassword']);
+	account::createAccount($cleanNewUsername, $cleanNewPassword);
+}
 
 if (isset($_POST['username'])) {
 //Tvättar username och password innan vi skickar fråga till databas
