@@ -1,16 +1,17 @@
 <?php
 class Content{
 
-	function addContent($dirtyTitle, $dirtyText){
+	function addContent($dirtyTitle, $dirtySubject, $dirtyText){
 		//instans av db-uppkoppling
 		$mysqli = DB::getInstance();
 
 		//Washes those dirty variables
 		$cleanTitle = Cleaner::cleanVar($dirtyTitle);
+		$cleanSubject = Cleaner::cleanVar($dirtySubject);
 		$cleanText = Cleaner::cleanVar($dirtyText);
 
 	    // LÄGGER TILL I DATABASEN PÅ VALDA POSITIONER
-	    $query = "INSERT INTO content (title, text) VALUES ('$cleanTitle','$cleanText')";
+	    $query = "INSERT INTO content (title, subject, text) VALUES ('$cleanTitle','$cleanSubject','$cleanText')";
 	    $mysqli->query($query);
 	}
 
@@ -37,6 +38,7 @@ class Content{
 		SELECT *
 		FROM content
 		WHERE content.text LIKE '%".$cleanSearch."%'
+		OR content.subject LIKE '%".$cleanSearch."%'
 		OR content.title LIKE '%".$cleanSearch."%'
 		";
 		$result = $mysqli->query($query);

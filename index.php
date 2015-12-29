@@ -27,7 +27,7 @@ if (!isset($_SESSION['userID'])) {
 
 //$content är alltid deklarerad nu annars fick man problem med visning.
 $content = new Content();
-if(isset($_POST['postContent'])) $content->addContent($_POST['title'], $_POST['text']);
+if(isset($_POST['postContent'])) $content->addContent($_POST['title'], $_POST['subject'], $_POST['text']);
 	if(isset($_POST['addFile'])) {
 	$upload = $_FILES["fileToUpload"];
 	$content->addFile($upload);
