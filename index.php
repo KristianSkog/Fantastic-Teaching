@@ -24,7 +24,7 @@ if (!isset($_SESSION['userID'])) {
 	]; //data-array till twig avslutas
 }
 
-
+include "searchbox.php";
 
 //$content är alltid deklarerad nu annars fick man problem med visning.
 $content = new Content();
