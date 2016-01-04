@@ -18,7 +18,7 @@ class Content{
 	function viewContent(){
 		$mysqli = DB::getInstance();
 	    
-	     $query = "SELECT * FROM content";
+	     $query = "SELECT * FROM content ORDER BY timestamp DESC";
    
 	    $result = $mysqli->query($query);
 
@@ -41,6 +41,7 @@ class Content{
 		WHERE content.subject = '".$cleanSubject."'
 		HAVING content.title LIKE '%".$cleanSearch."%'
 		OR content.text LIKE '%".$cleanSearch."%'
+		ORDER BY timestamp DESC
 		";
 		$result = $mysqli->query($query);
 		$array = array();
