@@ -47,12 +47,22 @@
 					</div>
 				</form>				 
 				<form method="post" action="">
+					<div class="form-group">
+						<label for="subject">Search within subject:</label>
+						<select class="form-control" name="searchSubject">
+						<option value="Svenska">Svenska</option>
+						<option value="Geografi">Geografi</option>
+						<option value="Historia">Historia</option>
+						<option value="Matte">Matte</option>
+						</select>
+						</textarea>
+					</div>
 					<div class="input-group">
 				      <input required type="text" class="form-control" name="search" placeholder="Search for...">
 				      <span class="input-group-btn">
 				        <button class="btn btn-default" type="button" value="Search">Search</button>
 				      </span>
-					</div>					
+					</div>			
 				</form>
 			</div>
 			<div class="col-sm-8">
@@ -65,10 +75,10 @@
 					<div class="form-group">
 						<label for="subject">Subject:</label>
 						<select class="form-control" name='subject'>
-						<option>Svenska</option>
-						<option>Geografi</option>
-						<option>Historia</option>
-						<option>Matte</option>
+						<option value="Svenska">Svenska</option>
+						<option value="Geografi">Geografi</option>
+						<option value="Historia">Historia</option>
+						<option value="Matte">Matte</option>
 						</select>
 						</textarea>
 					</div>

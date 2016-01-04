@@ -31,15 +31,16 @@ class Content{
 	}
 
 
-	function searchContent($dirtySearch){
+	function searchContent($dirtySearch, $dirtySubject){
+		$cleanSubject = Cleaner::cleanVar($dirtySubject);
 		$cleanSearch = Cleaner::cleanVar($dirtySearch);
 		$mysqli = DB::getInstance();
 		$query = "
 		SELECT *
 		FROM content
-		WHERE content.text LIKE '%".$cleanSearch."%'
-		OR content.subject LIKE '%".$cleanSearch."%'
-		OR content.title LIKE '%".$cleanSearch."%'
+		WHERE content.subject = '".$cleanSubject."'
+		HAVING content.title LIKE '%".$cleanSearch."%'
+		OR content.text LIKE '%".$cleanSearch."%'
 		";
 		$result = $mysqli->query($query);
 		$array = array();

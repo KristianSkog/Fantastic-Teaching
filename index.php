@@ -34,7 +34,7 @@ if(isset($_POST['postContent'])) $content->addContent($_POST['title'], $_POST['s
 	}
 
 if(isset($_POST['search'])){
-	$content = $content->searchContent($_POST['search']);
+	$content = $content->searchContent($_POST['search'], $_POST['searchSubject']);
 	$showBtn = TRUE;
 }elseif (isset($_POST['showAll'])){
 	$content = $content->viewContent();
