@@ -1,17 +1,18 @@
 <?php
 class Content{
 
-	function addContent($dirtyTitle, $dirtySubject, $dirtyText){
+	function addContent($dirtyTitle, $dirtySubject, $dirtyYear, $dirtyText){
 		//instans av db-uppkoppling
 		$mysqli = DB::getInstance();
 
 		//Washes those dirty variables
 		$cleanTitle = Cleaner::cleanVar($dirtyTitle);
 		$cleanSubject = Cleaner::cleanVar($dirtySubject);
+		$cleanYear = Cleaner::cleanVar($dirtyYear);
 		$cleanText = Cleaner::cleanVar($dirtyText);
 
 	    // LÄGGER TILL I DATABASEN PÅ VALDA POSITIONER
-	    $query = "INSERT INTO content (title, subject, text) VALUES ('$cleanTitle','$cleanSubject','$cleanText')";
+	    $query = "INSERT INTO content (title, subject, year, text) VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanText')";
 	    $mysqli->query($query);
 	}
 
@@ -31,14 +32,16 @@ class Content{
 	}
 
 
-	function searchContent($dirtySearch, $dirtySubject){
+	function searchContent($dirtySearch, $dirtySubject, $dirtyYear){
 		$cleanSubject = Cleaner::cleanVar($dirtySubject);
 		$cleanSearch = Cleaner::cleanVar($dirtySearch);
+		$cleanYear = Cleaner::cleanVar($dirtyYear);
 		$mysqli = DB::getInstance();
 		$query = "
 		SELECT *
 		FROM content
 		WHERE content.subject = '".$cleanSubject."'
+		AND content.year = '".$cleanYear."'
 		HAVING content.title LIKE '%".$cleanSearch."%'
 		OR content.text LIKE '%".$cleanSearch."%'
 		ORDER BY timestamp DESC

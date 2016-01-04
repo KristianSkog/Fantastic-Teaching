@@ -37,7 +37,7 @@ if (!isset($_SESSION['userID'])) {
 $content = new Content();
 
 if(isset($_POST['postContent'])){
-	$content->addContent($_POST['title'], $_POST['subject'], $_POST['text']);
+	$content->addContent($_POST['title'], $_POST['subject'], $_POST['year'], $_POST['text']);
 	//after adding new content - go back to index.php so get values disappear
 	header('Location: http://192.168.33.10/Fantastic-Teaching/index.php');
 
@@ -48,7 +48,7 @@ if(isset($_POST['addFile'])) {
 }
 
 if(isset($_POST['search'])){
-	$content = $content->searchContent($_POST['search'], $_POST['searchSubject']);
+	$content = $content->searchContent($_POST['search'], $_POST['searchSubject'], $_POST['searchYear']);
 	$showBtn = TRUE;
 }elseif (isset($_POST['showAll'])){
 	$content = $content->viewContent();
