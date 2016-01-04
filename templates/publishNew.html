@@ -1,5 +1,5 @@
 <h3>Publish new content</h3>
-<form method='post' action="">
+<form method='post' action="" enctype="multipart/form-data">
 	<div class="form-group">
 		<label for="title">Title:</label>
 		<input class="form-control" type='text' name='title' placeholder='Add title...'>
@@ -26,15 +26,7 @@
 		<label for="text">Text:</label>
 		<textarea class="form-control" name='text' placeholder='Write your text...'></textarea>
 		<input type="hidden" name="publishNew" value=NULL>
-		<input class="btn btn-default" type='submit' name='postContent' value='Post'>
-	</div>
-</form>
-<form method="post" enctype="multipart/form-data">
-	<label for="fileToUpload">File:</label>
-	<div class="input-group">
 		<input class="form-control" type="file" name="fileToUpload" id="fileToUpload">
-		<span class="input-group-btn">
-		<input class="btn btn-default" type="submit" value="Upload Image" name="addFile"></button>
-	    </span>
+		<input class="btn btn-default" type='submit' name='postContent' value='Post'>
 	</div>
 </form>

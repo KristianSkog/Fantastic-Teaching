@@ -1,9 +1,22 @@
 <?php
 class Content{
 
-	function addContent($dirtyTitle, $dirtySubject, $dirtyYear, $dirtyText){
+	function addContent($dirtyTitle, $dirtySubject, $dirtyYear, $dirtyText, $fileUpload){
 		//instans av db-uppkoppling
+
+
 		$mysqli = DB::getInstance();
+
+		//variabler för filuppladdning
+		$tempName = $fileUpload['tmp_name'];
+		$filename  = basename($fileUpload['name']);
+		$extension = pathinfo($filename, PATHINFO_EXTENSION);
+		$newName       = md5($filename).'.'.$extension;
+
+		$target_dir = "uploads/";
+		$target_file = $target_dir . $newName;
+		$uploadOk = 1;
+		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
 		//Washes those dirty variables
 		$cleanTitle = Cleaner::cleanVar($dirtyTitle);
@@ -12,9 +25,51 @@ class Content{
 		$cleanText = Cleaner::cleanVar($dirtyText);
 
 	    // LÄGGER TILL I DATABASEN PÅ VALDA POSITIONER
-	    $query = "INSERT INTO content (title, subject, year, text) VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanText')";
+	    $query = "INSERT INTO content (title, subject, year, text, file) VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanText','$newName')";
 	    $mysqli->query($query);
-	}
+
+		//ladda upp fil
+
+	    if(!empty($fileUpload['tmp_name'])) {
+	    $check = getimagesize($fileUpload['tmp_name']);
+	    if($check !== false) {
+        //echo "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
+	    } else {
+        //echo "File is not an image.";
+        $uploadOk = 0;
+		    }
+		}
+		// Check if file already exists
+		if (file_exists($target_file)) {
+		    
+		    $uploadOk = 0;
+		}
+		// Check file size
+		if ($fileUpload['size'] > 50000000) {
+		    
+		    $uploadOk = 0;
+		}
+		// Allow certain file formats
+		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+		&& $imageFileType != "gif" ) {
+		    
+		    $uploadOk = 0;
+		}
+		// Check if $uploadOk is set to 0 by an error
+		if ($uploadOk == 0) {
+		    
+		// if everything is ok, try to upload file
+		} else {
+		    if (move_uploaded_file($fileUpload['tmp_name'], $target_file)) {
+		        //echo "The file ". basename( $upload['tmp_name']). " has been uploaded.";
+		    } else {
+
+		    }
+		}
+
+	}//stänger funktion
+
 
 	function viewContent(){
 		$mysqli = DB::getInstance();

@@ -37,7 +37,7 @@ if (!isset($_SESSION['userID'])) {
 $content = new Content();
 
 if(isset($_POST['postContent'])){
-	$content->addContent($_POST['title'], $_POST['subject'], $_POST['year'], $_POST['text']);
+	$content->addContent($_POST['title'], $_POST['subject'], $_POST['year'], $_POST['text'], $_FILES["fileToUpload"]);
 	//after adding new content - go back to index.php so get values disappear
 	header('Location: http://192.168.33.10/Fantastic-Teaching/index.php');
 
