@@ -6,7 +6,9 @@
 	<!-- Latest compiled and minified CSS BOOTSTRAP -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<style type="text/css">
-
+		.grayText{
+			color: silver;
+		}
 		.user-header{
 			background-color: lightblue;
 		}
@@ -41,6 +43,11 @@
 		<div class="row user-header">
 			<div class="col-sm-4">
 				<h3>Welcome {{user}}!</h3>
+				<form method="get" action="">
+					<div class="form-group">
+						<button class="transparentbtn" type="submit" name="changePassword" value="{{sessionUserID}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Change password</button>
+					</div>
+				</form>
 				<form method="get" action="">
 					<div class="form-group">
 						<button class="transparentbtn" type="submit" name="logout" value="{{sessionUserID}}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log out <b>{{user}}</b></button>
@@ -109,7 +116,8 @@
 							{# <img src="..." alt="..."> #}
 								<div class="caption">
 								<h3>{{ row.title|e }}</h3>
-								<p><i>{{ row.subject|e }}</i></p>
+								<p class="grayText"><i>Published {{ row.timestamp|e }}</i></p>
+								 <p><b>{{ row.subject|e }}</b></p>
 								<p>{{ row.text|e }}</p>
 								{# <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p> #}
 								</div>

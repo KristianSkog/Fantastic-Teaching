@@ -10,6 +10,13 @@ if (isset($_GET['logout'])){
 //instans av db-uppkoppling
 $mysqli = DB::getInstance();
 
+//Update Password in DB
+if (isset($_POST['userForUpdate']) && isset($_POST['updatedPassword'])) {
+	Account::changePassword($_POST['userForUpdate'], $_POST['updatedPassword']);
+	header('Location: http://192.168.33.10/Fantastic-Teaching/index.php');
+}
+
+//Create account
 if (isset($_POST['newUser'])) {
 	Account::createAccount($_POST['newUsername'], $_POST['newPassword'], $_POST['allowedEmail']);
 }
@@ -62,11 +69,15 @@ require_once 'Twig/lib/Twig/Autoloader.php';
 Twig_Autoloader::register();
 $loader = new Twig_Loader_Filesystem('templates/');
 $twig = new Twig_Environment($loader);
-if (isset($_SESSION['userID'])) {
+if (isset($_SESSION['userID']) && !isset($_GET['changePassword'])) {
 	echo $twig->render('index.html', $data);
 }
 elseif (!isset($_SESSION['userID'])) {
 	echo $twig->render('login.html', $data);
+}
+//Change password if logged in and clicked changePassword-btn
+elseif (isset($_GET['changePassword']) && isset($_SESSION['userID'])) {
+	echo $twig->render('changeUser.html', $data);
 }
 
 //Läser in klass-filer

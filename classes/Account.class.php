@@ -98,6 +98,25 @@ class Account{
 		}
 	}
 
+	static function changePassword($userToChange, $dirtyUpdatedPassword){
+		//instans av db-uppkoppling
+		$mysqli = DB::getInstance();
+		$cleanUpdatedPassword = Cleaner::cleanVar($dirtyUpdatedPassword);
+		
+		//creates long, random salt:
+		$size = mcrypt_get_iv_size(MCRYPT_CAST_256, MCRYPT_MODE_CFB);
+		$newSalt = mcrypt_create_iv($size);
+
+		//hashes our cleaned password with added salt:
+		$safeUpdatedPassword = hash("sha512", "$newSalt"."$cleanUpdatedPassword");
+		$queryChangePassword ="
+		UPDATE users
+		SET password='".$safeUpdatedPassword."', salt='".$newSalt."'
+		WHERE users.id=".$userToChange.";
+		";
+		$mysqli->query($queryChangePassword);
+	}
+
 	static function getUserID(){
 		return self::$id;
 	}
