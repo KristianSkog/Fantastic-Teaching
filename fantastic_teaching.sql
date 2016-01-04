@@ -28,16 +28,11 @@ CREATE TABLE `content` (
   `title` varchar(100) COLLATE utf8_bin NOT NULL,
   `text` longtext COLLATE utf8_bin NOT NULL,
   `subject` enum('Matte','Svenska','Geografi','Historia') COLLATE utf8_bin NOT NULL,
+  `file` varchar(20) COLLATE utf8_bin NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `content` (`content_id`, `title`, `text`, `subject`) VALUES
-(2,	'Lite content',	'Och en massa text',	'Svenska'),
-(6,	'titel',	'text',	'Geografi'),
-(7,	'test frÃ¥n Klara',	'lÃ¥ng text					\r\n				',	'Historia'),
-(8,	'Nytt test av Klara',	'Min senaste text					\r\n				',	'Matte'),
-(18,	'Matte-test',	'Matte-frÃ¥gor 1 2 3 4',	'Matte'),
-(19,	'svenska-test',	'svenska test',	'Svenska');
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -49,6 +44,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `users` (`id`, `username`, `salt`, `password`) VALUES
-(1,	'admin',	'',	'c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec');
+(2,	'erik',	'ó>í?74þq„h{}?',	'0702eafd40f61cce7bbe8970bdfc9d453e3d9c76b610c33dc9d82937adefcc77399854d106b6d6222a2da6d8a2ef72d846234036ba1858ed5e409edd89a22afa');
 
--- 2016-01-04 13:56:04
+-- 2016-01-04 16:38:10
