@@ -35,11 +35,17 @@ if (!isset($_SESSION['userID'])) {
 
 //$content är alltid deklarerad nu annars fick man problem med visning.
 $content = new Content();
-if(isset($_POST['postContent'])) $content->addContent($_POST['title'], $_POST['subject'], $_POST['text']);
-	if(isset($_POST['addFile'])) {
+
+if(isset($_POST['postContent'])){
+	$content->addContent($_POST['title'], $_POST['subject'], $_POST['text']);
+	//after adding new content - go back to index.php so get values disappear
+	header('Location: http://192.168.33.10/Fantastic-Teaching/index.php');
+
+}
+if(isset($_POST['addFile'])) {
 	$upload = $_FILES["fileToUpload"];
 	$content->addFile($upload);
-	}
+}
 
 if(isset($_POST['search'])){
 	$content = $content->searchContent($_POST['search'], $_POST['searchSubject']);
@@ -52,6 +58,13 @@ if(isset($_POST['search'])){
 	$showBtn = NULL;
 }
 
+//If we pressed link to publish form - show publish form by setting value to true, twig will render publishNew.html template
+if (isset($_POST['publishNew'])) {
+	$publishNew = TRUE;
+}else{
+	$publishNew = NULL;
+}
+
 //Om vi har inloggad användare - visa detta:
 if (isset($_SESSION['userID'])) {
 	//data twig använder (i array):
@@ -60,6 +73,7 @@ if (isset($_SESSION['userID'])) {
 	'content' => $content,
 	'user' => $_SESSION['username'],
 	'sessionUserID' => $_SESSION['userID'],
+	'publishNew' => $publishNew,
 	'showBtn' => $showBtn
 	]; //data-array till twig avslutas
 }

@@ -1,0 +1,31 @@
+<h3>Publish new content</h3>
+<form method='post' action="">
+	<div class="form-group">
+		<label for="title">Title:</label>
+		<input class="form-control" type='text' name='title' placeholder='Add title...'>
+	</div>
+	<div class="form-group">
+		<label for="subject">Subject:</label>
+		<select class="form-control" name='subject'>
+		<option value="Svenska">Svenska</option>
+		<option value="Geografi">Geografi</option>
+		<option value="Historia">Historia</option>
+		<option value="Matte">Matte</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label for="text">Text:</label>
+		<textarea class="form-control" name='text' placeholder='Write your text...'></textarea>
+		<input type="hidden" name="publishNew" value=NULL>
+		<input class="btn btn-default" type='submit' name='postContent' value='Post'>
+	</div>
+</form>
+<form method="post" enctype="multipart/form-data">
+	<label for="fileToUpload">File:</label>
+	<div class="input-group">
+		<input class="form-control" type="file" name="fileToUpload" id="fileToUpload">
+		<span class="input-group-btn">
+		<input class="btn btn-default" type="submit" value="Upload Image" name="addFile"></button>
+	    </span>
+	</div>
+</form>
