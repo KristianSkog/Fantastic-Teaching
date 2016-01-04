@@ -36,11 +36,12 @@ INSERT INTO `content` (`content_id`, `title`, `text`, `subject`) VALUES
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(50) COLLATE utf8_bin NOT NULL,
+  `salt` varchar(150) COLLATE utf8_bin NOT NULL,
   `password` char(128) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `users` (`id`, `username`, `password`) VALUES
-(1,	'admin',	'c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec');
+INSERT INTO `users` (`id`, `username`, `salt`, `password`) VALUES
+(1,	'admin',	'',	'c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec');
 
--- 2015-12-29 22:30:38
+-- 2016-01-04 13:05:51
