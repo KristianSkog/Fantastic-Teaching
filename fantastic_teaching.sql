@@ -5,6 +5,11 @@ SET time_zone = '+00:00';
 SET foreign_key_checks = 0;
 SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
+DROP DATABASE IF EXISTS `fantastic_teaching`;
+CREATE DATABASE `fantastic_teaching` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin */;
+USE `fantastic_teaching`;
+
+DROP TABLE IF EXISTS `allowed_accounts`;
 CREATE TABLE `allowed_accounts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(128) COLLATE utf8_bin NOT NULL,
@@ -17,6 +22,7 @@ INSERT INTO `allowed_accounts` (`id`, `email`) VALUES
 (3,	'b8cba57da356b0f18e7245cee154e6f1a5182e26e5eaee5b8b3cb1eb990219b135c9663f8f32c2c03938ed6afb63233bf530914edf1b10ceb60e1894c765663a'),
 (4,	'8cf0d552d9620083dfc508138bb66355af53b75bab61ba08eefae22ef8b1507b49316793fdd08002163abefa7a30048a1e12d60015748f0f6b0bd9e6738dce43');
 
+DROP TABLE IF EXISTS `content`;
 CREATE TABLE `content` (
   `content_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(100) COLLATE utf8_bin NOT NULL,
@@ -33,6 +39,7 @@ INSERT INTO `content` (`content_id`, `title`, `text`, `subject`) VALUES
 (18,	'Matte-test',	'Matte-frÃ¥gor 1 2 3 4',	'Matte'),
 (19,	'svenska-test',	'svenska test',	'Svenska');
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(50) COLLATE utf8_bin NOT NULL,
@@ -44,4 +51,4 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `salt`, `password`) VALUES
 (1,	'admin',	'',	'c7ad44cbad762a5da0a452f9e854fdc1e0e7a52a38015f23f3eab1d80b931dd472634dfac71cd34ebc35d16ab7fb8a90c81f975113d6c7538dc69dd8de9077ec');
 
--- 2016-01-04 13:05:51
+-- 2016-01-04 13:56:04

@@ -2,8 +2,9 @@
 session_start();
 
 //om logga ut finns i get - unsetta innan något printas på sajten
-if (isset($_POST['logout'])){
+if (isset($_GET['logout'])){
 	unset($_SESSION['userID']);
+	header('Location: http://192.168.33.10/Fantastic-Teaching/index.php');
 }
 
 //instans av db-uppkoppling
