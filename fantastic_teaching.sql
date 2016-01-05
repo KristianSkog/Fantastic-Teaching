@@ -31,14 +31,14 @@ CREATE TABLE `content` (
   `text` longtext COLLATE utf8_bin NOT NULL,
   `file` varchar(50) COLLATE utf8_bin NOT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `video` varchar(150) COLLATE utf8_bin NOT NULL,
   PRIMARY KEY (`content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `content` (`content_id`, `title`, `subject`, `year`, `text`, `file`, `timestamp`) VALUES
-(1,	'Min fina titel',	'Svenska',	'1-2',	'Svenska-text av Klara',	'',	'2016-01-04 18:30:18'),
-(2,	'testar',	'Historia',	'3-5',	'historiatext',	'',	'2016-01-04 20:24:40'),
-(12,	'Titel',	'Matte',	'6-7',	'Ny text om matte',	'',	'2016-01-04 20:24:47'),
-(14,	'LÃ¤gger upp en bild',	'Svenska',	'1-2',	'Nedan Ã¤r en bild',	'5a5b5f495d8d0f4b2349652a3fcdc6bb.png',	'2016-01-04 21:19:09');
+INSERT INTO `content` (`content_id`, `title`, `subject`, `year`, `text`, `file`, `timestamp`, `video`) VALUES
+(1,	'Min fina titel',	'Svenska',	'1-2',	'Svenska-text av Klara',	'',	'2016-01-04 18:30:18',	''),
+(2,	'testar',	'Historia',	'3-5',	'historiatext',	'',	'2016-01-04 20:24:40',	''),
+(12,	'Titel',	'Matte',	'6-7',	'Ny text om matte',	'',	'2016-01-04 20:24:47',	'');
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -51,6 +51,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `salt`, `password`) VALUES
 (2,	'erik',	'ó>í?74þq„h{}?',	'0702eafd40f61cce7bbe8970bdfc9d453e3d9c76b610c33dc9d82937adefcc77399854d106b6d6222a2da6d8a2ef72d846234036ba1858ed5e409edd89a22afa'),
-(3,	'Klara',	'M\ZGò9\nÄJözb_^',	'e8b2c16b8b40dca0a22f62a2794dbb8f038cea236079b6f4b874f8ed34748cacd82051cc4e67b87d365faa04345ea15702c620403a266dc0771ff217f611b03f');
+(3,	'Klara',	'M\ZGò9\nÄJözb_^',	'e8b2c16b8b40dca0a22f62a2794dbb8f038cea236079b6f4b874f8ed34748cacd82051cc4e67b87d365faa04345ea15702c620403a266dc0771ff217f611b03f'),
+(4,	'kiss',	'|nîŽ8÷4¦ÂÛ;',	'9a9b95bcae1d4725ed531caa98c186f4602b06ad50864553958c70f63f316d90753802af01ad26fb5405dcd56b9ab63ace69f2771523c18a955db977ad9c0fb2');
 
--- 2016-01-04 21:22:12
+-- 2016-01-05 11:30:19

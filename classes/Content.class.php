@@ -1,20 +1,20 @@
 <?php
 class Content{
 
-	function addContent($dirtyTitle, $dirtySubject, $dirtyYear, $dirtyText, $fileUpload){
+	function addContent($dirtyTitle, $dirtySubject, $dirtyYear, $dirtyText, $fileUpload, $dirtyVideo){
 		//instans av db-uppkoppling
 
 
 		$mysqli = DB::getInstance();
 
 		//variabler för filuppladdning
-		$tempName = $fileUpload['tmp_name'];
-		$filename  = basename($fileUpload['name']);
-		$extension = pathinfo($filename, PATHINFO_EXTENSION);
-		$newName       = md5($filename).'.'.$extension;
+		//$tempName = $fileUpload['tmp_name'];
+		$originalFileName  = basename($fileUpload['name']);
+		$fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+		$newFileName       = md5($originalFileName).'.'.$fileExtension;
 
 		$target_dir = "uploads/";
-		$target_file = $target_dir . $newName;
+		$target_file = $target_dir . $newFileName;
 		$uploadOk = 1;
 		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
@@ -23,9 +23,10 @@ class Content{
 		$cleanSubject = Cleaner::cleanVar($dirtySubject);
 		$cleanYear = Cleaner::cleanVar($dirtyYear);
 		$cleanText = Cleaner::cleanVar($dirtyText);
+		$cleanVideo = Cleaner::cleanVar($dirtyVideo);
 
 	    // LÄGGER TILL I DATABASEN PÅ VALDA POSITIONER
-	    $query = "INSERT INTO content (title, subject, year, text, file) VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanText','$newName')";
+	    $query = "INSERT INTO content (title, subject, year, text, file, video) VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanText','$newFileName','$cleanVideo')";
 	    $mysqli->query($query);
 
 		//ladda upp fil
