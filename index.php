@@ -4,7 +4,7 @@ session_start();
 //om logga ut finns i get - unsetta innan något printas på sajten
 if (isset($_GET['logout'])){
 	unset($_SESSION['userID']);
-	header('Location: http://192.168.33.10/Fantastic-Teaching/index.php');
+	header('Location: http://192.168.33.10/Fantastic-Teaching/');
 }
 
 //instans av db-uppkoppling
@@ -13,7 +13,7 @@ $mysqli = DB::getInstance();
 //Update Password in DB
 if (isset($_POST['userForUpdate']) && isset($_POST['updatedPassword'])) {
 	Account::changePassword($_POST['userForUpdate'], $_POST['updatedPassword']);
-	header('Location: http://192.168.33.10/Fantastic-Teaching/index.php');
+	header('Location: http://192.168.33.10/Fantastic-Teaching/');
 }
 
 //Create account
@@ -39,9 +39,9 @@ $content = new Content();
 if(isset($_POST['postContent'])){
 	$content->addContent($_POST['title'], $_POST['subject'], $_POST['year'], $_POST['text'], $_FILES["fileToUpload"],$_POST['video']);
 	//after adding new content - go back to index.php so get values disappear
-	header('Location: http://192.168.33.10/Fantastic-Teaching/index.php');
-
+	header('Location: http://192.168.33.10/Fantastic-Teaching/');
 }
+
 if(isset($_POST['addFile'])) {
 	$upload = $_FILES["fileToUpload"];
 	$content->addFile($upload);
@@ -58,11 +58,29 @@ if(isset($_POST['search'])){
 	$showBtn = NULL;
 }
 
+if(isset($_POST['goalUserID'])){
+	Goals::addGoal($_POST['goal'], $_POST['subject'], $_POST['year'], $_POST['goalUserID']);
+}
+
+if(isset($_POST['showGoals'])){
+	$goals = Goals::viewGoals($_SESSION['userID']);
+	$goalsTemplate = TRUE;
+}else{
+	$goals = NULL;
+	$goalsTemplate = NULL;
+}
+
 //If we pressed link to publish form - show publish form by setting value to true, twig will render publishNew.html template
 if (isset($_POST['publishNew'])) {
 	$publishNew = TRUE;
 }else{
 	$publishNew = NULL;
+}
+
+if (isset($_GET['changePassword']) && isset($_SESSION['userID'])) {
+	$changeUserTemplate = TRUE;
+}else{
+	$changeUserTemplate = NULL;
 }
 
 //Om vi har inloggad användare - visa detta:
@@ -74,6 +92,9 @@ if (isset($_SESSION['userID'])) {
 	'user' => $_SESSION['username'],
 	'sessionUserID' => $_SESSION['userID'],
 	'publishNew' => $publishNew,
+	'showGoals' => $goalsTemplate,
+	'changeUser' => $changeUserTemplate,
+	'goals' => $goals,
 	'showBtn' => $showBtn
 	]; //data-array till twig avslutas
 }
@@ -83,15 +104,11 @@ require_once 'Twig/lib/Twig/Autoloader.php';
 Twig_Autoloader::register();
 $loader = new Twig_Loader_Filesystem('templates/');
 $twig = new Twig_Environment($loader);
-if (isset($_SESSION['userID']) && !isset($_GET['changePassword'])) {
+if (isset($_SESSION['userID'])) {
 	echo $twig->render('index.html', $data);
 }
 elseif (!isset($_SESSION['userID'])) {
 	echo $twig->render('login.html', $data);
-}
-//Change password if logged in and clicked changePassword-btn
-elseif (isset($_GET['changePassword']) && isset($_SESSION['userID'])) {
-	echo $twig->render('changeUser.html', $data);
 }
 
 //Läser in klass-filer
