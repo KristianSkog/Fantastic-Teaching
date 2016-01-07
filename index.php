@@ -7,6 +7,18 @@ if (isset($_GET['logout'])){
 	header('Location: http://192.168.33.10/Fantastic-Teaching/');
 }
 
+if (isset($_POST['deleteContentID'])) {
+	Content::deleteContent($_POST['deleteContentID']);
+}
+
+if (isset($_POST['deleteGoalID'])) {
+	Goals::deleteGoal($_POST['deleteGoalID']);
+}
+
+if (isset($_POST['connect'])) {
+	Goals::useContent($_POST['connectedGoalID'], $_POST['connectedContentID'], $_SESSION['userID'] );
+}
+
 //instans av db-uppkoppling
 $mysqli = DB::getInstance();
 
@@ -37,16 +49,17 @@ if (!isset($_SESSION['userID'])) {
 $content = new Content();
 
 if(isset($_POST['postContent'])){
-	$content->addContent($_POST['title'], $_POST['subject'], $_POST['year'], $_POST['text'], $_FILES["fileToUpload"],$_POST['video']);
+	$content->addContent($_POST['title'], $_POST['subject'], $_POST['year'], $_POST['text'], $_FILES["fileToUpload"], $_POST['video'], $_SESSION['userID']);
 	//after adding new content - go back to index.php so get values disappear
 	header('Location: http://192.168.33.10/Fantastic-Teaching/');
 }
-
+/* TROR VI KAN TA BORT DET HÄR 
+_______________________________
 if(isset($_POST['addFile'])) {
 	$upload = $_FILES["fileToUpload"];
 	$content->addFile($upload);
 }
-
+*/
 if(isset($_POST['search'])){
 	$content = $content->searchContent($_POST['search'], $_POST['searchSubject'], $_POST['searchYear']);
 	$showBtn = TRUE;
@@ -63,12 +76,14 @@ if(isset($_POST['goalUserID'])){
 }
 
 if(isset($_POST['showGoals'])){
-	$goals = Goals::viewGoals($_SESSION['userID']);
-	$goalsTemplate = TRUE;
+	$goalsForm = TRUE;
 }else{
-	$goals = NULL;
-	$goalsTemplate = NULL;
+	$goalsForm = NULL;
 }
+
+$goals = Goals::viewGoals($_SESSION['userID']);
+
+
 
 //If we pressed link to publish form - show publish form by setting value to true, twig will render publishNew.html template
 if (isset($_POST['publishNew'])) {
@@ -92,7 +107,7 @@ if (isset($_SESSION['userID'])) {
 	'user' => $_SESSION['username'],
 	'sessionUserID' => $_SESSION['userID'],
 	'publishNew' => $publishNew,
-	'showGoals' => $goalsTemplate,
+	'goalsForm' => $goalsForm,
 	'changeUser' => $changeUserTemplate,
 	'goals' => $goals,
 	'showBtn' => $showBtn

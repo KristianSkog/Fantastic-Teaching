@@ -1,7 +1,7 @@
 <?php
 class Content{
 
-	function addContent($dirtyTitle, $dirtySubject, $dirtyYear, $dirtyText, $fileToUpload, $dirtyVideo){
+	function addContent($dirtyTitle, $dirtySubject, $dirtyYear, $dirtyText, $fileToUpload, $dirtyVideo, $dirtyAuthorID){
 		//instans av db-uppkoppling
 		$mysqli = DB::getInstance();
 
@@ -11,6 +11,7 @@ class Content{
 		$cleanYear = Cleaner::cleanVar($dirtyYear);
 		$cleanText = Cleaner::cleanVar($dirtyText);
 		$cleanVideo = Cleaner::cleanVar($dirtyVideo);
+		$cleanAuthorID = Cleaner::cleanVar($dirtyAuthorID);
 
 
 		$videoAdress = explode('=', $cleanVideo);
@@ -52,7 +53,11 @@ class Content{
 		}
 
 		// LÄGGER TILL I DATABASEN PÅ VALDA POSITIONER
-	    $query = "INSERT INTO content (title, subject, year, text, file, video) VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanText','$newFileName','$videoID')";
+	    $query = "
+	    INSERT INTO content (title, subject, year, text, file, video, author_id)
+	    VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanText','$newFileName','$videoID','$cleanAuthorID')
+	    ";
+	    
 	    $mysqli->query($query);
 
 	}//stänger addContent funktion
@@ -60,7 +65,13 @@ class Content{
 	function viewContent(){
 		$mysqli = DB::getInstance();
 
-		$query = "SELECT * FROM content ORDER BY timestamp DESC";
+		$query = "
+		SELECT content.*, users.username
+		FROM content
+		JOIN users
+		ON content.author_id = users.id
+		ORDER BY content.timestamp DESC
+		";
    		$result = $mysqli->query($query);
 		$array = array();
 
@@ -77,14 +88,16 @@ class Content{
 		$mysqli = DB::getInstance();
 
 		$query = "
-			SELECT *
-			FROM content
-			WHERE content.subject = '".$cleanSubject."'
-			AND content.year = '".$cleanYear."'
-			HAVING content.title LIKE '%".$cleanSearch."%'
-			OR content.text LIKE '%".$cleanSearch."%'
-			ORDER BY timestamp DESC
-			";
+		SELECT *
+		FROM users
+		JOIN content
+		ON users.id = content.author_id
+		AND content.subject = '".$cleanSubject."'
+		AND content.year = '".$cleanYear."'
+		HAVING content.title LIKE '%".$cleanSearch."%'
+		OR content.text LIKE '%".$cleanSearch."%'
+		ORDER BY timestamp DESC
+		";
 
 		$result = $mysqli->query($query);
 		$array = array();
@@ -93,5 +106,19 @@ class Content{
 	  }
 	  return $array;
 	}// stänger searchContent funktion
+
+	static function deleteContent($dirtyContentID){
+		$cleanContentID = Cleaner::cleanVar($dirtyContentID);
+
+		$mysqli = DB::getInstance();
+	    
+	    $query = "
+	    DELETE
+	    FROM content
+	    WHERE content.id = '".$cleanContentID."'
+	    ";
+
+	    $mysqli->query($query);
+	}
 
 }//Close class

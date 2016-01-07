@@ -24,7 +24,7 @@ INSERT INTO `allowed_accounts` (`id`, `email`) VALUES
 
 DROP TABLE IF EXISTS `content`;
 CREATE TABLE `content` (
-  `content_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title` varchar(100) COLLATE utf8_bin NOT NULL,
   `subject` enum('Matte','Svenska','Geografi','Historia') COLLATE utf8_bin NOT NULL,
   `year` enum('1-2','3-5','6-7','8-9') COLLATE utf8_bin NOT NULL,
@@ -32,13 +32,13 @@ CREATE TABLE `content` (
   `file` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `video` varchar(150) COLLATE utf8_bin DEFAULT NULL,
-  PRIMARY KEY (`content_id`)
+  `author_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `content` (`content_id`, `title`, `subject`, `year`, `text`, `file`, `timestamp`, `video`) VALUES
-(37,	'En Titel',	'Svenska',	'1-2',	'Och Text',	'',	'2016-01-07 15:44:12',	''),
-(38,	'En youtube Video',	'Svenska',	'1-2',	'',	'',	'2016-01-07 15:45:01',	'<iframe width=\"420\" height=\"315\" src=\"https://www.youtube.com/embed/k6U-i4gXkLM\" frameborder=\"0\" allowfullscreen></iframe>'),
-(39,	'En bild',	'Svenska',	'1-2',	'',	'568e881270e1a.png',	'2016-01-07 15:45:22',	'');
+INSERT INTO `content` (`id`, `title`, `subject`, `year`, `text`, `file`, `timestamp`, `video`, `author_id`) VALUES
+(46,	'innehÃ¥llets titel',	'Svenska',	'1-2',	'min jÃ¤vla text',	'',	'2016-01-07 19:34:54',	'',	3),
+(47,	'titeln',	'Svenska',	'1-2',	'textfan',	'',	'2016-01-07 20:37:04',	'',	3);
 
 DROP TABLE IF EXISTS `goals`;
 CREATE TABLE `goals` (
@@ -51,8 +51,31 @@ CREATE TABLE `goals` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `goals` (`id`, `goal`, `subject`, `year`, `user_id`) VALUES
-(1,	'Mitt fÃ¶rsta mÃ¥l',	'Svenska',	'1-2',	3),
-(2,	'Nytt mÃ¥l',	'Historia',	'6-7',	3);
+(2,	'Nytt mÃ¥l',	'Historia',	'6-7',	3),
+(4,	'tredje',	'Svenska',	'1-2',	3);
+
+DROP TABLE IF EXISTS `goals_use_content`;
+CREATE TABLE `goals_use_content` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `goal_id` int(10) unsigned NOT NULL,
+  `content_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+INSERT INTO `goals_use_content` (`id`, `goal_id`, `content_id`, `user_id`) VALUES
+(1,	4,	46,	3),
+(4,	2,	46,	3),
+(5,	2,	46,	3),
+(6,	2,	46,	3),
+(7,	2,	46,	3),
+(8,	2,	46,	3),
+(9,	2,	46,	3),
+(10,	2,	46,	3),
+(11,	2,	46,	3),
+(12,	2,	46,	3),
+(13,	3,	47,	3),
+(14,	4,	47,	3);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -68,4 +91,4 @@ INSERT INTO `users` (`id`, `username`, `salt`, `password`) VALUES
 (3,	'Klara',	'ˆSdæÎ³ÏU¡\n£SÝÏ]~',	'548543f363ec8b6b585528871cc7c27265fab143ef469181676320dcc8864c42834a81592e1e53c5e3a28995389b3a42be5fdc8b2569091cd536f4ed9887eaa0'),
 (4,	'kiss',	'|nîŽ8÷4¦ÂÛ;',	'9a9b95bcae1d4725ed531caa98c186f4602b06ad50864553958c70f63f316d90753802af01ad26fb5405dcd56b9ab63ace69f2771523c18a955db977ad9c0fb2');
 
--- 2016-01-07 15:45:38
+-- 2016-01-07 23:18:00

@@ -42,4 +42,58 @@ class Goals{
 	    return $array;
 	}
 
+
+	static function deleteGoal($dirtyGoalID){
+		$cleanGoalID = Cleaner::cleanVar($dirtyGoalID);
+
+		$mysqli = DB::getInstance();
+	    
+	    $query = "
+	    DELETE
+	    FROM goals
+	    WHERE goals.id = '".$cleanGoalID."'
+	    ";
+
+	    $mysqli->query($query);
+	}
+
+	static function useContent($dirtyGoalID, $dirtyContentID, $dirtyUserID){
+		$cleanGoalID = Cleaner::cleanVar($dirtyGoalID);
+		$cleanContentID = Cleaner::cleanVar($dirtyContentID);
+		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
+
+		$mysqli = DB::getInstance();
+	    
+	    $query = "
+	    INSERT INTO goals_use_content (goal_id, content_id, user_id)
+	    VALUES ('$cleanGoalID','$cleanContentID','$cleanUserID')
+	    ";
+
+	    $mysqli->query($query);
+	}
+/*
+	static function showConnectedContent($dirtyGoalID, $dirtyUserID){
+		$cleanGoalID = Cleaner::cleanVar($dirtyGoalID);
+		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
+
+		$mysqli = DB::getInstance();
+
+		$query = "
+		select *
+		from content, goals_use_content
+		WHERE content.id = goals_use_content.content_id
+		AND goals_use_content.goal_id = '".$cleanGoalID."'
+		HAVING goals_use_content.user_id = '".$cleanUserID."'
+		ORDER BY content.timestamp DESC
+		";
+   		$result = $mysqli->query($query);
+		$array = array();
+
+		while ($row = $result->fetch_assoc()) {
+	  	$array[] = $row;
+		}
+	  
+		return $array;
+	}*/
+
 }

@@ -1,28 +1,20 @@
-<h3>Teaching Goals:</h3>
-<form method='post' action="">
-	<div class="form-group">
-		<label for="title">Goal:</label>
-		<input class="form-control" type='text' name='goal' placeholder="What's your goal?">
+<div class="col-sm-6 col-md-4">
+	<div class="thumbnail">
+		<h4>{{ row.goal }}</h4>
+		<p>Subject: {{row.subject|e}}</p>
+		<p>For year: {{row.year|e}}</p>
+		<!--	{% if connectedContent %}
+				{% include connectedContents.html %}
+				{% endif %} -->
 	</div>
+<!-- 	<div class="form-group">
+		<form method="post" action="">
+			<button class="transparentbtn" type="submit" name="showConnections" value="{{goalID}}"><span class="glyphicon glyphicon-expand" aria-hidden="true"></span> Show connected content</button>
+		</form>
+	</div> -->
 	<div class="form-group">
-		<label for="subject">Belongs in subject:</label>
-		<select class="form-control" name='subject'>
-		<option value="Svenska">Svenska</option>
-		<option value="Geografi">Geografi</option>
-		<option value="Historia">Historia</option>
-		<option value="Matte">Matte</option>
-		</select>
+		<form method="post" action="">
+			<button class="transparentbtn" type="submit" name="deleteGoalID" value="{{row.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete goal</button>
+		</form>
 	</div>
-	<div class="form-group">
-		<label for="year">For teaching year:</label>
-		<select class="form-control" name='year'>
-		<option value="1-2">1-2</option>
-		<option value="3-5">3-5</option>
-		<option value="6-7">6-7</option>
-		<option value="8-9">8-9</option>
-		</select>
-	</div>
-	<div class="form-group">
-		<button class="transparentbtn" type="submit" name="goalUserID" value="{{sessionUserID}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add goal</button>
-	</div>
-</form>
+</div>
