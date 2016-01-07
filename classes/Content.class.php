@@ -31,10 +31,8 @@ class Content{
 	    if(!empty($fileToUpload['tmp_name'])) {
 	    $check = getimagesize($fileToUpload['tmp_name']);
 	    if($check !== FALSE) {
-        //echo "File is an image - " . $check["mime"] . ".";
         $uploadCheck = TRUE;
 	    } else {
-        //echo "File is not an image.";
         $uploadCheck = FALSE;
 		    }
 			}
