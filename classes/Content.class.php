@@ -43,10 +43,13 @@ class Content{
 			    $uploadCheck = FALSE;
 			}
 			// Check if $uploadCheck is set to 0 by an error
-			if ($uploadCheck == FALSE) {
+			if ($uploadCheck == TRUE) {
 				move_uploaded_file($fileToUpload['tmp_name'], $target_file);
 			}
 		}//stänger ifsats om $fileToUpload är tom.
+		else{
+			$newFileName == NULL;
+		}
 
 		// LÄGGER TILL I DATABASEN PÅ VALDA POSITIONER
 	    $query = "INSERT INTO content (title, subject, year, text, file, video) VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanText','$newFileName','$videoID')";
@@ -57,8 +60,8 @@ class Content{
 	function viewContent(){
 		$mysqli = DB::getInstance();
 
-	  $query = "SELECT * FROM content ORDER BY timestamp DESC";
-   	$result = $mysqli->query($query);
+		$query = "SELECT * FROM content ORDER BY timestamp DESC";
+   		$result = $mysqli->query($query);
 		$array = array();
 
 		while ($row = $result->fetch_assoc()) {

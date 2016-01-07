@@ -146,10 +146,11 @@
 								 <p><b>Subject: {{row.subject|e}}</b></p>
 								 <p><b>Recommended for year: {{row.year|e}}</b></p>
 								<p>{{row.text|e}}</p>
+								{% if row.video %}
 								<div class="embed-responsive embed-responsive-16by9">
 									<iframe width="560" height="315" src="https://www.youtube.com/embed/{{row.video|raw}}" frameborder="0" allowfullscreen></iframe>
 								</div>
-								
+								{% endif %}
 								{# <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p> #}
 								</div>
 							</div>
