@@ -1,22 +1,11 @@
 <?php
 class Content{
 
-	function addContent($dirtyTitle, $dirtySubject, $dirtyYear, $dirtyText, $fileUpload, $dirtyVideo){
+	function addContent($dirtyTitle, $dirtySubject, $dirtyYear, $dirtyText, $fileToUpload, $dirtyVideo){
 		//instans av db-uppkoppling
-
 
 		$mysqli = DB::getInstance();
 
-		//variabler för filuppladdning
-		//$tempName = $fileUpload['tmp_name'];
-		$originalFileName  = basename($fileUpload['name']);
-		$fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
-		$newFileName       = md5($originalFileName).'.'.$fileExtension;
-
-		$target_dir = "uploads/";
-		$target_file = $target_dir . $newFileName;
-		$uploadOk = 1;
-		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
 		//Washes those dirty variables
 		$cleanTitle = Cleaner::cleanVar($dirtyTitle);
@@ -25,49 +14,57 @@ class Content{
 		$cleanText = Cleaner::cleanVar($dirtyText);
 		$cleanVideo = Cleaner::cleanVar($dirtyVideo);
 
-	    // LÄGGER TILL I DATABASEN PÅ VALDA POSITIONER
-	    $query = "INSERT INTO content (title, subject, year, text, file, video) VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanText','$newFileName','$cleanVideo')";
-	    $mysqli->query($query);
+
 
 		//ladda upp fil
+		if(!empty($fileToUpload['tmp_name'])){
 
-	    if(!empty($fileUpload['tmp_name'])) {
-	    $check = getimagesize($fileUpload['tmp_name']);
+		$originalFileName  = basename($fileToUpload['name']);
+		$fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
+		$newFileName       = uniqid().'.'.$fileExtension;
+
+		$target_dir = "uploads/";
+		$target_file = $target_dir . $newFileName;
+		$uploadCheck = 1;
+		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+	    if(!empty($fileToUpload['tmp_name'])) {
+	    $check = getimagesize($fileToUpload['tmp_name']);
 	    if($check !== false) {
         //echo "File is an image - " . $check["mime"] . ".";
-        $uploadOk = 1;
+        $uploadCheck = 1;
 	    } else {
         //echo "File is not an image.";
-        $uploadOk = 0;
+        $uploadCheck = 0;
 		    }
 		}
 		// Check if file already exists
-		if (file_exists($target_file)) {
-		    
-		    $uploadOk = 0;
-		}
+
 		// Check file size
-		if ($fileUpload['size'] > 50000000) {
-		    
-		    $uploadOk = 0;
-		}
+
 		// Allow certain file formats
 		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-		&& $imageFileType != "gif" ) {
+		&& $imageFileType != "gif" && $fileToUpload['size'] > 50000000) {
 		    
-		    $uploadOk = 0;
+		    $uploadCheck = 0;
 		}
-		// Check if $uploadOk is set to 0 by an error
-		if ($uploadOk == 0) {
+		// Check if $uploadCheck is set to 0 by an error
+		if ($uploadCheck == 0) {
 		    
 		// if everything is ok, try to upload file
 		} else {
-		    if (move_uploaded_file($fileUpload['tmp_name'], $target_file)) {
+		    if (move_uploaded_file($fileToUpload['tmp_name'], $target_file)) {
 		        //echo "The file ". basename( $upload['tmp_name']). " has been uploaded.";
 		    } else {
 
 		    }
 		}
+	}//stänger ifsats om $fileToUpload är tom.
+
+
+		// LÄGGER TILL I DATABASEN PÅ VALDA POSITIONER
+	    $query = "INSERT INTO content (title, subject, year, text, file, video) VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanText','$newFileName','$cleanVideo')";
+	    $mysqli->query($query);
 
 	}//stänger funktion
 
@@ -109,55 +106,6 @@ class Content{
 	    }
 	    return $array;
 	}
-
-	function addFile($upload){
-
-		$target_dir = "uploads/";
-		$target_file = $target_dir . basename($upload['name']);
-		$uploadOk = 1;
-		$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-		// Check if image file is a actual image or fake image
-		if(isset($_POST['addFile'])) {
-		    $check = getimagesize($upload['tmp_name']);
-		    if($check !== false) {
-		        //echo "File is an image - " . $check["mime"] . ".";
-		        $uploadOk = 1;
-		    } else {
-		        //echo "File is not an image.";
-		        $uploadOk = 0;
-		    }
-		}
-		// Check if file already exists
-		if (file_exists($target_file)) {
-		    
-		    $uploadOk = 0;
-		}
-		// Check file size
-		if ($upload['size'] > 50000000) {
-		    
-		    $uploadOk = 0;
-		}
-		// Allow certain file formats
-		if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-		&& $imageFileType != "gif" ) {
-		    
-		    $uploadOk = 0;
-		}
-		// Check if $uploadOk is set to 0 by an error
-		if ($uploadOk == 0) {
-		    
-		// if everything is ok, try to upload file
-		} else {
-		    if (move_uploaded_file($upload['tmp_name'], $target_file)) {
-		        //echo "The file ". basename( $upload['tmp_name']). " has been uploaded.";
-		    } else {
-
-		    }
-		}
-		
-	}
-
-
 
 }//Close class
 
