@@ -14,7 +14,8 @@ class Content{
 		$cleanText = Cleaner::cleanVar($dirtyText);
 		$cleanVideo = Cleaner::cleanVar($dirtyVideo);
 
-
+		$videoAdress = explode('=', $cleanVideo);
+		$videoID = $videoAdress[1];
 
 		//ladda upp fil
 		if(!empty($fileToUpload['tmp_name'])){
@@ -63,7 +64,7 @@ class Content{
 
 
 		// LÄGGER TILL I DATABASEN PÅ VALDA POSITIONER
-	    $query = "INSERT INTO content (title, subject, year, text, file, video) VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanText','$newFileName','$cleanVideo')";
+	    $query = "INSERT INTO content (title, subject, year, text, file, video) VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanText','$newFileName','$videoID')";
 	    $mysqli->query($query);
 
 	}//stänger funktion
