@@ -71,7 +71,7 @@ class Goals{
 
 	    $mysqli->query($query);
 	}
-/*
+
 	static function showConnectedContent($dirtyGoalID, $dirtyUserID){
 		$cleanGoalID = Cleaner::cleanVar($dirtyGoalID);
 		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
@@ -91,9 +91,10 @@ class Goals{
 
 		while ($row = $result->fetch_assoc()) {
 	  	$array[] = $row;
+	  	
 		}
-	  
+		
 		return $array;
-	}*/
+	}
 
 }

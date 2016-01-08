@@ -53,13 +53,7 @@ if(isset($_POST['postContent'])){
 	//after adding new content - go back to index.php so get values disappear
 	header('Location: http://192.168.33.10/Fantastic-Teaching/');
 }
-/* TROR VI KAN TA BORT DET HÄR 
-_______________________________
-if(isset($_POST['addFile'])) {
-	$upload = $_FILES["fileToUpload"];
-	$content->addFile($upload);
-}
-*/
+
 if(isset($_POST['search'])){
 	$content = $content->searchContent($_POST['search'], $_POST['searchSubject'], $_POST['searchYear']);
 	$showBtn = TRUE;
@@ -83,8 +77,8 @@ if(isset($_POST['showGoals'])){
 
 $goals = Goals::viewGoals($_SESSION['userID']);
 
-
-
+$connectedContent = Goals::showConnectedContent($_POST['showConnections'], $_SESSION['userID']);
+	
 //If we pressed link to publish form - show publish form by setting value to true, twig will render publishNew.html template
 if (isset($_POST['publishNew'])) {
 	$publishNew = TRUE;
@@ -109,6 +103,7 @@ if (isset($_SESSION['userID'])) {
 	'publishNew' => $publishNew,
 	'goalsForm' => $goalsForm,
 	'changeUser' => $changeUserTemplate,
+	'connectedContent' => $connectedContent,
 	'goals' => $goals,
 	'showBtn' => $showBtn
 	]; //data-array till twig avslutas
