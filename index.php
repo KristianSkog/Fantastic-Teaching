@@ -78,6 +78,7 @@ if(isset($_POST['showGoals'])){
 $goals = Goals::viewGoals($_SESSION['userID']);
 
 $connectedContent = Goals::showConnectedContent($_POST['showConnections'], $_SESSION['userID']);
+
 	
 //If we pressed link to publish form - show publish form by setting value to true, twig will render publishNew.html template
 if (isset($_POST['publishNew'])) {
@@ -102,6 +103,7 @@ if (isset($_SESSION['userID'])) {
 	'sessionUserID' => $_SESSION['userID'],
 	'publishNew' => $publishNew,
 	'goalsForm' => $goalsForm,
+	'buttonId' => $_POST['showConnections'],
 	'changeUser' => $changeUserTemplate,
 	'connectedContent' => $connectedContent,
 	'goals' => $goals,

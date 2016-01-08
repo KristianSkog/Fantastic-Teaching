@@ -78,38 +78,42 @@
 
 
 
-
 				{% if goals %}
-				{% for row in goals %}
-					{% set goalID = row.id %}
-					<div class="col-sm-6 col-md-4">
-						<div class="thumbnail">
-							<h4>{{ row.goal }}</h4>
-							id {{ goalID|e}}
-							<p>Subject: {{row.subject|e}}</p>
-							<p>For year: {{row.year|e}}</p>
-											{% if connectedContent %}
-											<h5>Content connected to this goal:</h5>
-											<ul>
-											{% for row in connectedContent %}
-											<li>{{row.title|e}}</li>
-											{{goalID}}
-											{% endfor %}
-											</ul>
-											{% endif %} 
+					{% for row in goals %}
+						{% set goalID = row.id %}
+							<div class="col-sm-6 col-md-4">
+								<div class="thumbnail">
+									<h4>{{ row.goal }}</h4>
+									id {{ goalID|e}}
+									<p>Subject: {{row.subject|e}}</p>
+									<p>For year: {{row.year|e}}</p>
 
-						</div>
-						<div class="form-group">
-							<form method="post" action="">
-								<button class="transparentbtn" type="submit" name="showConnections" value="{{goalID}}"><span class="glyphicon glyphicon-expand" aria-hidden="true"></span> Show connected content</button>
-							</form>
-						</div>
-						<div class="form-group">
-							<form method="post" action="">
-								<button class="transparentbtn" type="submit" name="deleteGoalID" value="{{row.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete goal</button>
-							</form>
-						</div>
-					</div>
+									{% if row.id == buttonId %}
+										{% if connectedContent %}
+											<h5>Content connected to this goal:</h5>
+
+											<ul>
+												{% for contentrow in connectedContent %}
+													<li>{{contentrow.title|e}}</li>
+													{{goalID}}
+												{% endfor %}
+											</ul>
+
+										{% endif %} 
+									{% endif %} 
+
+								</div>
+								<div class="form-group">
+									<form method="post" action="">
+										<button class="transparentbtn" type="submit" name="showConnections" value="{{goalID}}"><span class="glyphicon glyphicon-expand" aria-hidden="true"></span> Show connected content</button>
+									</form>
+								</div>
+								<div class="form-group">
+									<form method="post" action="">
+										<button class="transparentbtn" type="submit" name="deleteGoalID" value="{{row.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete goal</button>
+									</form>
+								</div>
+							</div>
 				{% endfor %}
 				{% endif %}
 
