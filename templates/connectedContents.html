@@ -1,7 +1,6 @@
-
-			<h5>Content connected to this goal:</h5>
-			<ul>
-			{% for row in connectedContent %}
-			<li>{{row.title|e}}</li>
-			{% endfor %}
-			</ul>
+<h5>Content connected to this goal:</h5>
+<ul>
+	{% for contentrow in connectedContent %}
+		<li>{{contentrow.title|e}}</li>
+	{% endfor %}
+</ul>

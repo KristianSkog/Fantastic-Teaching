@@ -77,7 +77,11 @@ if(isset($_POST['showGoals'])){
 
 $goals = Goals::viewGoals($_SESSION['userID']);
 
-$connectedContent = Goals::showConnectedContent($_POST['showConnections'], $_SESSION['userID']);
+if (isset($_POST['showConnections'])) {
+	$connectedContent = Goals::showConnectedContent($_POST['showConnections'], $_SESSION['userID']);
+}else{
+	$connectedContent = NULL;
+}
 
 	
 //If we pressed link to publish form - show publish form by setting value to true, twig will render publishNew.html template
@@ -92,6 +96,12 @@ if (isset($_GET['changePassword']) && isset($_SESSION['userID'])) {
 }else{
 	$changeUserTemplate = NULL;
 }
+if (isset($_POST['showConnections'])) {
+	$buttonId = $_POST['showConnections'];
+}else{
+	$buttonId = NULL;
+}
+
 
 //Om vi har inloggad användare - visa detta:
 if (isset($_SESSION['userID'])) {
@@ -103,7 +113,7 @@ if (isset($_SESSION['userID'])) {
 	'sessionUserID' => $_SESSION['userID'],
 	'publishNew' => $publishNew,
 	'goalsForm' => $goalsForm,
-	'buttonId' => $_POST['showConnections'],
+	'buttonId' => $buttonId,
 	'changeUser' => $changeUserTemplate,
 	'connectedContent' => $connectedContent,
 	'goals' => $goals,
