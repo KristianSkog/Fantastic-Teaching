@@ -43,5 +43,20 @@
 		</div>
 		{% endif %}
 		</div>
+
+		{% if allContent %}
+		<div class="rating">
+			<form method='post' action=''>
+				<input type="hidden" name="contentRatingId" value="{{row.id}}">
+				<input type="hidden" name="userRatingId" value="{{sessionUserID}}">
+				<button type="submit" name="submitUp" value="1"><span class="glyphicon glyphicon-menu-up btn-lg" aria-hidden="true" ></span></button>
+				{% for row in viewRating %}
+						<div style="margin-left: 20px;">{{row.rating|e}}</div>
+				{% endfor %}
+				<button type="submit" name="submitDown" value="-1"><span class="glyphicon glyphicon-menu-down btn-lg" aria-hidden="true" ></span></button>
+			</form>
+		</div>
+		{% endif %}
+
 	</div>
 </div>
