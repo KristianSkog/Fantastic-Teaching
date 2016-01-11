@@ -62,11 +62,37 @@ class Content{
 
 	}//stänger addContent funktion
 
-	function viewContent(){
+	function viewSingleContent($dirtyContentID){
+		$cleanContentID = Cleaner::cleanVar($dirtyContentID);
+
 		$mysqli = DB::getInstance();
 
 		$query = "
 		SELECT content.*, users.username
+		FROM content
+		JOIN users
+		ON content.author_id = users.id
+		WHERE content.id = ".$cleanContentID;
+
+   		$result = $mysqli->query($query);
+		$array = array();
+
+		while ($row = $result->fetch_assoc()) {
+	  	$array[] = $row;
+	  }
+	  return $array;
+	} // stänger viewContent funktion
+
+	function viewContent(){
+		$mysqli = DB::getInstance();
+
+		$query = "
+		SELECT content.id, content.title,
+		content.subject, content.year,
+		content.file, content.video,
+		content.author_id,
+		substring(content.text,1,50) as text,
+		users.username
 		FROM content
 		JOIN users
 		ON content.author_id = users.id
@@ -88,15 +114,23 @@ class Content{
 		$mysqli = DB::getInstance();
 
 		$query = "
-		SELECT *
+				SELECT content.id,
+		content.title,
+		content.subject,
+		content.year,
+		content.file,
+		content.video,
+		content.author_id,
+		content.text as 'fulltext',
+		substring(content.text,1,50) as 'text',
+		users.username
 		FROM users
 		JOIN content
 		ON users.id = content.author_id
-		AND content.subject = '".$cleanSubject."'
-		AND content.year = '".$cleanYear."'
+		WHERE CONCAT(content.subject, content.year) LIKE '%".$cleanSubject.$cleanYear."%'
 		HAVING content.title LIKE '%".$cleanSearch."%'
-		OR content.text LIKE '%".$cleanSearch."%'
-		ORDER BY timestamp DESC
+		OR content.text  LIKE '%".$cleanSearch."%'
+		ORDER BY content.timestamp DESC
 		";
 
 		$result = $mysqli->query($query);

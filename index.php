@@ -64,16 +64,19 @@ if(isset($_POST['submitUp'])){
 if(isset($_POST['submitDown'])){
 	$content->rating($_POST['contentRatingId'], $_POST['userRatingId'], $_POST['submitDown']);
 }
+$singleContent = NULL;
+$allContent = NULL;
+$getAllContentBTN = NULL;
+
 
 if(isset($_POST['search'])){
-	$content = $content->searchContent($_POST['search'], $_POST['searchSubject'], $_POST['searchYear']);
-	$showBtn = TRUE;
-}elseif (isset($_POST['showAll'])){
-	$content = $content->viewContent();
-	$showBtn = NULL;
+	$allContent = $content->searchContent($_POST['search'], $_POST['searchSubject'], $_POST['searchYear']);
+	$getAllContentBTN = TRUE;
+}elseif(isset($_POST['viewSingleContent'])){
+	$singleContent = $content->viewSingleContent($_POST['viewSingleContent']);
+	$getAllContentBTN = TRUE;
 }else{
-	$content = $content->viewContent();
-	$showBtn = NULL;
+	$allContent = $content->viewContent();
 }
 
 if(isset($_POST['goalUserID'])){
@@ -119,7 +122,8 @@ if (isset($_SESSION['userID'])) {
 	//data twig använder (i array):
 	$data= [
 	'title' => "Fantastic Teaching",
-	'content' => $content,
+	'allContent' => $allContent,
+	'singleContent' => $singleContent,
 	'user' => $_SESSION['username'],
 	'sessionUserID' => $_SESSION['userID'],
 	'publishNew' => $publishNew,
@@ -129,7 +133,7 @@ if (isset($_SESSION['userID'])) {
 	'connectedContent' => $connectedContent,
 	'viewRating' => $viewRating,
 	'goals' => $goals,
-	'showBtn' => $showBtn
+	'getAllContentBTN' => $getAllContentBTN
 	]; //data-array till twig avslutas
 }
 
