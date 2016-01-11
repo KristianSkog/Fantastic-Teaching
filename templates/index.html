@@ -83,17 +83,29 @@
 			</div>
 		</div>
 		<div class="row">
+			<div class="col-sm-12 form-group">
+				{% if getAllContentBTN %}
+					<form method='post' action=''>
+					<button class='btn btn-default' type='submit' name='getAllContentBTN'>Show all content</button>
+					</form>
+				{% endif %}
+			</div>
 			<div class="col-sm-12">
-				{% if content %}
-					{% for row in content %}
+				{% if allContent %}
+					{% for row in allContent %}
+						{% include "content.html" %}
+					{% endfor %}
+				{% endif %}
+				{% if singleContent %}
+					{% for row in singleContent %}
 						{% include "singleContent.html" %}
 					{% endfor %}
 				{% endif %}
 			</div>
 			<div class="col-sm-12">
-			{% if showBtn %}
+			{% if getAllContentBTN %}
 				<form method='post' action=''>
-				<button class='btn btn-default' type='submit' name='showAll'>Show all content</button>
+				<button class='btn btn-default' type='submit' name='getAllContentBTN'>Show all content</button>
 				</form>
 			{% endif %}
 			</div>
