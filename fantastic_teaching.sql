@@ -56,7 +56,6 @@ INSERT INTO `goals` (`id`, `goal`, `subject`, `year`, `user_id`) VALUES
 (2,	'Nytt mÃ¥l',	'Historia',	'6-7',	3),
 (4,	'tredje',	'Svenska',	'1-2',	3),
 (5,	'hej pÃ¥ dig ERIK',	'Svenska',	'1-2',	6);
-(5,	'2016 Ã¥r1 svenska',	'Svenska',	'1-2',	9);
 
 DROP TABLE IF EXISTS `goals_use_content`;
 CREATE TABLE `goals_use_content` (
