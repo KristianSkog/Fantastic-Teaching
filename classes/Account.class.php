@@ -2,6 +2,7 @@
 class Account{
 	static private $id;
 	static private $username;
+	static private $userLevel;
 
 	static function createAccount($dirtyNewUsername, $dirtyNewPassword, $dirtyNewEmail) {
 
@@ -79,7 +80,7 @@ class Account{
 		
 		// fråga till sql-db med tvättade variabler
 		$queryGetUserMatch = "
-		SELECT users.id, users.username
+		SELECT users.id, users.username, users.level
 		FROM users 
 		WHERE username='".$cleanUsername."' 
 		AND password='".$safePassword."'
@@ -90,8 +91,10 @@ class Account{
 			while( $row = $result->fetch_assoc() ){
 				self::$id = $row['id'];
 				self::$username = $row['username'];
+				self::$userLevel = $row['level'];
 				$_SESSION['userID'] = self::$id;
 				$_SESSION['username'] = self::$username;
+				$_SESSION['userLevel'] = self::$userLevel;
 			}
 		}else{
 			echo $mysqli->error;
@@ -123,6 +126,10 @@ class Account{
 
 	static function getUsername(){
 		return self::$username;
+	}
+
+	static function getUserLevel(){
+		return self::$userLevel;
 	}
 }
 ?>

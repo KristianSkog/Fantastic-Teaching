@@ -39,8 +39,8 @@ CREATE TABLE `content` (
 INSERT INTO `content` (`id`, `title`, `subject`, `year`, `text`, `file`, `timestamp`, `video`, `author_id`) VALUES
 (46,	'innehÃ¥llets titel',	'Svenska',	'1-2',	'min jÃ¤vla text',	'',	'2016-01-07 19:34:54',	'',	3),
 (47,	'titeln',	'Svenska',	'1-2',	'textfan',	'',	'2016-01-07 20:37:04',	'',	3),
-(48,	'Hej hej',	'Svenska',	'1-2',	'hej hej',	'5693e2a8b3d8a.png',	'2016-01-11 17:13:12',	'',	6),
-(49,	'Youtube',	'Svenska',	'1-2',	'Youtube',	'',	'2016-01-11 17:15:29',	'C_E3bSFi8lI',	6);
+(48,	'Nytt innehÃ¥ll av premiumkonto',	'Svenska',	'1-2',	'premiumkonto',	'',	'2016-01-11 16:58:05',	'',	9);
+
 
 DROP TABLE IF EXISTS `goals`;
 CREATE TABLE `goals` (
@@ -56,6 +56,7 @@ INSERT INTO `goals` (`id`, `goal`, `subject`, `year`, `user_id`) VALUES
 (2,	'Nytt mÃ¥l',	'Historia',	'6-7',	3),
 (4,	'tredje',	'Svenska',	'1-2',	3),
 (5,	'hej pÃ¥ dig ERIK',	'Svenska',	'1-2',	6);
+(5,	'2016 Ã¥r1 svenska',	'Svenska',	'1-2',	9);
 
 DROP TABLE IF EXISTS `goals_use_content`;
 CREATE TABLE `goals_use_content` (
@@ -141,19 +142,60 @@ INSERT INTO `rating` (`id`, `content_id`, `rating`, `users_id`) VALUES
 (62,	47,	1,	6),
 (63,	47,	1,	6);
 
+DROP TABLE IF EXISTS `rating`;
+CREATE TABLE `rating` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `content_id` int(11) unsigned NOT NULL,
+  `rating` int(11) NOT NULL,
+  `users_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `content_id` (`content_id`),
+  KEY `users_id` (`users_id`),
+  CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`content_id`) REFERENCES `content` (`id`),
+  CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+INSERT INTO `rating` (`id`, `content_id`, `rating`, `users_id`) VALUES
+(19,	47,	-1,	6),
+(20,	46,	1,	6),
+(21,	46,	1,	6),
+(22,	46,	1,	6),
+(23,	46,	1,	6),
+(24,	47,	1,	6),
+(25,	47,	1,	6),
+(26,	47,	1,	6),
+(27,	47,	-1,	6),
+(28,	47,	-1,	6),
+(29,	47,	-1,	6),
+(30,	47,	-1,	6),
+(31,	47,	-1,	6),
+(32,	47,	-1,	6),
+(33,	47,	-1,	6),
+(34,	47,	-1,	6),
+(35,	47,	1,	6),
+(36,	47,	1,	6),
+(37,	46,	1,	6),
+(38,	46,	1,	6),
+(39,	46,	1,	6),
+(40,	46,	1,	6),
+(41,	46,	1,	6),
+(42,	46,	1,	6),
+(43,	46,	1,	6),
+(44,	46,	1,	6),
+(45,	46,	1,	6);
+
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(50) COLLATE utf8_bin NOT NULL,
   `salt` varchar(150) COLLATE utf8_bin NOT NULL,
   `password` char(128) COLLATE utf8_bin NOT NULL,
+  `level` enum('Free','Premium') COLLATE utf8_bin NOT NULL DEFAULT 'Free',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `users` (`id`, `username`, `salt`, `password`) VALUES
-(2,	'erik',	'ó>í?74þq„h{}?',	'0702eafd40f61cce7bbe8970bdfc9d453e3d9c76b610c33dc9d82937adefcc77399854d106b6d6222a2da6d8a2ef72d846234036ba1858ed5e409edd89a22afa'),
-(3,	'Klara',	'ˆSdæÎ³ÏU¡\n£SÝÏ]~',	'548543f363ec8b6b585528871cc7c27265fab143ef469181676320dcc8864c42834a81592e1e53c5e3a28995389b3a42be5fdc8b2569091cd536f4ed9887eaa0'),
-(4,	'kiss',	'|nîŽ8÷4¦ÂÛ;',	'9a9b95bcae1d4725ed531caa98c186f4602b06ad50864553958c70f63f316d90753802af01ad26fb5405dcd56b9ab63ace69f2771523c18a955db977ad9c0fb2'),
-(6,	'Kristian2',	'aqOj% qE¯¾MScz',	'd33d27aeea7524fb42a9ffb5149ce735cfcbb237d9f311798bae74009ff3eec5158effe8e7e7dbfa8239aeff6b218703c61941a4307d9a7a8a91e9b68dec1910');
-
--- 2016-01-11 17:17:24
+INSERT INTO `users` (`id`, `username`, `salt`, `password`, `level`) VALUES
+(4,	'kiss',	'|nîŽ8÷4¦ÂÛ;',	'9a9b95bcae1d4725ed531caa98c186f4602b06ad50864553958c70f63f316d90753802af01ad26fb5405dcd56b9ab63ace69f2771523c18a955db977ad9c0fb2',	'Premium'),
+(6,	'Kristian2',	'aqOj% qE¯¾MScz',	'd33d27aeea7524fb42a9ffb5149ce735cfcbb237d9f311798bae74009ff3eec5158effe8e7e7dbfa8239aeff6b218703c61941a4307d9a7a8a91e9b68dec1910',	'Premium'),
+(8,	'KlaraFree',	'r?í‚õ½ÆFx€òÛÅä²Ø',	'42e7a1ab2732128ced176f98b4adff38c844efac9355a8a8bd3af8ccd394279681d8b72bacd4929338b57ba401027a748869dcc1f7e84f1927420fd0ba978dec',	'Free'),
+(9,	'KlaraPremium',	'Ïô®WQGøêezVá÷Ç®',	'04f071db62fa07a106ec8af876ae0e9416de6e0a3b53aff9a9b4b3aff9416439d415e47506da98b9a8d306d3115e731f821721cbbf3fe5d1fb2cf87b8dd8d2fe',	'Premium');

@@ -114,15 +114,15 @@ class Content{
 		$mysqli = DB::getInstance();
 
 		$query = "
-				SELECT content.id,
-		content.title,
-		content.subject,
-		content.year,
-		content.file,
-		content.video,
-		content.author_id,
-		content.text as 'fulltext',
-		substring(content.text,1,50) as 'text',
+		SELECT content.id, 
+		content.title, 
+		content.subject, 
+		content.year, 
+		content.file, 
+		content.video, 
+		content.author_id, 
+		content.text as 'fulltext', 
+		substring(content.text,1,50) as 'text', 
 		users.username
 		FROM users
 		JOIN content

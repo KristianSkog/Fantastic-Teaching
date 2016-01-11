@@ -27,21 +27,21 @@
 			</div>
 		{% endif %}
 		<div class="caption">
-			<div class="form-group">
-				<form method="post" action="">
-					<button class="transparentbtn" type="submit" name="viewSingleContent" value="{{row.id}}"><span class="glyphicon glyphicon-expand" aria-hidden="true"></span> Expand</button>
-				</form>
-			</div>
-		<h4>{{row.title|e}}</h4>
-		<p class="grayText"><i>Published {{row.timestamp|e}} Author: {{row.username}}</i></p>
-		 <p>Subject: {{row.subject|e}}</p>
-		 <p>Recommended for year: {{row.year|e}}</p>
-		<p>{{row.text|e}}. . .</p>
-		{% if row.video %}
+			<h4>{{row.title|e}}</h4>
+			<p class="grayText"><i>Published {{row.timestamp|e}} Author: {{row.username}}</i></p>
+			<p>Subject: {{row.subject|e}}</p>
+			<p>Recommended for year: {{row.year|e}}</p>
+			<p>{{row.text|e}}. . .</p>
+			{% if row.video %}
 		<div class="embed-responsive embed-responsive-16by9">
 			<iframe width="560" height="315" src="https://www.youtube.com/embed/{{row.video|raw}}" frameborder="0" allowfullscreen></iframe>
 		</div>
 		{% endif %}
+		<div class="form-group">
+			<form method="post" action="">
+				<button class="transparentbtn" type="submit" name="viewSingleContent" value="{{row.id}}"><span class="glyphicon glyphicon-expand" aria-hidden="true"></span> Expand</button>
+			</form>
+		</div>
 		</div>
 
 		{% if allContent %}

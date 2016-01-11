@@ -69,18 +69,20 @@
 				{% include "publishNew.html" %}
 				{% endif %}
 			</div>
-			<div class="col-sm-6">
-				{% if goalsForm %}
-				{% include "goalsForm.html" %}
-				{% endif %}
-			</div>
-			<div class="col-sm-12">
-				{% if goals %}
-					{% for row in goals %}
-						{% include "goals.html" %}
-					{% endfor %}
-				{% endif %}
-			</div>
+			{% if userLevel == "Premium" %}
+				<div class="col-sm-6">
+					{% if goalsForm %}
+					{% include "goalsForm.html" %}
+					{% endif %}
+				</div>
+				<div class="col-sm-12">
+					{% if goals %}
+						{% for row in goals %}
+							{% include "goals.html" %}
+						{% endfor %}
+					{% endif %}
+				</div>
+			{% endif %}
 		</div>
 		<div class="row">
 			<div class="col-sm-12 form-group">

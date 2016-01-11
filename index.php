@@ -126,6 +126,7 @@ if (isset($_SESSION['userID'])) {
 	'singleContent' => $singleContent,
 	'user' => $_SESSION['username'],
 	'sessionUserID' => $_SESSION['userID'],
+	'userLevel' => $_SESSION['userLevel'],
 	'publishNew' => $publishNew,
 	'goalsForm' => $goalsForm,
 	'buttonId' => $buttonId,
