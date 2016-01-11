@@ -88,14 +88,13 @@ class Content{
 		$mysqli = DB::getInstance();
 
 		$query = "
-		SELECT *
+		SELECT * 
 		FROM users
 		JOIN content
 		ON users.id = content.author_id
-		AND content.subject = '".$cleanSubject."'
-		AND content.year = '".$cleanYear."'
+		WHERE CONCAT(subject, year) LIKE '%".$cleanSubject.$cleanYear."%'
 		HAVING content.title LIKE '%".$cleanSearch."%'
-		OR content.text LIKE '%".$cleanSearch."%'
+		OR content.text  LIKE '%".$cleanSearch."%'
 		ORDER BY timestamp DESC
 		";
 
