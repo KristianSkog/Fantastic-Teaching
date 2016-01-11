@@ -48,10 +48,21 @@ if (!isset($_SESSION['userID'])) {
 //$content är alltid deklarerad nu annars fick man problem med visning.
 $content = new Content();
 
+$viewRating = $content->viewRating();
+
+
 if(isset($_POST['postContent'])){
 	$content->addContent($_POST['title'], $_POST['subject'], $_POST['year'], $_POST['text'], $_FILES["fileToUpload"], $_POST['video'], $_SESSION['userID']);
 	//after adding new content - go back to index.php so get values disappear
 	header('Location: http://192.168.33.10/Fantastic-Teaching/');
+}
+
+if(isset($_POST['submitUp'])){
+	$content->rating($_POST['contentRatingId'], $_POST['userRatingId'], $_POST['submitUp']);
+}
+
+if(isset($_POST['submitDown'])){
+	$content->rating($_POST['contentRatingId'], $_POST['userRatingId'], $_POST['submitDown']);
 }
 
 if(isset($_POST['search'])){
@@ -83,7 +94,7 @@ if (isset($_POST['showConnections'])) {
 	$connectedContent = NULL;
 }
 
-	
+
 //If we pressed link to publish form - show publish form by setting value to true, twig will render publishNew.html template
 if (isset($_POST['publishNew'])) {
 	$publishNew = TRUE;
@@ -116,6 +127,7 @@ if (isset($_SESSION['userID'])) {
 	'buttonId' => $buttonId,
 	'changeUser' => $changeUserTemplate,
 	'connectedContent' => $connectedContent,
+	'viewRating' => $viewRating,
 	'goals' => $goals,
 	'showBtn' => $showBtn
 	]; //data-array till twig avslutas

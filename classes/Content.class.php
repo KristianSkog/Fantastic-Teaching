@@ -57,7 +57,7 @@ class Content{
 	    INSERT INTO content (title, subject, year, text, file, video, author_id)
 	    VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanText','$newFileName','$videoID','$cleanAuthorID')
 	    ";
-	    
+
 	    $mysqli->query($query);
 
 	}//stänger addContent funktion
@@ -111,7 +111,7 @@ class Content{
 		$cleanContentID = Cleaner::cleanVar($dirtyContentID);
 
 		$mysqli = DB::getInstance();
-	    
+
 	    $query = "
 	    DELETE
 	    FROM content
@@ -119,6 +119,38 @@ class Content{
 	    ";
 
 	    $mysqli->query($query);
+	}
+
+	function rating($dirtyContentID,$dirtyUserId,$dirtyRating){
+
+		$cleanContentID = Cleaner::cleanVar($dirtyContentID);
+		$cleanUserId = Cleaner::cleanVar($dirtyUserId);
+		$cleanRating = Cleaner::cleanVar($dirtyRating);
+
+		$mysqli = DB::getInstance();
+
+		$query = "
+		INSERT INTO rating (content_id, users_id, rating)
+		VALUES ('$cleanContentID', '$cleanUserId', '$cleanRating')
+		";
+
+		$mysqli->query($query);
+	}
+
+	function viewRating(){
+		$mysqli = DB::getInstance();
+		$query = "
+			select content_id, sum(rating) as rating
+			from rating
+			group by content_id
+		";
+
+		$result = $mysqli->query($query);
+		$array = array();
+		while ($row = $result->fetch_assoc()) {
+			$array[] = $row;
+		}
+		return $array;
 	}
 
 }//Close class

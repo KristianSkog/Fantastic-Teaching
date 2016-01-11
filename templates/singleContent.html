@@ -29,8 +29,8 @@
 								<div class="caption">
 								<h4>{{row.title|e}}</h4>
 								<p class="grayText"><i>Published {{row.timestamp|e}} Author: {{row.username}}</i></p>
-								 <p>Subject: {{row.subject|e}}</p>
-								 <p>Recommended for year: {{row.year|e}}</p>
+								<p>Subject: {{row.subject|e}}</p>
+								<p>Recommended for year: {{row.year|e}}</p>
 								<p>{{row.text|e}}</p>
 								{% if row.video %}
 								<div class="embed-responsive embed-responsive-16by9">
@@ -38,5 +38,22 @@
 								</div>
 								{% endif %}
 								</div>
+								{% if content %}
+								<div class="rating">
+									<form method='post' action=''>
+										<input type="hidden" name="contentRatingId" value="{{row.id}}">
+										<input type="hidden" name="userRatingId" value="{{sessionUserID}}">
+										<button type="submit" name="submitUp" value="1"><span class="glyphicon glyphicon-menu-up btn-lg" aria-hidden="true" ></span></button>
+								
+										{% for row in viewRating %}
+
+												{% if contentID == rating.content_id %}
+												<div style="margin-left: 20px;">{{row.rating|e}}</div>
+												{%endif%}
+										{% endfor %}
+										<button type="submit" name="submitDown" value="-1"><span class="glyphicon glyphicon-menu-down btn-lg" aria-hidden="true" ></span></button>
+									</form>
+								</div>
+								{% endif %}
 							</div>
 						</div>
