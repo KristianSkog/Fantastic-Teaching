@@ -163,13 +163,23 @@ class Content{
 
 		$mysqli = DB::getInstance();
 
-		$query = "
-		INSERT INTO rating (content_id, users_id, rating)
-		VALUES ('$cleanContentID', '$cleanUserId', '$cleanRating')
-		";
+		$query = "SELECT EXISTS(SELECT * FROM rating WHERE content_id = '$cleanContentID' and users_id = '$cleanUserId') as ratingExists";
+		$result = $mysqli->query($query);
+		$array = array();
+		while ($row = $result->fetch_assoc()) {
+			
+	  		if($row['ratingExists'] == 0){
 
-		$mysqli->query($query);
-	}
+			  	$query = "
+				INSERT INTO rating (content_id, users_id, rating)
+				VALUES ('$cleanContentID', '$cleanUserId', '$cleanRating')
+				";
+
+				$mysqli->query($query);
+			}
+	  	}
+	}//stänger rating
+	
 
 	function viewRating(){
 		$mysqli = DB::getInstance();
