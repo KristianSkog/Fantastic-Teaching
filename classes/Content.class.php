@@ -197,4 +197,24 @@ class Content{
 		return $array;
 	}
 
+	function viewArticleUses(){
+
+	$mysqli = DB::getInstance();
+	$query = "select content.author_id as user, content.title, count(content.id) as uses
+			from content
+			left join users
+			on content.author_id = users.id
+			left join goals_use_content
+			on content.id = goals_use_content.content_id
+			group by content.id
+			";
+	$result = $mysqli->query($query);
+		$array = array();
+		while ($row = $result->fetch_assoc()) {
+			$array[] = $row;
+		}
+		return $array;
+		
+	}//stänger ArticleUses
+
 }//Close class

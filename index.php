@@ -49,6 +49,8 @@ if (!isset($_SESSION['userID'])) {
 $content = new Content();
 
 $viewRating = $content->viewRating();
+$viewArticleUses = $content->viewArticleUses();
+
 
 
 if(isset($_POST['postContent'])){
@@ -133,6 +135,7 @@ if (isset($_SESSION['userID'])) {
 	'changeUser' => $changeUserTemplate,
 	'connectedContent' => $connectedContent,
 	'viewRating' => $viewRating,
+	'viewArticleUses' => $viewArticleUses,
 	'goals' => $goals,
 	'getAllContentBTN' => $getAllContentBTN
 	]; //data-array till twig avslutas

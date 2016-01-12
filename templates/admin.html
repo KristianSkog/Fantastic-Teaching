@@ -23,3 +23,18 @@
 		<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log out <b>{{user}}</b></button>
 	</form>
 </div>
+<div class="row">
+	<div class="col-xs-2">
+		<h5>Mina artiklar<h5>
+		<div class="row">
+			<ul class="list-group">
+			{% for row in viewArticleUses if row.user ==  sessionUserID %}
+ 				<li class="list-group-item">
+    				<span class="badge">{{row.uses|e}}</span>
+    				{{row.title|e}}
+  				</li>
+			{% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>
