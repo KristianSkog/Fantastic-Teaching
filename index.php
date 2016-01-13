@@ -7,7 +7,9 @@ if (isset($_GET['logout'])){
 	header('Location: http://192.168.33.10/Fantastic-Teaching/');
 }
 
-
+if (isset($_POST['deleteConnectionID'])) {
+	Goals::deleteConnection($_POST['deleteConnectionID']);
+}
 
 if (isset($_POST['deleteContentID'])) {
 	Content::deleteContent($_POST['deleteContentID']);
@@ -98,6 +100,7 @@ if (isset($_POST['showConnections'])) {
 	$estimateSum = Goals::sumEstimate($_POST['showConnections'], $_SESSION['userID']);
 }else{
 	$connectedContent = NULL;
+	$estimateSum = NULL;
 }
 
 

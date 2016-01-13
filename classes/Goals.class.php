@@ -95,6 +95,20 @@ class Goals{
 		return $array;
 	}
 
+	static function deleteConnection($dirtyConnectionID){
+		$cleanConnectionID = Cleaner::cleanVar($dirtyConnectionID);
+
+		$mysqli = DB::getInstance();
+
+	    $query = "
+	    DELETE
+	    FROM goals_use_content
+	    WHERE goals_use_content.id = '".$cleanConnectionID."'
+	    ";
+
+	    $mysqli->query($query);
+	}
+
 	static function sumEstimate($dirtyGoalID, $dirtyUserID){
 		$cleanGoalID = Cleaner::cleanVar($dirtyGoalID);
 		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
