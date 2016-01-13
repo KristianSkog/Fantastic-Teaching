@@ -1,3 +1,6 @@
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
 <h3>Publish new content</h3>
 <form method='post' action="" enctype="multipart/form-data">
 	<div class="form-group">
@@ -30,7 +33,16 @@
 	</div>
 	<div class="form-group">
 		<label for="text">Text:</label>
-		<textarea class="form-control" name='text' placeholder='Write your text...'></textarea>
+		<textarea class="form-control" id="my_textarea" name="text" placeholder='Write your text...'></textarea>
+		<br />
+		<input type="button" value="b" />
+		<input type="button" value="i" />
+		<input type="button" value="u" />
+		<br>
+		<br>
+
+		<div id="preview"></div>
+
 	</div>
 	<div class="form-group">
 		<input type="hidden" name="publishNew" value=NULL>
@@ -46,3 +58,37 @@
 		<input class="btn btn-default" type='submit' name='postContent' value='Post'>
 	</div>
 </form>
+
+<script>
+
+//FORMATTING
+
+$('input:button').click(function() {
+    
+    var myTextAreaValue = $('#my_textarea').val();
+    var selectedText = getInputSelection($('#my_textarea'));
+    var updatedText = '<'+$(this).val()+'>' + selectedText + '</'+$(this).val()+'>';
+    myTextAreaValue = myTextAreaValue.replace(selectedText, updatedText);
+    $('#my_textarea').val(myTextAreaValue)
+});
+
+function getInputSelection(elem){
+ if(typeof elem != "undefined"){
+  s=elem[0].selectionStart;
+  e=elem[0].selectionEnd;
+  return elem.val().substring(s, e);
+ }else{
+  return '';
+ }
+}
+
+
+//LIVE PREVIEW
+
+var wpcomment = document.getElementById('my_textarea');
+
+wpcomment.onkeyup = wpcomment.onkeypress = function(){
+    document.getElementById('preview').innerHTML = this.value;
+}
+
+</script>

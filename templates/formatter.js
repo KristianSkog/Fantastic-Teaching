@@ -1,25 +1,3 @@
-<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-
-<textarea id="my_textarea" name="my_textarea" style="height:250px; width:500px;"></textarea>
-<br />
-<input type="button" value="b" />
-<input type="button" value="i" />
-<input type="button" value="u" />
-<input type="button" value="li" />
-<input type="button" value="ul" />
-<input type="button" value="ol" />
-<input type="button" value="center" />
-<input type="button" value="div" />
-<input type="button" value="p" />
-<br>
-<br>
-
-<div id="preview"></div>
-
-
-<script>
-
 //FORMATTING
 
 $('input:button').click(function() {
@@ -49,5 +27,3 @@ var wpcomment = document.getElementById('my_textarea');
 wpcomment.onkeyup = wpcomment.onkeypress = function(){
     document.getElementById('preview').innerHTML = this.value;
 }
-
-</script>
