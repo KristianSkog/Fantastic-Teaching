@@ -1,4 +1,4 @@
--- Adminer 4.2.3 MySQL dump
+-- Adminer 4.2.2 MySQL dump
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -28,6 +28,7 @@ CREATE TABLE `content` (
   `title` varchar(100) COLLATE utf8_bin NOT NULL,
   `subject` enum('Matte','Svenska','Geografi','Historia') COLLATE utf8_bin NOT NULL,
   `year` enum('1-2','3-5','6-7','8-9') COLLATE utf8_bin NOT NULL,
+  `estimate` enum('1','2','3','4','5','6','7','8','9','10') COLLATE utf8_bin NOT NULL,
   `text` longtext COLLATE utf8_bin,
   `file` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -36,11 +37,11 @@ CREATE TABLE `content` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `content` (`id`, `title`, `subject`, `year`, `text`, `file`, `timestamp`, `video`, `author_id`) VALUES
-(46,	'innehÃ¥llets titel',	'Svenska',	'1-2',	'min jÃ¤vla text',	'',	'2016-01-07 19:34:54',	'',	3),
-(47,	'titeln',	'Svenska',	'1-2',	'textfan',	'',	'2016-01-07 20:37:04',	'',	3),
-(48,	'Nytt innehÃ¥ll av premiumkonto',	'Svenska',	'1-2',	'premiumkonto',	'',	'2016-01-11 16:58:05',	'',	9);
-
+INSERT INTO `content` (`id`, `title`, `subject`, `year`, `estimate`, `text`, `file`, `timestamp`, `video`, `author_id`) VALUES
+(46,	'innehÃ¥llets titel',	'Svenska',	'1-2',	'1',	'min jÃ¤vla text',	'',	'2016-01-07 19:34:54',	'',	3),
+(47,	'titeln',	'Svenska',	'1-2',	'1',	'textfan',	'',	'2016-01-07 20:37:04',	'',	3),
+(48,	'Nytt innehÃ¥ll av premiumkonto',	'Svenska',	'1-2',	'1',	'premiumkonto',	'',	'2016-01-11 16:58:05',	'',	9),
+(49,	'god morgon',	'Svenska',	'1-2',	'1',	'min lÃ¥nga text',	'',	'2016-01-13 10:23:28',	'',	9);
 
 DROP TABLE IF EXISTS `goals`;
 CREATE TABLE `goals` (
@@ -53,9 +54,9 @@ CREATE TABLE `goals` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `goals` (`id`, `goal`, `subject`, `year`, `user_id`) VALUES
-(2,	'Nytt mÃ¥l',	'Historia',	'6-7',	3),
-(4,	'tredje',	'Svenska',	'1-2',	3),
-(5,	'hej pÃ¥ dig ERIK',	'Svenska',	'1-2',	6);
+(6,	'FÃ¶rsta mÃ¥let',	'Svenska',	'1-2',	9),
+(7,	'nytt mÃ¥l',	'Svenska',	'1-2',	9),
+(8,	'nytt mÃ¥l',	'Svenska',	'1-2',	9);
 
 DROP TABLE IF EXISTS `goals_use_content`;
 CREATE TABLE `goals_use_content` (
@@ -67,19 +68,10 @@ CREATE TABLE `goals_use_content` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `goals_use_content` (`id`, `goal_id`, `content_id`, `user_id`) VALUES
-(1,	4,	46,	3),
-(4,	2,	46,	3),
-(5,	2,	46,	3),
-(6,	2,	46,	3),
-(7,	2,	46,	3),
-(8,	2,	46,	3),
-(9,	2,	46,	3),
-(10,	2,	46,	3),
-(11,	2,	46,	3),
-(12,	2,	46,	3),
-(13,	3,	47,	3),
-(14,	4,	47,	3),
-(15,	5,	47,	6);
+(16,	6,	48,	9),
+(17,	6,	49,	9),
+(18,	6,	49,	9),
+(19,	7,	49,	9);
 
 DROP TABLE IF EXISTS `rating`;
 CREATE TABLE `rating` (
@@ -94,94 +86,6 @@ CREATE TABLE `rating` (
   CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `rating` (`id`, `content_id`, `rating`, `users_id`) VALUES
-(19,	47,	-1,	6),
-(20,	46,	1,	6),
-(21,	46,	1,	6),
-(22,	46,	1,	6),
-(23,	46,	1,	6),
-(24,	47,	1,	6),
-(25,	47,	1,	6),
-(26,	47,	1,	6),
-(27,	47,	-1,	6),
-(28,	47,	-1,	6),
-(29,	47,	-1,	6),
-(30,	47,	-1,	6),
-(31,	47,	-1,	6),
-(32,	47,	-1,	6),
-(33,	47,	-1,	6),
-(34,	47,	-1,	6),
-(35,	47,	1,	6),
-(36,	47,	1,	6),
-(37,	46,	1,	6),
-(38,	46,	1,	6),
-(39,	46,	1,	6),
-(40,	46,	1,	6),
-(41,	46,	1,	6),
-(42,	46,	1,	6),
-(43,	46,	1,	6),
-(44,	46,	1,	6),
-(45,	46,	1,	6),
-(46,	46,	1,	6),
-(47,	46,	1,	6),
-(48,	46,	1,	6),
-(49,	46,	1,	6),
-(50,	46,	1,	6),
-(51,	46,	1,	6),
-(52,	46,	1,	6),
-(53,	46,	1,	6),
-(54,	46,	1,	6),
-(55,	46,	1,	6),
-(56,	46,	1,	6),
-(57,	46,	1,	6),
-(58,	46,	-1,	6),
-(59,	46,	-1,	6),
-(60,	46,	-1,	6),
-(61,	46,	-1,	6),
-(62,	47,	1,	6),
-(63,	47,	1,	6);
-
-DROP TABLE IF EXISTS `rating`;
-CREATE TABLE `rating` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `content_id` int(11) unsigned NOT NULL,
-  `rating` int(11) NOT NULL,
-  `users_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `content_id` (`content_id`),
-  KEY `users_id` (`users_id`),
-  CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`content_id`) REFERENCES `content` (`id`),
-  CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
-INSERT INTO `rating` (`id`, `content_id`, `rating`, `users_id`) VALUES
-(19,	47,	-1,	6),
-(20,	46,	1,	6),
-(21,	46,	1,	6),
-(22,	46,	1,	6),
-(23,	46,	1,	6),
-(24,	47,	1,	6),
-(25,	47,	1,	6),
-(26,	47,	1,	6),
-(27,	47,	-1,	6),
-(28,	47,	-1,	6),
-(29,	47,	-1,	6),
-(30,	47,	-1,	6),
-(31,	47,	-1,	6),
-(32,	47,	-1,	6),
-(33,	47,	-1,	6),
-(34,	47,	-1,	6),
-(35,	47,	1,	6),
-(36,	47,	1,	6),
-(37,	46,	1,	6),
-(38,	46,	1,	6),
-(39,	46,	1,	6),
-(40,	46,	1,	6),
-(41,	46,	1,	6),
-(42,	46,	1,	6),
-(43,	46,	1,	6),
-(44,	46,	1,	6),
-(45,	46,	1,	6);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -198,3 +102,5 @@ INSERT INTO `users` (`id`, `username`, `salt`, `password`, `level`) VALUES
 (6,	'Kristian2',	'aqOj% qE¯¾MScz',	'd33d27aeea7524fb42a9ffb5149ce735cfcbb237d9f311798bae74009ff3eec5158effe8e7e7dbfa8239aeff6b218703c61941a4307d9a7a8a91e9b68dec1910',	'Premium'),
 (8,	'KlaraFree',	'r?í‚õ½ÆFx€òÛÅä²Ø',	'42e7a1ab2732128ced176f98b4adff38c844efac9355a8a8bd3af8ccd394279681d8b72bacd4929338b57ba401027a748869dcc1f7e84f1927420fd0ba978dec',	'Free'),
 (9,	'KlaraPremium',	'Ïô®WQGøêezVá÷Ç®',	'04f071db62fa07a106ec8af876ae0e9416de6e0a3b53aff9a9b4b3aff9416439d415e47506da98b9a8d306d3115e731f821721cbbf3fe5d1fb2cf87b8dd8d2fe',	'Premium');
+
+-- 2016-01-13 14:10:29

@@ -1,4 +1,4 @@
-						<div class="col-sm-6 col-md-4">
+						<div class="col-xs-12">
 							<div class="thumbnail">
 								{% if row.file %}
 								<img src="http://192.168.33.10/Fantastic-Teaching/uploads/{{ row.file|e }}" alt="article image">
@@ -39,9 +39,9 @@
 											{% set rowId = row.id %}
 											<div class="ratingWidth">
 											{% for row in viewRating if row.content_id == rowId %}
-													<div class="text-center">{{row.rating|e}}</div>
+												<div class="text-center">{{row.rating|e}}</div>
 											{% endfor %}
-										</div>
+											</div>
 											<button type="submit" name="submitDown" value="-1" class="glyphicon glyphicon-menu-down btn-sx ratingButton ratingWidth" aria-hidden="true"></button>
 										</form>
 									</div>
@@ -54,6 +54,7 @@
 									<p class="grayText"><i>Published {{row.timestamp|e}} Author: {{row.username}}</i></p>
 									<p>Subject: {{row.subject|e}}</p>
 									<p>Recommended for year: {{row.year|e}}</p>
+									<p>Estimated teaching hours: {{row.estimate|e}}</p>
 									<p>{{row.text|e}}</p>
 									{% if row.video %}
 									<div class="embed-responsive embed-responsive-16by9">

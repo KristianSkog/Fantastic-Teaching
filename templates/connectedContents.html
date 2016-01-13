@@ -1,6 +1,13 @@
+{% if goalID == buttonId %}
+	{% if estimateSum %}
+		{% for row in estimateSum %}			
+		    <p>Estimation for this goal: {{row.estimate|e}} hours</p>
+		{% endfor %}
+	{% endif %}
+{% endif %}
 <h5>Content connected to this goal:</h5>
 <ul>
 	{% for contentrow in connectedContent %}
-		<li>{{contentrow.title|e}}</li>
+		<li>{{contentrow.title|e}} - {{contentrow.estimate|e}} h</li>
 	{% endfor %}
 </ul>

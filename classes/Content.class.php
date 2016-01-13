@@ -1,7 +1,7 @@
 <?php
 class Content{
 
-	function addContent($dirtyTitle, $dirtySubject, $dirtyYear, $dirtyText, $fileToUpload, $dirtyVideo, $dirtyAuthorID){
+	function addContent($dirtyTitle, $dirtySubject, $dirtyYear, $dirtyEstimate, $dirtyText, $fileToUpload, $dirtyVideo, $dirtyAuthorID){
 		//instans av db-uppkoppling
 		$mysqli = DB::getInstance();
 
@@ -9,6 +9,7 @@ class Content{
 		$cleanTitle = Cleaner::cleanVar($dirtyTitle);
 		$cleanSubject = Cleaner::cleanVar($dirtySubject);
 		$cleanYear = Cleaner::cleanVar($dirtyYear);
+		$cleanEstimate = Cleaner::cleanVar($dirtyEstimate);
 		$cleanText = Cleaner::cleanVar($dirtyText);
 		$cleanVideo = Cleaner::cleanVar($dirtyVideo);
 		$cleanAuthorID = Cleaner::cleanVar($dirtyAuthorID);
@@ -54,8 +55,8 @@ class Content{
 
 		// LÄGGER TILL I DATABASEN PÅ VALDA POSITIONER
 	    $query = "
-	    INSERT INTO content (title, subject, year, text, file, video, author_id)
-	    VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanText','$newFileName','$videoID','$cleanAuthorID')
+	    INSERT INTO content (title, subject, year, estimate, text, file, video, author_id)
+	    VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanEstimate','$cleanText','$newFileName','$videoID','$cleanAuthorID')
 	    ";
 
 	    $mysqli->query($query);
@@ -88,7 +89,7 @@ class Content{
 
 		$query = "
 		SELECT content.id, content.title,
-		content.subject, content.year,
+		content.subject, content.year, content.estimate,
 		content.file, content.video,
 		content.author_id,
 		substring(content.text,1,50) as text,
@@ -117,7 +118,8 @@ class Content{
 		SELECT content.id, 
 		content.title, 
 		content.subject, 
-		content.year, 
+		content.year,
+		content.estimate, 
 		content.file, 
 		content.video, 
 		content.author_id, 
@@ -166,7 +168,7 @@ class Content{
 		$query = "SELECT EXISTS(SELECT * FROM rating WHERE content_id = '$cleanContentID' and users_id = '$cleanUserId') as ratingExists";
 		$result = $mysqli->query($query);
 		$array = array();
-		while ($row = $result->fetch_assoc()) {
+		while ($row = $result->fetch_assoc()) { 
 			
 	  		if($row['ratingExists'] == 0){
 

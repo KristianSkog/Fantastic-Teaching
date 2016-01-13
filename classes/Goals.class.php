@@ -36,8 +36,8 @@ class Goals{
 
 	    $array = array();
 
-	   while ($row = $result->fetch_assoc()) {
-	       $array[] = $row;
+	   while ($rowGoals = $result->fetch_assoc()) {
+	       $array[] = $rowGoals;
 	    }
 	    return $array;
 	}
@@ -78,23 +78,42 @@ class Goals{
 
 		$mysqli = DB::getInstance();
 
-		$query = "
-		select *
-		from content, goals_use_content
+		$queryConnections = "
+		SELECT *
+		FROM content, goals_use_content
 		WHERE content.id = goals_use_content.content_id
 		AND goals_use_content.goal_id = '".$cleanGoalID."'
 		HAVING goals_use_content.user_id = '".$cleanUserID."'
 		ORDER BY content.timestamp DESC
 		";
-   		$result = $mysqli->query($query);
+   		$resultConnections = $mysqli->query($queryConnections);
 		$array = array();
-
-		while ($row = $result->fetch_assoc()) {
-	  	$array[] = $row;
-	  	
+		while ($rowConnections = $resultConnections->fetch_assoc()) {
+	  	$array[] = $rowConnections;
 		}
 		
 		return $array;
+	}
+
+	static function sumEstimate($dirtyGoalID, $dirtyUserID){
+		$cleanGoalID = Cleaner::cleanVar($dirtyGoalID);
+		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
+		$mysqli = DB::getInstance();
+		$query = "
+			SELECT *, SUM(content.estimate) as estimate
+			FROM content, goals_use_content
+			WHERE goals_use_content.goal_id = '".$cleanGoalID."'
+			AND goals_use_content.user_id = '".$cleanUserID."'
+			AND content.id = goals_use_content.content_id
+			";
+		
+		$result = $mysqli->query($query);
+		$array = array();
+		while ($row = $result->fetch_assoc()) {
+			$array[] = $row;
+		}
+		return $array;
+		
 	}
 
 }
