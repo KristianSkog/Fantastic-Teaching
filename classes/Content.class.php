@@ -143,17 +143,18 @@ class Content{
 	  return $array;
 	}// stänger searchContent funktion
 
-	static function deleteContent($dirtyContentID){
+	function deleteContent($dirtyContentID){
 		$cleanContentID = Cleaner::cleanVar($dirtyContentID);
 
 		$mysqli = DB::getInstance();
-
+//LÄGG in ev kontroll så man bara kan ta bort egna publicerade artikler
 	    $query = "
 	    DELETE
 	    FROM content
 	    WHERE content.id = '".$cleanContentID."'
 	    ";
-
+	    var_dump($_POST['deleteContentID']);
+	    var_dump($cleanContentID);
 	    $mysqli->query($query);
 	}
 

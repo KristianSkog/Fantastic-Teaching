@@ -1,28 +1,6 @@
 <h3>Welcome {{user}}!</h3>
 <p>You have a {{userLevel}} account.</p>
-<div class="col-xs-12 col-sm-3 form-group">
-	<form method="post" action="">
-		<button class="transparentbtn" type="submit" name="publishNew" value="publish"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Content</button>
-	</form>	
-</div>
-{% if userLevel == "Premium" %}
-	<div class="col-xs-12 col-sm-3 form-group">
-		<form method="post" action="">
-			<button class="transparentbtn" type="submit" name="showGoals" value="goalsForm"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Goal</button>
-		</form>	
-	</div>
-{% endif %}
-<div class="col-xs-12 col-sm-3 form-group">
-	<form method="get" action="">
-		<button class="transparentbtn" type="submit" name="changePassword" value="{{sessionUserID}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Password</button>
-	</form>
-</div>
-<div class="col-xs-12 col-sm-3 form-group">
-	<form method="get" action="">
-		<button class="transparentbtn" type="submit" name="logout" value="{{sessionUserID}}">
-		<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log out <b>{{user}}</b></button>
-	</form>
-</div>
+{% include "menu.html" %}
 <div class="row">
 	{% if userLevel == "Premium" %}
 		<div class="col-xs-12">
