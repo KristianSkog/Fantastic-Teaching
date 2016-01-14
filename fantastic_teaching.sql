@@ -38,10 +38,9 @@ CREATE TABLE `content` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `content` (`id`, `title`, `subject`, `year`, `estimate`, `text`, `file`, `timestamp`, `video`, `author_id`) VALUES
-(46,	'innehÃ¥llets titel',	'Svenska',	'1-2',	'1',	'min jÃ¤vla text',	'',	'2016-01-07 19:34:54',	'',	3),
-(47,	'titeln',	'Svenska',	'1-2',	'1',	'textfan',	'',	'2016-01-07 20:37:04',	'',	3),
-(48,	'Nytt innehÃ¥ll av premiumkonto',	'Svenska',	'1-2',	'1',	'premiumkonto',	'',	'2016-01-11 16:58:05',	'',	9),
-(49,	'god morgon',	'Svenska',	'1-2',	'1',	'min lÃ¥nga text',	'',	'2016-01-13 10:23:28',	'',	9);
+(50,	'nyaste',	'Svenska',	'1-2',	'6',	'nwd,qank',	'',	'2016-01-13 14:46:46',	'',	9),
+(51,	'SKÃ–Ã–Ã–Ã–Ã–N titel',	'Geografi',	'8-9',	'1',	'OskÃ¶n text',	'5697bb3002bd8.png',	'2016-01-14 15:13:52',	'Rn5HZKgZl7Y',	9),
+(52,	'snyggaste inlÃ¤gget om eddie murphy',	'Matte',	'6-7',	'5',	'vad Ã¤r eddie 1 upphÃ¶jt till 2',	'',	'2016-01-14 15:15:50',	'',	9);
 
 DROP TABLE IF EXISTS `goals`;
 CREATE TABLE `goals` (
@@ -55,8 +54,7 @@ CREATE TABLE `goals` (
 
 INSERT INTO `goals` (`id`, `goal`, `subject`, `year`, `user_id`) VALUES
 (6,	'FÃ¶rsta mÃ¥let',	'Svenska',	'1-2',	9),
-(7,	'nytt mÃ¥l',	'Svenska',	'1-2',	9),
-(8,	'nytt mÃ¥l',	'Svenska',	'1-2',	9);
+(7,	'nytt mÃ¥l',	'Svenska',	'1-2',	9);
 
 DROP TABLE IF EXISTS `goals_use_content`;
 CREATE TABLE `goals_use_content` (
@@ -68,10 +66,14 @@ CREATE TABLE `goals_use_content` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `goals_use_content` (`id`, `goal_id`, `content_id`, `user_id`) VALUES
-(16,	6,	48,	9),
-(17,	6,	49,	9),
-(18,	6,	49,	9),
-(19,	7,	49,	9);
+(20,	6,	49,	9),
+(21,	6,	49,	9),
+(23,	6,	50,	9),
+(24,	6,	50,	9),
+(25,	6,	50,	9),
+(28,	7,	49,	9),
+(29,	6,	48,	9),
+(30,	6,	48,	9);
 
 DROP TABLE IF EXISTS `rating`;
 CREATE TABLE `rating` (
@@ -81,11 +83,14 @@ CREATE TABLE `rating` (
   `users_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `content_id` (`content_id`),
-  KEY `users_id` (`users_id`),
-  CONSTRAINT `rating_ibfk_1` FOREIGN KEY (`content_id`) REFERENCES `content` (`id`),
-  CONSTRAINT `rating_ibfk_2` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`)
+  KEY `users_id` (`users_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+INSERT INTO `rating` (`id`, `content_id`, `rating`, `users_id`) VALUES
+(49,	48,	1,	9),
+(50,	52,	1,	9),
+(51,	51,	1,	9),
+(52,	50,	-1,	9);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -103,4 +108,4 @@ INSERT INTO `users` (`id`, `username`, `salt`, `password`, `level`) VALUES
 (8,	'KlaraFree',	'r?í‚õ½ÆFx€òÛÅä²Ø',	'42e7a1ab2732128ced176f98b4adff38c844efac9355a8a8bd3af8ccd394279681d8b72bacd4929338b57ba401027a748869dcc1f7e84f1927420fd0ba978dec',	'Free'),
 (9,	'KlaraPremium',	'Ïô®WQGøêezVá÷Ç®',	'04f071db62fa07a106ec8af876ae0e9416de6e0a3b53aff9a9b4b3aff9416439d415e47506da98b9a8d306d3115e731f821721cbbf3fe5d1fb2cf87b8dd8d2fe',	'Premium');
 
--- 2016-01-13 14:10:29
+-- 2016-01-14 15:38:54
