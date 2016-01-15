@@ -1,3 +1,12 @@
+//ADD <br> WHEN ENTER IS CLICKED
+
+$('textarea').keypress(function (e){
+    if(e.keyCode == 13){
+        e.preventDefault();
+        this.value = this.value.substring(0, this.selectionStart)+"<br>"+"\n";
+    }
+});
+
 //FORMATTING
 
 $('input:button').click(function() {
