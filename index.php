@@ -4,7 +4,9 @@ require_once("classes/DB.class.php");
 
 # $url_params blir en array med alla "värden" som står efter ? avgränsade med /
 # ex. /Posts/single/11 kommer ge en array med 3 värden som är Posts, single och 11
+if (count($_GET)>0) {
 $url_parts = getUrlParts($_GET); 
+
 $class = array_shift($url_parts); # tar ut första värdet och lägger den i $class, i vårt exempel ovan "Posts"
 $method = array_shift($url_parts); # tar ut andra värdet och lägger den i $method, i vårt exempel ovan "single"
 
@@ -16,6 +18,7 @@ require_once("classes/".$class.".class.php");
 # Svaret från anropet av metoden, dvs det den kör return på, lagrar vi i $data
 $data = $class::$method($url_parts); 
 
+print_r($data);
 
 if(isset($data['redirect'])){ # om $data innehåller något på nyckeln 'redirect'
 	
@@ -42,9 +45,31 @@ if(isset($data['redirect'])){ # om $data innehåller något på nyckeln 'redirec
 	# låt Twig rendera den template vi pekat ut ovan och skicka med den $data 
 	# som vi fick från metoden vi anropade
 	echo $twig->render($template, $data);
- }
+	}
+	}else {
+	$twig = startTwig();
+	$template = 'index.html';
 
+	$data = ['title' => "Fantastic Teaching"];
+	echo $twig->render($template, $data);
+}/*elseif (!(count($_GET)>0) && isset($_SESSION['userID'])) {
+	$twig = startTwig();
+	$template = 'index.html';
 
+	// $data = [
+	// 	'title' => "Fantastic Teaching"
+	// ];
+	echo $twig->render($template, $data);
+}else{
+// 	$twig = startTwig();
+// 	$template = 'login.html';
+
+// 	$data = [
+// 		'title' => "Fantastic Teaching"
+// 	];
+// 	echo $twig->render($template, $data);
+// }
+*/
 
 
 ###############################################################
@@ -99,7 +124,9 @@ function getUrlParts($get){
 
 #FELSÖKNINGSGREJER
 
-echo "content ID".$_POST['deleteContentID'];
+var_dump($_SERVER['HTTP_REFERER']);
+print_r($viewArticleUses);
+var_dump($data);
 
 
 #FELSÖKNINGSGREJER SLUT

@@ -200,7 +200,7 @@ class Content{
 		return $array;
 	}
 
-	function viewArticleUses(){
+	static function viewArticleUses(){
 
 	$mysqli = DB::getInstance();
 	$query = "select content.author_id as user, content.title, count(content.id) as uses
@@ -212,12 +212,14 @@ class Content{
 			group by content.id
 			";
 	$result = $mysqli->query($query);
-		$array = array();
+		$viewArticleUses = array();
 		while ($row = $result->fetch_assoc()) {
-			$array[] = $row;
+			$viewArticleUses[] = $row;
 		}
-		return $array;
-		
+
+		return [
+		'viewArticleUses' => $viewArticleUses
+		];
 	}//stänger ArticleUses
 
 }//Close class

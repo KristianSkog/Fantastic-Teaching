@@ -4,15 +4,8 @@
 <div class="row">
 	{% if userLevel == "Premium" %}
 		<div class="col-xs-12">
-			<h5>Mina artiklar<h5>
-			<ul class="list-group">
-			{% for row in viewArticleUses if row.user ==  sessionUserID %}
- 				<li class="list-group-item">
-    				<span class="badge">{{row.uses|e}}</span>
-    				{{row.title|e}}
-  				</li>
-			{% endfor %}
-			</ul>
+			{# <a href="/Fantastic-Teaching/?/Content/viewArticleUses">
+			<h5>Mina artiklar</h5></a> #}
 		</div>
 	{% endif %}
 </div>
