@@ -43,7 +43,7 @@ class Page{
 			$singleContent = NULL;
 			$allContent = NULL;
 			$getAllContentBTN = NULL;
-			$goals = Goals::viewGoals($_SESSION['userID']);
+			print_r($goals = Goals::viewGoals($_SESSION['userID']));
 
 
 			if(isset($_POST['search'])){
@@ -64,7 +64,7 @@ class Page{
 
 
 			return $data = [
-			'template' => 'test.html',
+			'template' => 'home.html',
 			'title' => "Fantastic Teaching",
 			'allContent' => $allContent,
 			'singleContent' => $singleContent,

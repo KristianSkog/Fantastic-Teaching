@@ -1,11 +1,4 @@
-<h3>Welcome {{user}}!</h3>
-<p>You have a {{userLevel}} account.</p>
-{% include "menu.html" %}
 <div class="row">
-	{% if userLevel == "Premium" %}
-		<div class="col-xs-12">
-			{# <a href="/Fantastic-Teaching/?/Content/viewArticleUses">
-			<h5>Mina artiklar</h5></a> #}
-		</div>
-	{% endif %}
+	<h3>Welcome {{user}}!</h3>
+	<p>You have a {{userLevel}} account.</p>
 </div>

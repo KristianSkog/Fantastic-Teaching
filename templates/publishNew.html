@@ -1,59 +1,62 @@
-<h3>Publish new content</h3>
-<form method='post' action="" enctype="multipart/form-data">
-	<div class="form-group">
-		<label for="title">Title:</label>
-		<input class="form-control" autofocus required type='text' name='title' placeholder='Add title...'>
-	</div>
-	<div class="form-group">
-		<label for="subject">Subject:</label>
-		<select class="form-control" name='subject'>
-		<option value="Svenska">Svenska</option>
-		<option value="Geografi">Geografi</option>
-		<option value="Historia">Historia</option>
-		<option value="Matte">Matte</option>
-		</select>
-	</div>
-	<div class="form-group">
-		<label for="year">Suitable for year:</label>
-		<select class="form-control" name='year'>
-		<option value="1-2">1-2</option>
-		<option value="3-5">3-5</option>
-		<option value="6-7">6-7</option>
-		<option value="8-9">8-9</option>
-		</select>
-	</div>
-	<div class="form-group">
-		<label for="estimate">Estimated teaching hours this exercise might need in class:</label>
-		<select class="form-control" name='estimate'>
-		<option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
-		</select>
-	</div>
-	<div class="form-group">
-		<label for="text">Text:</label>
-		<textarea class="form-control" id="my_textarea" name="text" placeholder='Write your text...'></textarea>
-		<input type="button" value="b" />
-		<input type="button" value="i" />
-		<input type="button" value="u" />
-		<br>
-		<br>
-		<div id="preview"></div>
-		<br>
-	</div>
-	<div class="form-group">
-		<input type="hidden" name="publishNew" value=NULL>
-	<div class="form-group">
-		<label for="video">URL for youtube clip:</label>
-		<input class="form-control" type="url" name="video" pattern="https?://.+" title="Include http://" name='video' placeholder='Embed video..'>
-	</div>
-	<div class="form-group">
-		<label for="fileToUpload">Choose file to upload:</label>
-		<input class="form-control" type="file" name="fileToUpload" id="fileToUpload">
-	</div>
-	<div class="form-group">
-		<input class="btn btn-default" type='submit' name='postContent' value='Post'>
-	</div>
-</form>
+<div class="row">
+	<h3>Publish new content</h3>
+	<form method='post' action="/fantastic-teaching/?/Page/home" enctype="multipart/form-data">
+		<div class="form-group">
+			<label for="title">Title:</label>
+			<input class="form-control" autofocus required type='text' name='title' placeholder='Add title...'>
+		</div>
+		<div class="form-group">
+			<label for="subject">Subject:</label>
+			<select class="form-control" name='subject'>
+			<option value="Svenska">Svenska</option>
+			<option value="Geografi">Geografi</option>
+			<option value="Historia">Historia</option>
+			<option value="Matte">Matte</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="year">Suitable for year:</label>
+			<select class="form-control" name='year'>
+			<option value="1-2">1-2</option>
+			<option value="3-5">3-5</option>
+			<option value="6-7">6-7</option>
+			<option value="8-9">8-9</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="estimate">Estimated teaching hours this exercise might need in class:</label>
+			<select class="form-control" name='estimate'>
+			<option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="text">Text:</label>
+			<textarea class="form-control" id="my_textarea" name="text" placeholder='Write your text...'></textarea>
+			<input type="button" value="b" />
+			<input type="button" value="i" />
+			<input type="button" value="u" />
+			<br>
+			<br>
+			<div id="preview"></div>
+			<br>
+		</div>
+		<div class="form-group">
+			<input type="hidden" name="publishNew" value=NULL>
+		<div class="form-group">
+			<label for="video">URL for youtube clip:</label>
+			<input class="form-control" type="url" name="video" pattern="https?://.+" title="Include http://" name='video' placeholder='Embed video..'>
+		</div>
+		<div class="form-group">
+			<label for="fileToUpload">Choose file to upload:</label>
+			<input class="form-control" type="file" name="fileToUpload" id="fileToUpload">
+		</div>
+		<div class="form-group">
+			<input class="btn btn-default" type='submit' name='postContent' value='Post'>
+		</div>
+	</form>
+<div class="row">
 
+<!-- Script -->
 <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script src="scripts/formatter.js"></script>

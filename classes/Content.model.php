@@ -1,5 +1,5 @@
 <?php
-class Content{
+class ContentModel{
 
 	function addContent($dirtyTitle, $dirtySubject, $dirtyYear, $dirtyEstimate, $dirtyText, $fileToUpload, $dirtyVideo, $dirtyAuthorID){
 		//instans av db-uppkoppling
@@ -153,8 +153,7 @@ class Content{
 	    FROM content
 	    WHERE content.id = '".$cleanContentID."'
 	    ";
-	    var_dump($_POST['deleteContentID']);
-	    var_dump($cleanContentID);
+	    
 	    $mysqli->query($query);
 	}
 
@@ -217,12 +216,7 @@ class Content{
 			$viewArticleUses[] = $row;
 		}
 
-		return [
-			'sessionUserID' => $_SESSION['userID'],
-		'userLevel' => $_SESSION['userLevel'],
-		'template' => 'viewArticleUses.html',
-		'viewArticleUses' => $viewArticleUses
-		];
+		return $viewArticleUses;
 	}//stänger ArticleUses
 
 }//Close class

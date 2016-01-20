@@ -1,5 +1,7 @@
+					<div class="row">
 						<div class="col-xs-12">
 							<div class="thumbnail">
+							{% for row in article %}
 								{% if row.file %}
 								<img src="http://192.168.33.10/Fantastic-Teaching/uploads/{{ row.file|e }}" alt="article image">
 								{% endif %}
@@ -30,7 +32,7 @@
 							<div class="row">
 
 								<div class="col-xs-1">
-									{% if singleContent %}
+								
 									<div class="rating">
 										<form method='post' action=''>
 											<input type="hidden" name="contentRatingId" value="{{row.id}}">
@@ -45,9 +47,9 @@
 											<button type="submit" name="submitDown" value="-1" class="glyphicon glyphicon-menu-down btn-sx ratingButton ratingWidth" aria-hidden="true"></button>
 										</form>
 									</div>
-									{% endif %}
+									
 								</div>
-
+							
 								<div class="col-xs-11">
 									<div class="caption">
 									<h4>{{row.title|e}}</h4>
@@ -63,8 +65,9 @@
 									{% endif %}
 									</div>
 								</div>
-
+							{% endfor %}
 							</div>
 
 							</div>
 						</div>
+					</div>

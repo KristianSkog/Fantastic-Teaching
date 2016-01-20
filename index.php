@@ -11,14 +11,14 @@ $class = array_shift($url_parts); # tar ut första värdet och lägger den i $cl
 $method = array_shift($url_parts); # tar ut andra värdet och lägger den i $method, i vårt exempel ovan "single"
 
 # Hämta in klassfilen för den klass vi ska anropa
-require_once("classes/".$class.".class.php"); 
+require_once("classes/".$class.".controller.php"); 
 
 # Anropa metoden vill vill köra på klassen vi har fått från vår URL 
 # samt skicka med övriga parametrar in till den metoden, i vårt exempel ovan finns "11" kvar
 # Svaret från anropet av metoden, dvs det den kör return på, lagrar vi i $data
 $data = $class::$method($url_parts); 
 
-print_r($data);
+
 
 if(isset($data['redirect'])){ # om $data innehåller något på nyckeln 'redirect'
 	
@@ -39,19 +39,22 @@ if(isset($data['redirect'])){ # om $data innehåller något på nyckeln 'redirec
 #BEHÖVS NOG EJ SPARA TILL SENARE IFALL.
 	// 	$template = "Admin/index.html";
 	// }else{ 					# om klassen vi laddat var något annat än Admin
-	 	$template = 'index.html';
+	 	$template = 'test.html';
+
 	// }
 
 	# låt Twig rendera den template vi pekat ut ovan och skicka med den $data 
 	# som vi fick från metoden vi anropade
 	echo $twig->render($template, $data);
-	}
-	}else {
+}
+} else {
+	require_once("classes/User.controller.php"); 
+	$data = User::login();
 	$twig = startTwig();
-	$template = 'index.html';
+	$template = 'test.html';
 
-	$data = ['title' => "Fantastic Teaching"];
 	echo $twig->render($template, $data);
+
 }/*elseif (!(count($_GET)>0) && isset($_SESSION['userID'])) {
 	$twig = startTwig();
 	$template = 'index.html';
@@ -124,9 +127,9 @@ function getUrlParts($get){
 
 #FELSÖKNINGSGREJER
 
-var_dump($_SERVER['HTTP_REFERER']);
-print_r($viewArticleUses);
-var_dump($data);
+//var_dump($_SERVER['HTTP_REFERER']);
+//print_r($viewArticleUses);
+//var_dump($data);
 
 
 #FELSÖKNINGSGREJER SLUT

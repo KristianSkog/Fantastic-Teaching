@@ -1,3 +1,5 @@
+<div class="row">
+{% for row in content %}							
 <div class="col-sm-6 col-md-4">
 	<div class="thumbnail">
 		{% if row.file %}
@@ -19,7 +21,7 @@
 				</form>
 			</div>
 		{% endif %}
-		{% if row.username == user %}
+		{% if row.id == userID %}
 			<div class="form-group">
 				<form method="post" action="">
 					<button class="transparentbtn" type="submit" name="deleteContentID" value="{{row.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete this content</button>
@@ -28,16 +30,15 @@
 		{% endif %}
 	<div class="row">
 		<div class="col-xs-1">
-			{% if allContent %}
+			{% if content %}
 				<div class="rating">
 					<form method='post' action=''>
 						<input type="hidden" name="contentRatingId" value="{{row.id}}">
 						<input type="hidden" name="userRatingId" value="{{sessionUserID}}">
 						<button type="submit" name="submitUp" value="1" class="glyphicon glyphicon-menu-up btn-md ratingButton ratingWidth" aria-hidden="true"></button>
-						{% set rowId = row.id %}
 							<div class="ratingWidth">
-							{% for row in viewRating if row.content_id == rowId %}
-									<div class="text-center">{{row.rating|e }}</div>
+							{% for rating in viewRating if rating.content_id == row.id %}
+									<div class="text-center">{{rating.rating|e }}</div>
 							{% endfor %}
 							</div>
 						<button type="submit" name="submitDown" value="-1" class="glyphicon glyphicon-menu-down btn-md ratingButton ratingWidth" aria-hidden="true"></button>
@@ -59,12 +60,14 @@
 		</div>
 		{% endif %}
 		<div class="form-group">
-			<form method="post" action="">
-				<button class="transparentbtn" type="submit" name="viewSingleContent" value="{{row.id}}"><span class="glyphicon glyphicon-expand" aria-hidden="true"></span> Expand</button>
-			</form>
+			<a href="?/Article/view/{{row.id}}">
+				<button class="transparentbtn" value="{{row.id}}"><span class="glyphicon glyphicon-expand" aria-hidden="true"></span> Expand</button>
+			</a>
 		</div>
 		</div>
 	</div>
 	</div>
 	</div>
+</div>
+{% endfor %}
 </div>

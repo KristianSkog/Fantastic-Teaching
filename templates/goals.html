@@ -1,6 +1,9 @@
+<div class="row">
 {% set goalID = rowGoals.id %}
 <div class="col-sm-6 col-md-4">
+{% for rowGoals in goals %} 
 	<div class="thumbnail">
+	<!-- senast ändrat måndag. ska vi ha kvar? -->
 		<h4>{{ rowGoals.goal }}</h4>
 		<p>Subject: {{rowGoals.subject|e}}</p>
 		<p>For year: {{rowGoals.year|e}}</p>
@@ -9,15 +12,15 @@
 		{% include "connectedContents.html" %}
 		{% endif %} 
 		{% endif %} 
+		 <!-- senast ändrat måndag. ska vi ha kvar? -->
 	</div>
-	<div class="form-group">
-		<form method="post" action="">
-			<button class="transparentbtn" type="submit" name="showConnections" value="{{goalID}}"><span class="glyphicon glyphicon-expand" aria-hidden="true"></span> Expand</button>
-		</form>
-	</div>
+
+	<a href="/fantastic-teaching/?/GoalsController/singleGoal/{{rowGoals.id}}">Overview this goal</a>
 	<div class="form-group">
 		<form method="post" action="">
 			<button class="transparentbtn" type="submit" name="deleteGoalID" value="{{rowGoals.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete goal</button>
 		</form>
 	</div>
+{% endfor %}
+</div>
 </div>
