@@ -214,7 +214,7 @@ class Page{
 			require_once("classes/Account.class.php");
 			require_once("classes/Cleaner.class.php");
 			$logIn = Account::logIn($_POST['username'], $_POST['password']);
-			return header('Location: /Fantastic-Teaching/?/Page/home');
+			return header('Location: /Fantastic-Teaching/?/user/home');
 
 		// $data = [
 		// 'title' => "Fantastic Teaching",

@@ -2,10 +2,10 @@
 	<div class="col-sm-12">
 		<h4>Edit user settings</h4>
 		<div class="form-group">
-			<form method="post" action="">
+			<form method="post" action="/Fantastic-Teaching/?/Account/change">
 				<label for="updatedPassword">New Password:</label>
 				<input autofocus required type="password" name="updatedPassword" class="form-control" placeholder="New Password . . ." pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
-				<button class="transparentbtn" name="userForUpdate" value="{{sessionUserID}}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Change Password</button>
+				<button class="transparentbtn" name="userForUpdate" value="{{userID}}" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Change Password</button>
 			</form>
 		</div>
 	</div>

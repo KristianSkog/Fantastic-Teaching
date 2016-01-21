@@ -35,7 +35,7 @@
 					<div class="rating">
 						<form method='post' action=''>
 							<input type="hidden" name="contentRatingId" value="{{row.id}}">
-							<input type="hidden" name="userRatingId" value="{{sessionUserID}}">
+							<input type="hidden" name="userRatingId" value="{{userID}}">
 							<button type="submit" name="submitUp" value="1" class="glyphicon glyphicon-menu-up btn-md ratingButton ratingWidth" aria-hidden="true"></button>
 								<div class="ratingWidth">
 								{% for rating in viewRating if rating.content_id == row.id %}
@@ -61,7 +61,7 @@
 			</div>
 			{% endif %}
 			<div class="form-group">
-				<a href="?/Article/view/{{row.id}}">
+				<a href="?/Content/view/{{row.id}}">
 					<button class="transparentbtn" value="{{row.id}}"><span class="glyphicon glyphicon-expand" aria-hidden="true"></span> Expand</button>
 				</a>
 			</div>

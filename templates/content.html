@@ -2,6 +2,13 @@
 {% for row in content %}							
 <div class="col-sm-6 col-md-4">
 	<div class="thumbnail">
+		{% if row.username == user %}
+			<div class="form-group">
+				<form method="post" action="/Fantastic-Teaching/?/Content/delete/{{row.id}}">
+					<button class="transparentbtn" type="submit" name="deleteContentID" value="{{row.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete content</button>
+				</form>
+			</div>
+		{% endif %}
 		{% if row.file %}
 		<img src="http://192.168.33.10/Fantastic-Teaching/uploads/{{ row.file|e }}" alt="article image">
 		{% endif %}
@@ -21,18 +28,11 @@
 				</form>
 			</div>
 		{% endif %}
-		{% if row.id == userID %}
-			<div class="form-group">
-				<form method="post" action="">
-					<button class="transparentbtn" type="submit" name="deleteContentID" value="{{row.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete this content</button>
-				</form>
-			</div>
-		{% endif %}
 	<div class="row">
 		<div class="col-xs-1">
 			{% if content %}
 				<div class="rating">
-					<form method='post' action=''>
+					<form method='post' action='?/User/home'>
 						<input type="hidden" name="contentRatingId" value="{{row.id}}">
 						<input type="hidden" name="userRatingId" value="{{sessionUserID}}">
 						<button type="submit" name="submitUp" value="1" class="glyphicon glyphicon-menu-up btn-md ratingButton ratingWidth" aria-hidden="true"></button>
@@ -55,15 +55,12 @@
 			<p>Estimated teaching hours: {{row.estimate|e}}</p>
 			<p>{{row.text|e}}. . .</p>
 			{% if row.video %}
-		<div class="embed-responsive embed-responsive-16by9">
-			<iframe width="560" height="315" src="https://www.youtube.com/embed/{{row.video|raw}}" frameborder="0" allowfullscreen></iframe>
-		</div>
-		{% endif %}
-		<div class="form-group">
-			<a href="?/Article/view/{{row.id}}">
-				<button class="transparentbtn" value="{{row.id}}"><span class="glyphicon glyphicon-expand" aria-hidden="true"></span> Expand</button>
+			<div class="embed-responsive embed-responsive-16by9">
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/{{row.video|raw}}" frameborder="0" allowfullscreen></iframe>
+			</div>
+			{% endif %}
+			<a href="?/Content/view/{{row.id}}"><button class="transparentbtn" value="{{row.id}}"><span class="glyphicon glyphicon-expand" aria-hidden="true"></span> Expand</button>
 			</a>
-		</div>
 		</div>
 	</div>
 	</div>

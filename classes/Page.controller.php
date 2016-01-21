@@ -211,10 +211,10 @@ class Page{
 	}
 
 	static function login(){
-			require_once("classes/Account.class.php");
-			require_once("classes/Cleaner.class.php");
-			$logIn = Account::logIn($_POST['username'], $_POST['password']);
-			return header('Location: /Fantastic-Teaching/?/Page/home');
+			// require_once("classes/Account.class.php");
+			// require_once("classes/Cleaner.class.php");
+			// $logIn = Account::logIn($_POST['username'], $_POST['password']);
+			// return header('Location: /Fantastic-Teaching/?/Page/home');
 
 		// $data = [
 		// 'title' => "Fantastic Teaching",

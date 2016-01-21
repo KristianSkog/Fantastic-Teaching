@@ -1,73 +1,77 @@
-					<div class="row">
-						<div class="col-xs-12">
-							<div class="thumbnail">
-							{% for row in article %}
-								{% if row.file %}
-								<img src="http://192.168.33.10/Fantastic-Teaching/uploads/{{ row.file|e }}" alt="article image">
-								{% endif %}
-								<div class="form-group">
-									<form method="post" action="">
-										<div class="form-group">
-											<label for="connectedGoalID">Koppla till mål:</label>
-											<select class="form-control" name='connectedGoalID'>
-											{% if goals %}
-												{% for row in goals %}
-													<option value="{{row.id}}">{{ row.goal }}</option>
-												{% endfor %}
-											{% endif %}
-											</select>
-											<input type="hidden" name="connectedContentID" value="{{row.id}}">
-											<button class="transparentbtn" type="submit" name="connect"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Connect content</button>
-										</div>
-									</form>
-								</div>
-								{% if row.username == user %}
-									<div class="form-group">
-										<form method="post" action="">
-											<button class="transparentbtn" type="submit" name="deleteContentID" value="{{row.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete this content</button>
-										</form>
-									</div>
-								{% endif %}
-
-							<div class="row">
-
-								<div class="col-xs-1">
-								
-									<div class="rating">
-										<form method='post' action=''>
-											<input type="hidden" name="contentRatingId" value="{{row.id}}">
-											<input type="hidden" name="userRatingId" value="{{sessionUserID}}">
-											<button type="submit" name="submitUp" value="1" class="glyphicon glyphicon-menu-up btn-sx ratingButton ratingWidth" aria-hidden="true"></button>
-											{% set rowId = row.id %}
-											<div class="ratingWidth">
-											{% for row in viewRating if row.content_id == rowId %}
-												<div class="text-center">{{row.rating|e}}</div>
-											{% endfor %}
-											</div>
-											<button type="submit" name="submitDown" value="-1" class="glyphicon glyphicon-menu-down btn-sx ratingButton ratingWidth" aria-hidden="true"></button>
-										</form>
-									</div>
-									
-								</div>
-							
-								<div class="col-xs-11">
-									<div class="caption">
-									<h4>{{row.title|e}}</h4>
-									<p class="grayText"><i>Published {{row.timestamp|e}} Author: {{row.username}}</i></p>
-									<p>Subject: {{row.subject|e}}</p>
-									<p>Recommended for year: {{row.year|e}}</p>
-									<p>Estimated teaching hours: {{row.estimate|e}}</p>
-									<p>{{row.text|e}}</p>
-									{% if row.video %}
-									<div class="embed-responsive embed-responsive-16by9">
-										<iframe width="560" height="315" src="https://www.youtube.com/embed/{{row.video|raw}}" frameborder="0" allowfullscreen></iframe>
-									</div>
-									{% endif %}
-									</div>
-								</div>
+<div class="row">
+	<div class="col-xs-12">
+		<div class="thumbnail">
+		{% for row in article %}
+			{% if row.file %}
+			<img src="http://192.168.33.10/Fantastic-Teaching/uploads/{{ row.file|e }}" alt="article image">
+			{% endif %}
+			<div class="form-group">
+				<form method="post" action="">
+					<div class="form-group">
+						<label for="connectedGoalID">Koppla till mål:</label>
+						<select class="form-control" name='connectedGoalID'>
+						{% if goals %}
+							{% for row in goals %}
+								<option value="{{row.id}}">{{ row.goal }}</option>
 							{% endfor %}
-							</div>
-
-							</div>
-						</div>
+						{% endif %}
+						</select>
+						<input type="hidden" name="connectedContentID" value="{{row.id}}">
+						<button class="transparentbtn" type="submit" name="connect"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Connect content</button>
 					</div>
+				</form>
+			</div>
+			{% if row.username == user %}
+				<div class="form-group">
+					<form method="post" action="">
+						<button class="transparentbtn" type="submit" name="deleteContentID" value="{{row.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete this content</button>
+					</form>
+				</div>
+			{% endif %}
+
+		<div class="row">
+
+			<div class="col-xs-1">
+			
+				<div class="rating">
+					<form method='post' action=''>
+						<input type="hidden" name="contentRatingId" value="{{row.id}}">
+						<input type="hidden" name="userRatingId" value="{{sessionUserID}}">
+						<button type="submit" name="submitUp" value="1" class="glyphicon glyphicon-menu-up btn-sx ratingButton ratingWidth" aria-hidden="true"></button>
+						{% set rowId = row.id %}
+						<div class="ratingWidth">
+						{% for row in viewRating if row.content_id == rowId %}
+							<div class="text-center">{{row.rating|e}}</div>
+						{% endfor %}
+						</div>
+						<button type="submit" name="submitDown" value="-1" class="glyphicon glyphicon-menu-down btn-sx ratingButton ratingWidth" aria-hidden="true"></button>
+					</form>
+				</div>
+				
+			</div>
+		
+			<div class="col-xs-11">
+				<div class="caption">
+				<h4>{{row.title|e}}</h4>
+				<p class="grayText"><i>Published {{row.timestamp|e}} Author: {{row.username}}</i></p>
+				<p>Subject: {{row.subject|e}}</p>
+				<p>Recommended for year: {{row.year|e}}</p>
+				<p>Estimated teaching hours: {{row.estimate|e}}</p>
+				<p>{{row.text|e}}</p>
+				{% if row.video %}
+				<div class="embed-responsive embed-responsive-16by9">
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/{{row.video|raw}}" frameborder="0" allowfullscreen></iframe>
+				</div>
+				{% endif %}
+				</div>
+			</div>
+		{% endfor %}
+		</div>
+	</div>
+	<div class="form-group">
+		<a href="?/User/home">
+			<button class="transparentbtn" value="{{row.id}}"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> View all</button>
+			</a>
+		</div>
+	</div>
+</div>
