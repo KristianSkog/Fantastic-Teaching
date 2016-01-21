@@ -50,7 +50,6 @@ class GoalsController {
 		$goalsMdl = new GoalsModel();
 		$id = $url_parts[0];
 
-var_dump($_SESSION['userID']);
 		$data = array(
 				'templates' => array('header.html','menu.html','singleGoal.html','footer.html'),
 				'goals' => $goalsMdl->viewGoals($_SESSION['userID']),	

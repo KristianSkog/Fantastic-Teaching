@@ -1,16 +1,31 @@
 <?php
 session_start();
 require_once("classes/DB.class.php");
-if (count($_GET)>0) {
-	$url_parts = getUrlParts($_GET); 
 
-	$class = array_shift($url_parts); # tar ut första värdet och lägger den i $class, i vårt exempel ovan "Posts"
-	$method = array_shift($url_parts); # tar ut andra värdet och lägger den i $method, i vårt exempel ovan "single"
+	if (!isset($_GET) || count($_GET)<=0) {
+		//$class = "Account";
+		//$method = "login";
+	}else{
+		$url_parts = getUrlParts($_GET); 
 
-	# Hämta in filen för den klass vi ska anropa
-	require_once("classes/".$class.".controller.php"); 
+		$class = array_shift($url_parts); # tar ut första värdet och lägger den i $class, i vårt exempel ovan "Posts"
+		$method = array_shift($url_parts); # tar ut andra värdet och lägger den i $method, i vårt exempel ovan "single"
+	}
 
-	$data = $class::$method($url_parts);
+	# Hämta in filen för den klass vi ska anrop 
+	if($class == 'Account' && ($method == 'login' || $method == 'create')){
+		require_once("classes/".$class.".controller.php");
+		$data = $class::$method($url_parts);
+	}elseif($_SESSION['userID']){
+		require_once("classes/".$class.".controller.php");
+		$data = $class::$method($url_parts);
+	}else{
+		$data = array(
+			'templates'=>array('header.html','login.html','footer.html')
+		);
+		//ska istället köra en header() till /homepage
+	}
+	
 	//data är resultatet av class/method/parametern som startades via URLen
 
 	if(isset($data['redirect'])){
@@ -22,13 +37,6 @@ if (count($_GET)>0) {
 	 		$template = 'index.html';
 			echo $twig->render($template, $data);
 	}
-}else{
-		require_once("classes/Account.controller.php"); 
-		$data = Account::login();
-		$template = 'index.html';
-		$twig = startTwig();
-		echo $twig->render($template, $data);
-}
 
 //Delar URL till class/method/parameter i array
 function getUrlParts($get){

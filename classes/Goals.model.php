@@ -94,7 +94,7 @@ class GoalsModel{
 	  	$array[] = $row;
 		}
 		
-		return $array;
+		return ['items' => $array, 'goal' => $array[0]['goal']];
 
 	}
 

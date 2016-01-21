@@ -93,6 +93,10 @@ class AccountModel{
 		}else{
 			echo $mysqli->error;
 		}
+		if($_SESSION['userID']){
+			return TRUE;
+		}else
+			return FALSE;
 	}
 
 	static function changePassword($userToChange, $dirtyUpdatedPassword){

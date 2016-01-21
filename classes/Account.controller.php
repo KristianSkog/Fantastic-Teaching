@@ -5,8 +5,10 @@ class Account {
 	public static function login() {
 		require_once("classes/Account.model.php");
 		require_once("classes/Cleaner.class.php");
-		$logIn = AccountModel::logIn($_POST['username'], $_POST['password']);
-		return header('Location: /Fantastic-Teaching/?/User/home');
+		$login = AccountModel::logIn($_POST['username'], $_POST['password']);
+		if($login){
+		header('Location: /Fantastic-Teaching/?/User/home');
+	}
 	}
 
 	public static function create() {
