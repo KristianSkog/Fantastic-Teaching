@@ -1,5 +1,5 @@
 <?php
-class Account{
+/*class Account{
 	static private $id;
 	static private $username;
 	static private $userLevel;
@@ -131,5 +131,5 @@ class Account{
 	static function getUserLevel(){
 		return self::$userLevel;
 	}
-}
+}*/
 ?>

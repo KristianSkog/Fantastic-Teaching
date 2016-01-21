@@ -1,5 +1,5 @@
 <?php
-class Content{
+/*class Content{
 
 	function addContent($dirtyTitle, $dirtySubject, $dirtyYear, $dirtyEstimate, $dirtyText, $fileToUpload, $dirtyVideo, $dirtyAuthorID){
 		//instans av db-uppkoppling
@@ -226,3 +226,4 @@ class Content{
 	}//stänger ArticleUses
 
 }//Close class
+*/

@@ -1,15 +1,14 @@
 <div class="row">
-<ul class="list-group">
-
-
-	{% for row in viewArticleUses  %}
-	{% if row.user ==  userID %}
-			<li class="list-group-item">
-			<span class="badge">{{row.uses|e}}</span>
-			{{row.title|e}}
-			</li>
-			{% endif %}
-	{% endfor %}
-
-</ul>
+	<div class="col-xs-12">
+		<ul class="list-group">
+			{% for row in viewArticleUses  %}
+				{% if row.user ==  userID %}
+					<li class="list-group-item">
+					<span class="badge">{{row.uses|e}}</span>
+					{{row.title|e}}
+					</li>
+					{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
 </div>

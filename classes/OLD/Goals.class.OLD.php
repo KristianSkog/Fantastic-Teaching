@@ -1,4 +1,5 @@
 <?php
+/*
 class Goals{
 
 	static function addGoal($dirtyGoal, $dirtySubject, $dirtyYear, $dirtyUserID){
@@ -130,4 +131,4 @@ class Goals{
 		
 	}
 
-}
+}*/

@@ -1,4 +1,5 @@
 <?php
+/*
 class Account{
 	private $id;
 	private $username;
@@ -32,5 +33,5 @@ class Account{
 	function getUsername(){
 		return $this->username;
 	}
-}
+}*/
 ?>

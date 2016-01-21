@@ -2,7 +2,6 @@
 	<div class="col-sm-6 col-md-4">
 	{% for row in searchResult %}
 		<div class="thumbnail">
-		
 			{% if row.file %}
 			<img src="http://192.168.33.10/Fantastic-Teaching/uploads/{{ row.file|e }}" alt="article image">
 			{% endif %}
@@ -68,7 +67,6 @@
 			</div>
 		</div>
 		</div>
-		
 		</div>
 		{% endfor %}
 	</div>
