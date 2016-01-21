@@ -2,6 +2,8 @@
 
 class GoalsController {
 
+
+
 	public static function goalsForm() {
 		if (isset($_SESSION['userID'])) {
 			require_once('Goals.model.php');
@@ -35,7 +37,7 @@ class GoalsController {
 		require_once('Goals.model.php');
 		$goalsMdl = new GoalsModel();
 		$id = $url_parts[0];
-		$delete = $goalsMdl->deleteGoal($id);
+		$delete = $goalsMdl->deleteGoal($id, $_SESSION['userID']);
 		header('Location: /Fantastic-Teaching/?/User/profile');
 		
 	}

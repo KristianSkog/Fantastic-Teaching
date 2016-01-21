@@ -43,15 +43,17 @@ class GoalsModel{
 	}
 
 
-	static function deleteGoal($dirtyGoalID){
+	static function deleteGoal($dirtyGoalID, $dirtyUserID){
 		$cleanGoalID = Cleaner::cleanVar($dirtyGoalID);
+		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
 
 		$mysqli = DB::getInstance();
-	    
+	    //check session['userID'] if you are the creator of the goal that you are trying to delete.
 	    $query = "
 	    DELETE
 	    FROM goals
 	    WHERE goals.id = '".$cleanGoalID."'
+	    AND goals.user_id = '".$cleanUserID."'
 	    ";
 
 	    $mysqli->query($query);
