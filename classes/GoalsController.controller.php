@@ -31,6 +31,15 @@ class GoalsController {
 		
 	}
 
+	public static function delete($url_parts) {
+		require_once('Goals.model.php');
+		$goalsMdl = new GoalsModel();
+		$id = $url_parts[0];
+		$delete = $goalsMdl->deleteGoal($id);
+		header('Location: /Fantastic-Teaching/?/User/profile');
+		
+	}
+
 	public static function goals() {
 		require_once('Goals.model.php');
 		$goalsMdl = new GoalsModel();
