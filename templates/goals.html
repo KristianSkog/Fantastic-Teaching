@@ -1,7 +1,7 @@
-<div class="row">
 {% set goalID = rowGoals.id %}
-<div class="col-sm-6 col-md-4">
+
 {% for rowGoals in goals %} 
+<div class="col-xs-12 col-sm-6 col-md-4">
 	<div class="thumbnail">
 	<!-- senast ändrat måndag. ska vi ha kvar? -->
 		<h4>{{ rowGoals.goal }}</h4>
@@ -21,6 +21,7 @@
 			<button class="transparentbtn" type="submit" name="deleteGoalID" value="{{rowGoals.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete goal</button>
 		</form>
 	</div>
+</div>
 {% endfor %}
-</div>
-</div>
+
+

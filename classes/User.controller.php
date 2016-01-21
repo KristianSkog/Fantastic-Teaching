@@ -43,9 +43,8 @@ class User {
 			$contentMdl = new ContentModel();
 			
 			$data = array(
-					'templates'=>array('header.html','menu.html','viewArticleUses.html','goalsForm.html','goals.html','footer.html'),
+					'templates'=>array('header.html','profile.html','menu.html','goals.html','viewArticleUses.html','footer.html'),
 					'goals' => $goalsMdl->viewGoals($_SESSION['userID']),
-					'addGoal' => $goalsMdl->addGoal($_POST['goal'], $_POST['subject'], $_POST['year'], $_POST['goalUserID']),
 					'viewArticleUses' => $contentMdl->viewArticleUses($_SESSION['userID']),	
 					'userID' => $_SESSION['userID'],
 					'user' => $_SESSION['username'],

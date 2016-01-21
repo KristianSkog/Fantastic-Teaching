@@ -23,12 +23,20 @@ class GoalsController {
 		}
 	}
 
+	public static function add() {
+		require_once('Goals.model.php');
+		$goalsMdl = new GoalsModel();
+		$create = $goalsMdl->addGoal($_POST['goal'], $_POST['subject'], $_POST['year'], $_POST['goalUserID']);
+		header('Location: /Fantastic-Teaching/?/User/profile');
+		
+	}
+
 	public static function goals() {
 		require_once('Goals.model.php');
 		$goalsMdl = new GoalsModel();
 		
 		$data = array(
-				'templates' => array('header.html','menu.html','goalsForm.html','goals.html','footer.html'),
+				'templates' => array('header.html','menu.html','goals.html','footer.html'),
 				'goals' => $goalsMdl->viewGoals($_SESSION['userID']),	
 				'userID' => $_SESSION['userID'],
 				'userLevel' => $_SESSION['userLevel']
@@ -44,7 +52,7 @@ class GoalsController {
 
 var_dump($_SESSION['userID']);
 		$data = array(
-				'templates' => array('header.html','menu.html','goalsForm.html','singleGoal.html','footer.html'),
+				'templates' => array('header.html','menu.html','singleGoal.html','footer.html'),
 				'goals' => $goalsMdl->viewGoals($_SESSION['userID']),	
 				'userID' => $_SESSION['userID'],
 				'userLevel' => $_SESSION['userLevel'],

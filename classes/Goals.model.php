@@ -79,14 +79,16 @@ class GoalsModel{
 
 		$query = "
 			SELECT content.*, goals_use_content.id as 'connection_id', goals.id as 'goal_id', goals.goal, goals.subject as 'goal_subject', goals.year as 'goal_year', goals.user_id as 'goal_user_id'
-			FROM content, goals_use_content, goals
-			WHERE content.id = goals_use_content.content_id
-			AND goals_use_content.goal_id = '".$cleanGoalID."'
-			AND goals_use_content.user_id = '".$cleanUserID."'
-			AND goals_use_content.goal_id = goals.id
-			ORDER BY content.timestamp DESC";
-
-			$result = $mysqli->query($query);
+			from goals
+			left join goals_use_content
+			on goals.id = goals_use_content.goal_id
+			left join content
+			on goals_use_content.content_id = content.id
+			where goals.user_id = '".$cleanUserID."'
+			and goals.id = '".$cleanGoalID."'
+		";
+			
+		$result = $mysqli->query($query);
 		$array = array();
 		while ($row = $result->fetch_assoc()) {
 	  	$array[] = $row;
