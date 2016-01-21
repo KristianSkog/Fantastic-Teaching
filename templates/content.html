@@ -3,11 +3,7 @@
 <div class="col-sm-6 col-md-4">
 	<div class="thumbnail">
 		{% if row.username == user %}
-			<div class="form-group">
-				<form method="post" action="/Fantastic-Teaching/?/Content/delete/{{row.id}}">
-					<button class="transparentbtn" type="submit" name="deleteContentID" value="{{row.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete content</button>
-				</form>
-			</div>
+			{% include 'deleteContentBTN.html' %}
 		{% endif %}
 		{% if row.file %}
 		<img src="http://192.168.33.10/Fantastic-Teaching/uploads/{{ row.file|e }}" alt="article image">

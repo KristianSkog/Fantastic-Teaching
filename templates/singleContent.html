@@ -22,17 +22,11 @@
 				</form>
 			</div>
 			{% if row.username == user %}
-				<div class="form-group">
-					<form method="post" action="">
-						<button class="transparentbtn" type="submit" name="deleteContentID" value="{{row.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete this content</button>
-					</form>
-				</div>
+				{% include 'deleteContentBTN.html' %}
 			{% endif %}
 
 		<div class="row">
-
 			<div class="col-xs-1">
-			
 				<div class="rating">
 					<form method='post' action=''>
 						<input type="hidden" name="contentRatingId" value="{{row.id}}">
@@ -47,29 +41,27 @@
 						<button type="submit" name="submitDown" value="-1" class="glyphicon glyphicon-menu-down btn-sx ratingButton ratingWidth" aria-hidden="true"></button>
 					</form>
 				</div>
-				
 			</div>
-		
 			<div class="col-xs-11">
 				<div class="caption">
-				<h4>{{row.title|e}}</h4>
-				<p class="grayText"><i>Published {{row.timestamp|e}} Author: {{row.username}}</i></p>
-				<p>Subject: {{row.subject|e}}</p>
-				<p>Recommended for year: {{row.year|e}}</p>
-				<p>Estimated teaching hours: {{row.estimate|e}}</p>
-				<p>{{row.text|e}}</p>
-				{% if row.video %}
-				<div class="embed-responsive embed-responsive-16by9">
-					<iframe width="560" height="315" src="https://www.youtube.com/embed/{{row.video|raw}}" frameborder="0" allowfullscreen></iframe>
-				</div>
+					<h4>{{row.title|e}}</h4>
+					<p class="grayText"><i>Published {{row.timestamp|e}} Author: {{row.username}}</i></p>
+					<p>Subject: {{row.subject|e}}</p>
+					<p>Recommended for year: {{row.year|e}}</p>
+					<p>Estimated teaching hours: {{row.estimate|e}}</p>
+					<p>{{row.text|e}}</p>
+					{% if row.video %}
+					<div class="embed-responsive embed-responsive-16by9">
+						<iframe width="560" height="315" src="https://www.youtube.com/embed/{{row.video|raw}}" frameborder="0" allowfullscreen></iframe>
+					</div>
 				{% endif %}
 				</div>
 			</div>
-		{% endfor %}
+			{% endfor %}
+			</div>
 		</div>
-	</div>
-	<div class="form-group">
-		<a href="?/User/home">
+		<div class="form-group">
+			<a href="?/User/home">
 			<button class="transparentbtn" value="{{row.id}}"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> View all</button>
 			</a>
 		</div>
