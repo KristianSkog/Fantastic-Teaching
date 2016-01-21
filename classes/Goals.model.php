@@ -94,7 +94,7 @@ class GoalsModel{
 	  	$array[] = $row;
 		}
 		
-		return ['items' => $array, 'goal' => $array[0]['goal']];
+		return ['items' => $array, 'goal' => $array[0]['goal'], 'goal_subject' => $array[1]['goal_subject'], 'goal_year' => $array[2]['goal_year'],'goal_id' => $array[3]['goal_id']];
 
 	}
 

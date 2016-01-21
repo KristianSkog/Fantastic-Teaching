@@ -1,10 +1,24 @@
-<div class="row">
 
- 	Goal: {{ singleGoal.goal }}
+	<div class="col-xs-12">
 
 
-	{% for row in singleGoal.items %}
-		<p> Content titel: {{ row.title }} </p>
-	{% endfor %}
-	<hr>
-</div>
+	 	<h4>{{ singleGoal.goal }}</h4>
+	 	<p>Subject: {{ singleGoal.goal_subject }}</p>
+	 	<p>For year: {{ singleGoal.goal_year }}</p>
+	 	<h5>Content connected to this goal:</h5>
+
+
+		{% for row in singleGoal.items %}
+
+							<li>
+						
+							{{row.title|e}} - {{row.estimate|e}} h
+							<!--här ska en knapp inkludas som gör goal till done-->
+							
+					</li>
+		{% endfor %}
+		<div class="form-group">
+			<!--här ska en knapp för delete Goal ligga-->
+		</div>
+		<hr>
+	</div>
