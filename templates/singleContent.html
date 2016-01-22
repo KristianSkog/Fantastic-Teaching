@@ -5,10 +5,10 @@
 				{% if row.file %}
 				<img src="http://192.168.33.10/Fantastic-Teaching/uploads/{{ row.file|e }}" alt="article image">
 				{% endif %}
-				{% include 'connectContentForm.html' %}
 			<div class="row">
 				<div class="col-xs-2">
 				{% include 'viewAllContentBtn.html' %}
+				{% include 'connectContentForm.html' %}
 				{% include 'contentBtns.html' %}
 				</div>
 				<div class="col-xs-10">

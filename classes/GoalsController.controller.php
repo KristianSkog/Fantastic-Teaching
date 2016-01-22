@@ -64,7 +64,7 @@ class GoalsController {
 		require_once('Goals.model.php');
 		$goalsMdl = new GoalsModel();
 		$createConnection = $goalsMdl->useContent($_POST['connectedGoalID'], $_POST['connectedContentID'], $_SESSION['userID'] );
-		header('Location: /Fantastic-Teaching/?/User/profile');
+		header('Location: /Fantastic-Teaching/?/GoalsController/singleGoal/'.$_POST['connectedGoalID'].'');
 		
 	}
 
