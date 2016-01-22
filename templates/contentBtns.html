@@ -13,9 +13,9 @@
 	<!-- RATING BTNS -->
 	<div class="col-xs-12">
 		<div class="rating">
-			<form method='post' action='?/User/home'>
+			<form method='post' action='?/Content/rate'>
 				<input type="hidden" name="contentRatingId" value="{{row.id}}">
-				<input type="hidden" name="userRatingId" value="{{sessionUserID}}">
+				<input type="hidden" name="userRatingId" value="{{userID}}">
 				<button type="submit" name="submitUp" value="1" class="glyphicon glyphicon-menu-up btn-md ratingButton ratingWidth" aria-hidden="true"></button>
 				<div class="ratingWidth">
 					{% for rating in viewRating if rating.content_id == row.id %}

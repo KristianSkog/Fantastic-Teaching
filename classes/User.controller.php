@@ -2,18 +2,10 @@
 
 class User {
 	public static function home() {
-		if (isset($_SESSION['userID'])) {
 			require_once('Goals.model.php');
 			require_once('Content.model.php');
 			$contentMdl = new ContentModel();
-			if(isset($_POST['submitUp'])){
-				$contentMdl->rating($_POST['contentRatingId'], $_POST['userRatingId'], $_POST['submitUp']);
-			}
-
-			if(isset($_POST['submitDown'])){
-				$contentMdl->rating($_POST['contentRatingId'], $_POST['userRatingId'], $_POST['submitDown']);
-			}
-		
+			
 			$data = array(
 				'templates'=>array('header.html','menu.html', 'searchForm.html','content.html','footer.html'),
 				'content' => $contentMdl->viewContent(),
@@ -24,19 +16,10 @@ class User {
 			);
 
 			return $data;
-		
-		}else{
-			$data = array(
-				'templates'=>array('header.html','login.html','footer.html')
-			);
-			return $data;
-		}
 	}
 
 
 	public static function profile() {
-
-		if (isset($_SESSION['userID'])) {
 			require_once('Goals.model.php');
 			require_once('Content.model.php');
 			$goalsMdl = new GoalsModel();
@@ -52,16 +35,9 @@ class User {
 					);
 
 			return $data;
-		}else{
-			$data = array(
-				'templates'=>array('header.html','login.html','footer.html')
-			);
-			return $data;
-		}
 	}
 
 	public static function changePassword() {
-		if (isset($_SESSION['userID'])) {
 			require_once('Goals.model.php');
 			require_once('Content.model.php');
 			$contentMdl = new ContentModel();
@@ -74,12 +50,5 @@ class User {
 			);
 
 			return $data;
-		
-		}else{
-			$data = array(
-				'templates'=>array('header.html','login.html','footer.html')
-			);
-			return $data;
-		}
 	}
 }

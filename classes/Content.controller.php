@@ -3,7 +3,6 @@
 class Content {
 
 	public static function contentForm() {
-		if (isset($_SESSION['userID'])) {
 
 			$data = array(
 				'templates'=>array('header.html','menu.html', 'publishNew.html','footer.html'),
@@ -13,13 +12,6 @@ class Content {
 			);
 
 			return $data;
-		
-		}else{
-			$data = array(
-				'templates'=>array('header.html','login.html','footer.html')
-			);
-			return $data;
-		}
 	}
 
 	public static function add($url_parts) {
@@ -43,12 +35,18 @@ class Content {
 		require_once('Content.model.php');
 		$contentMdl = new ContentModel();
 		$deleteContent = $contentMdl->deleteContent($_POST['deleteContentID'], $_SESSION['userID']);
-		$data = array(
-				'templates'=>array('header.html','menu.html','footer.html'),
-				'userLevel' => $_SESSION['userLevel'],
-				'user' => $_SESSION['username'],
-				'userID' => $_SESSION['userID']
-				);
+		
+
+		header('Location: /Fantastic-Teaching/?/User/home');
+		return $data;
+	}
+
+	public static function rate() {
+		require_once('Content.model.php');
+		$contentMdl = new ContentModel();
+		
+		if(isset($_POST['submitUp'])) $rateContent = $contentMdl->rating($_POST['contentRatingId'], $_POST['userRatingId'], $_POST['submitUp']);
+		if(isset($_POST['submitDown'])) $rateContent = $contentMdl->rating($_POST['contentRatingId'], $_POST['userRatingId'], $_POST['submitDown']);
 
 		header('Location: /Fantastic-Teaching/?/User/home');
 		return $data;
@@ -64,7 +62,8 @@ class Content {
 				'article' => $contentMdl->viewSingleContent($id),
 				'userLevel' => $_SESSION['userLevel'],
 				'user' => $_SESSION['username'],
-				'userID' => $_SESSION['userID']
+				'userID' => $_SESSION['userID'],
+				'viewRating' => $contentMdl->viewRating()
 				);
 
 		return $data;
