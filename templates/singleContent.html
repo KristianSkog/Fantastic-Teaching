@@ -23,6 +23,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-2">
+				{% include 'viewAllContentBtn.html' %}
 				{% include 'contentBtns.html' %}
 				</div>
 				<div class="col-xs-10">
@@ -42,11 +43,6 @@
 				</div>
 				{% endfor %}
 			</div>
-		</div>
-		<div class="form-group">
-			<a href="?/User/home">
-			<button class="transparentbtn" value="{{row.id}}"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> View all</button>
-			</a>
 		</div>
 	</div> <!-- close row -->
 </div> <!-- closes div from previous template file -->

@@ -1,27 +1,29 @@
 <!-- DELETE BTN -->
-<div class="col-xs-12">
-	{% if row.username == user %}
-	<div class="form-group">
-		<form method="post" action="/Fantastic-Teaching/?/Content/delete">
-			<button class="transparentbtn centered" type="submit" name="deleteContentID" value="{{row.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete</button>
-		</form>
+<div class="row">
+	<div class="col-xs-12">
+		{% if row.username == user %}
+		<div class="form-group">
+			<form method="post" action="/Fantastic-Teaching/?/Content/delete">
+				<button class="transparentbtn centered" type="submit" name="deleteContentID" value="{{row.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete</button>
+			</form>
+		</div>
+		{% endif %}
 	</div>
-	{% endif %}
-</div>
 
-<!-- RATING BTNS -->
-<div class="col-xs-12">
-	<div class="rating">
-		<form method='post' action='?/User/home'>
-			<input type="hidden" name="contentRatingId" value="{{row.id}}">
-			<input type="hidden" name="userRatingId" value="{{sessionUserID}}">
-			<button type="submit" name="submitUp" value="1" class="glyphicon glyphicon-menu-up btn-md ratingButton ratingWidth" aria-hidden="true"></button>
-			<div class="ratingWidth">
-				{% for rating in viewRating if rating.content_id == row.id %}
-				<div class="text-center">{{rating.rating|e }}</div>
-				{% endfor %}
-			</div>
-			<button type="submit" name="submitDown" value="-1" class="glyphicon glyphicon-menu-down btn-md ratingButton ratingWidth" aria-hidden="true"></button>
-		</form>
+	<!-- RATING BTNS -->
+	<div class="col-xs-12">
+		<div class="rating">
+			<form method='post' action='?/User/home'>
+				<input type="hidden" name="contentRatingId" value="{{row.id}}">
+				<input type="hidden" name="userRatingId" value="{{sessionUserID}}">
+				<button type="submit" name="submitUp" value="1" class="glyphicon glyphicon-menu-up btn-md ratingButton ratingWidth" aria-hidden="true"></button>
+				<div class="ratingWidth">
+					{% for rating in viewRating if rating.content_id == row.id %}
+					<div class="text-center">{{rating.rating|e }}</div>
+					{% endfor %}
+				</div>
+				<button type="submit" name="submitDown" value="-1" class="glyphicon glyphicon-menu-down btn-md ratingButton ratingWidth" aria-hidden="true"></button>
+			</form>
+		</div>
 	</div>
 </div>
