@@ -5,22 +5,7 @@
 				{% if row.file %}
 				<img src="http://192.168.33.10/Fantastic-Teaching/uploads/{{ row.file|e }}" alt="article image">
 				{% endif %}
-				<div class="form-group">
-					<form method="post" action="">
-						<div class="form-group">
-							<label for="connectedGoalID">Koppla till mål:</label>
-							<select class="form-control" name='connectedGoalID'>
-							{% if goals %}
-								{% for row in goals %}
-									<option value="{{row.id}}">{{ row.goal }}</option>
-								{% endfor %}
-							{% endif %}
-							</select>
-							<input type="hidden" name="connectedContentID" value="{{row.id}}">
-							<button class="transparentbtn" type="submit" name="connect"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Connect content</button>
-						</div>
-					</form>
-			</div>
+				{% include 'connectContentForm.html' %}
 			<div class="row">
 				<div class="col-xs-2">
 				{% include 'viewAllContentBtn.html' %}

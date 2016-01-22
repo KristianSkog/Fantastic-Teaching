@@ -3,7 +3,7 @@
 {% for rowGoals in goals %} 
 <div class="col-xs-12 col-sm-6 col-md-4">
 	<div class="thumbnail">
-	{% include 'deleteGoalBtn.html' %}
+		{% include 'deleteGoalBtn.html' %}
 		<h4>{{ rowGoals.goal }}</h4>
 		<p>Subject: {{rowGoals.subject|e}}</p>
 		<p>For year: {{rowGoals.year|e}}</p>

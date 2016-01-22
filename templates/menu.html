@@ -1,9 +1,12 @@
 <div class="row">
+<!-- NEW CONTENT -->
 	<div class="col-xs-12 col-sm-2 form-group">
 		<form method="post" action="/fantastic-teaching/?/Content/contentForm">
 			<button class="transparentbtn" type="submit" name="publishNew" value="publish"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Content</button>
 		</form>
 	</div>
+
+<!-- NEW GOAL -->
 	{% if userLevel == 'Premium' %}
 		<div class="col-xs-12 col-sm-2 form-group">
 			<form method="post" action="/fantastic-teaching/?/GoalsController/goalsForm">
@@ -11,16 +14,20 @@
 			</form>
 		</div>
 	{% endif %}
+
+<!-- CHANGE PASSWORD -->
 	<div class="col-xs-12 col-sm-2 form-group">
 		<form method="post" action="/fantastic-teaching/?/User/changePassword">
-			<button class="transparentbtn" type="submit" name="changePassword" value="{{userID}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Password</button>
+			<button class="transparentbtn" type="submit" name="changePassword" value="{{userID}}"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Password</button>
 		</form>
 	</div>
+
+<!-- USER PROFILE -->
 	<div class="col-xs-12 col-sm-2 form-group">
-		<form method="post" action="/fantastic-teaching/?/User/profile">
-			<button class="transparentbtn" type="submit" name="profile" value="{{userID}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Profile</button>
-		</form>
+		<a href="/fantastic-teaching/?/User/profile"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Profile</a>
 	</div>
+
+<!-- LOG OUT -->
 	<div class="col-xs-12 col-sm-4 form-group">
 		<form method="post" action="/fantastic-teaching/?/Account/logout">
 			<button class="transparentbtn" type="submit" name="logout" value="{{userID}}">

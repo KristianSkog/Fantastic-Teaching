@@ -60,6 +60,14 @@ class GoalsController {
 		return $data;
 	}
 
+	public static function createConnection() {
+		require_once('Goals.model.php');
+		$goalsMdl = new GoalsModel();
+		$createConnection = $goalsMdl->useContent($_POST['connectedGoalID'], $_POST['connectedContentID'], $_SESSION['userID'] );
+		header('Location: /Fantastic-Teaching/?/User/profile');
+		
+	}
+
 	public static function deleteConnection() {
 		require_once('Goals.model.php');
 		$goalsMdl = new GoalsModel();

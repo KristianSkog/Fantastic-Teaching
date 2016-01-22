@@ -54,11 +54,14 @@ class Content {
 	
 	public static function view($url_parts) {
 		require_once('Content.model.php');
+		require_once('Goals.model.php');
 		$contentMdl = new ContentModel();
+		$goalsMdl = new GoalsModel();
 		$id = $url_parts[0];
 				
 		$data = array(
 				'templates'=>array('header.html','menu.html', 'searchForm.html','singleContent.html','footer.html'),
+				'goals' => $goalsMdl->viewGoals($_SESSION['userID']),
 				'article' => $contentMdl->viewSingleContent($id),
 				'userLevel' => $_SESSION['userLevel'],
 				'user' => $_SESSION['username'],

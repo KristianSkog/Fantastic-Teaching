@@ -1,0 +1,16 @@
+<div class="form-group">
+	<form method="post" action="/Fantastic-Teaching/?/GoalsController/createConnection">
+		<div class="form-group">
+			<label for="connectedGoalID">Connect to goal:</label>
+			<select class="form-control" name='connectedGoalID'>
+			{% if goals %}
+				{% for row in goals %}
+					<option value="{{row.id}}">{{ row.goal }}</option>
+				{% endfor %}
+			{% endif %}
+			</select>
+			<input type="hidden" name="connectedContentID" value="{{row.id}}">
+			<button class="transparentbtn" type="submit" name="connect"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Connect content</button>
+		</div>
+	</form>
+</div>

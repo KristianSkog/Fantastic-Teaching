@@ -1,11 +1,15 @@
 <div class="col-xs-12">
+	{% include 'deleteGoalBtn.html' %}
  	<h4>{{ singleGoal.goal }}</h4>
  	<p>Subject: {{ singleGoal.goal_subject }}</p>
  	<p>For year: {{ singleGoal.goal_year }}</p>
- 		<h5>Content connected to this goal:</h5>
+ 	
+ 		<h5>Connected to this goal:</h5>
 			{% for row in singleGoal.items %}
-				<li>{{row.connection_id|e}} {{row.title|e}} - {{row.estimate|e}} h {% include 'deleteConnBtn.html' %}</li>
-			{% endfor %}
-	{% include 'deleteGoalBtn.html' %}
+				{% if row.title %}
+				<li>{{row.title|e}} - {{row.estimate|e}} h {% include 'deleteConnBtn.html' %}</li>
+					{% endif %}
+{% endfor %}
+	{% include 'viewAllGoalsBtn.html' %}
 	<hr>
 </div>
