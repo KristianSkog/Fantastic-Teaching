@@ -39,10 +39,9 @@ class Content {
 		return $data;
 	}
 
-	public static function delete($url_parts) {
+	public static function delete() {
 		require_once('Content.model.php');
 		$contentMdl = new ContentModel();
-		$id = $url_parts[0];
 		$deleteContent = $contentMdl->deleteContent($_POST['deleteContentID'], $_SESSION['userID']);
 		$data = array(
 				'templates'=>array('header.html','menu.html','footer.html'),

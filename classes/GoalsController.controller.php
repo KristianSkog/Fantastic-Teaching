@@ -5,7 +5,6 @@ class GoalsController {
 
 
 	public static function goalsForm() {
-		if (isset($_SESSION['userID'])) {
 			require_once('Goals.model.php');
 			$goalsMdl = new GoalsModel();
 			$data = array(
@@ -16,13 +15,6 @@ class GoalsController {
 			);
 
 			return $data;
-		
-		}else{
-			$data = array(
-				'templates'=>array('header.html','login.html','footer.html')
-			);
-			return $data;
-		}
 	}
 
 	public static function add() {
@@ -33,11 +25,10 @@ class GoalsController {
 		
 	}
 
-	public static function delete($url_parts) {
+	public static function delete() {
 		require_once('Goals.model.php');
 		$goalsMdl = new GoalsModel();
-		$id = $url_parts[0];
-		$delete = $goalsMdl->deleteGoal($id, $_SESSION['userID']);
+		$delete = $goalsMdl->deleteGoal($_POST['deleteGoalID'], $_SESSION['userID']);
 		header('Location: /Fantastic-Teaching/?/User/profile');
 		
 	}

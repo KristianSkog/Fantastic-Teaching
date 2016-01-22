@@ -2,9 +2,6 @@
 {% for row in content %}							
 <div class="col-sm-6 col-md-4">
 	<div class="thumbnail">
-		{% if row.username == user %}
-			{% include 'deleteContentBTN.html' %}
-		{% endif %}
 		{% if row.file %}
 		<img src="http://192.168.33.10/Fantastic-Teaching/uploads/{{ row.file|e }}" alt="article image">
 		{% endif %}
@@ -25,40 +22,25 @@
 			</div>
 		{% endif %}
 	<div class="row">
-		<div class="col-xs-1">
-			{% if content %}
-				<div class="rating">
-					<form method='post' action='?/User/home'>
-						<input type="hidden" name="contentRatingId" value="{{row.id}}">
-						<input type="hidden" name="userRatingId" value="{{sessionUserID}}">
-						<button type="submit" name="submitUp" value="1" class="glyphicon glyphicon-menu-up btn-md ratingButton ratingWidth" aria-hidden="true"></button>
-							<div class="ratingWidth">
-							{% for rating in viewRating if rating.content_id == row.id %}
-									<div class="text-center">{{rating.rating|e }}</div>
-							{% endfor %}
-							</div>
-						<button type="submit" name="submitDown" value="-1" class="glyphicon glyphicon-menu-down btn-md ratingButton ratingWidth" aria-hidden="true"></button>
-					</form>
+		<div class="col-xs-3">
+		{% include 'expandContentBtn.html' %}
+		{% include 'contentBtns.html' %}
+		</div>
+		<div class="col-xs-9">
+			<div class="caption">
+				<h4>{{row.title|e}}</h4>
+				<p class="grayText"><i>Published {{row.timestamp|e}} Author: {{row.username}}</i></p>
+				<p>Subject: {{row.subject|e}}</p>
+				<p>Recommended for year: {{row.year|e}}</p>
+				<p>Estimated teaching hours: {{row.estimate|e}}</p>
+				<p>{{row.text|e}}. . .</p>
+				{% if row.video %}
+				<div class="embed-responsive embed-responsive-16by9">
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/{{row.video|raw}}" frameborder="0" allowfullscreen></iframe>
 				</div>
-			{% endif %}
-		</div>
-	<div class="col-xs-11">
-		<div class="caption">
-			<h4>{{row.title|e}}</h4>
-			<p class="grayText"><i>Published {{row.timestamp|e}} Author: {{row.username}}</i></p>
-			<p>Subject: {{row.subject|e}}</p>
-			<p>Recommended for year: {{row.year|e}}</p>
-			<p>Estimated teaching hours: {{row.estimate|e}}</p>
-			<p>{{row.text|e}}. . .</p>
-			{% if row.video %}
-			<div class="embed-responsive embed-responsive-16by9">
-				<iframe width="560" height="315" src="https://www.youtube.com/embed/{{row.video|raw}}" frameborder="0" allowfullscreen></iframe>
+				{% endif %}
 			</div>
-			{% endif %}
-			<a href="?/Content/view/{{row.id}}"><button class="transparentbtn" value="{{row.id}}"><span class="glyphicon glyphicon-expand" aria-hidden="true"></span> Expand</button>
-			</a>
 		</div>
-	</div>
 	</div>
 	</div>
 </div>

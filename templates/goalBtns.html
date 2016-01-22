@@ -3,5 +3,9 @@
 </p>
 
 <p>
-	<a  class="transparentbtn" href="/fantastic-teaching/?/GoalsController/delete/{{rowGoals.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete</a>
+	<div class="form-group">
+		<form method="post" action="/Fantastic-Teaching/?/GoalsController/delete">
+			<button class="transparentbtn" type="submit" name="deleteGoalID" value="{{rowGoals.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete goal</button>
+		</form>
+	</div>
 </p>
