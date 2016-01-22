@@ -143,8 +143,9 @@ class ContentModel{
 	  return $array;
 	}// stänger searchContent funktion
 
-	function deleteContent($dirtyContentID){
+	function deleteContent($dirtyContentID, $dirtyUserID){
 		$cleanContentID = Cleaner::cleanVar($dirtyContentID);
+		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
 
 		$mysqli = DB::getInstance();
 //LÄGG in ev kontroll så man bara kan ta bort egna publicerade artikler
@@ -152,6 +153,7 @@ class ContentModel{
 	    DELETE
 	    FROM content
 	    WHERE content.id = '".$cleanContentID."'
+	    AND content.author_id = '".$cleanUserID."'
 	    ";
 	    
 	    $mysqli->query($query);

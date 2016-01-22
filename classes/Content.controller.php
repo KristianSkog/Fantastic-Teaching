@@ -43,7 +43,7 @@ class Content {
 		require_once('Content.model.php');
 		$contentMdl = new ContentModel();
 		$id = $url_parts[0];
-		$deleteContent = $contentMdl->deleteContent($_POST['deleteContentID']);
+		$deleteContent = $contentMdl->deleteContent($_POST['deleteContentID'], $_SESSION['userID']);
 		$data = array(
 				'templates'=>array('header.html','menu.html','footer.html'),
 				'userLevel' => $_SESSION['userLevel'],
