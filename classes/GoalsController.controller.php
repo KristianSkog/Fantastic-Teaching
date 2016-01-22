@@ -2,8 +2,6 @@
 
 class GoalsController {
 
-
-
 	public static function goalsForm() {
 			require_once('Goals.model.php');
 			$goalsMdl = new GoalsModel();
@@ -60,5 +58,13 @@ class GoalsController {
 				'singleGoal' => $goalsMdl->showSingleGoal($id, $_SESSION['userID'])
 				);
 		return $data;
+	}
+
+	public static function deleteConnection() {
+		require_once('Goals.model.php');
+		$goalsMdl = new GoalsModel();
+		$deleteConnection = $goalsMdl->deleteConnection($_POST['deleteConnectionID'], $_SESSION['userID']);
+		header('Location: /Fantastic-Teaching/?/User/profile');
+		
 	}
 }

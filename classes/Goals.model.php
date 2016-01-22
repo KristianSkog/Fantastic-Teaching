@@ -123,8 +123,10 @@ class GoalsModel{
 		return $array;
 	}
 
-	static function deleteConnection($dirtyConnectionID){
+	static function deleteConnection($dirtyConnectionID, $dirtyUserID){
 		$cleanConnectionID = Cleaner::cleanVar($dirtyConnectionID);
+		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
+
 
 		$mysqli = DB::getInstance();
 
@@ -132,6 +134,7 @@ class GoalsModel{
 	    DELETE
 	    FROM goals_use_content
 	    WHERE goals_use_content.id = '".$cleanConnectionID."'
+	    AND goals_use_content.user_id = '".$cleanUserID."'
 	    ";
 
 	    $mysqli->query($query);
