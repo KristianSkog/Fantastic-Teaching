@@ -20,7 +20,8 @@ INSERT INTO `allowed_accounts` (`id`, `email`) VALUES
 (1,	'd805ddd4cd620561635b001020373b3fe7945e9ab116e0701a6ec02b0b39203cc47cee927c4c5a336a1a3050980cb99bbb32bd7ace31c55e23c3486f3059b1d7'),
 (2,	'f638b0dd412a7de0fc17612db3271543e48a74070ff31312444e621c2c0160d1bdfbb5e511126c83eccf1534dd5567e4232b6e3c936fb53355a8eae47d6738e4'),
 (3,	'b8cba57da356b0f18e7245cee154e6f1a5182e26e5eaee5b8b3cb1eb990219b135c9663f8f32c2c03938ed6afb63233bf530914edf1b10ceb60e1894c765663a'),
-(4,	'8cf0d552d9620083dfc508138bb66355af53b75bab61ba08eefae22ef8b1507b49316793fdd08002163abefa7a30048a1e12d60015748f0f6b0bd9e6738dce43');
+(4,	'8cf0d552d9620083dfc508138bb66355af53b75bab61ba08eefae22ef8b1507b49316793fdd08002163abefa7a30048a1e12d60015748f0f6b0bd9e6738dce43')
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `email` = VALUES(`email`);
 
 DROP TABLE IF EXISTS `content`;
 CREATE TABLE `content` (
@@ -38,7 +39,9 @@ CREATE TABLE `content` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `content` (`id`, `title`, `subject`, `year`, `estimate`, `text`, `file`, `timestamp`, `video`, `author_id`) VALUES
-(51,	'SKÃ–Ã–Ã–Ã–Ã–N titel',	'Geografi',	'8-9',	'1',	'OskÃ¶n text',	'5697bb3002bd8.png',	'2016-01-14 15:13:52',	'Rn5HZKgZl7Y',	9);
+(51,	'SKÃ–Ã–Ã–Ã–Ã–N titel',	'Geografi',	'8-9',	'1',	'OskÃ¶n text',	'5697bb3002bd8.png',	'2016-01-14 15:13:52',	'Rn5HZKgZl7Y',	9),
+(73,	'uiÃ¶irygkler',	'Svenska',	'1-2',	'1',	'',	'',	'2016-01-22 15:12:35',	'',	9)
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `title` = VALUES(`title`), `subject` = VALUES(`subject`), `year` = VALUES(`year`), `estimate` = VALUES(`estimate`), `text` = VALUES(`text`), `file` = VALUES(`file`), `timestamp` = VALUES(`timestamp`), `video` = VALUES(`video`), `author_id` = VALUES(`author_id`);
 
 DROP TABLE IF EXISTS `goals`;
 CREATE TABLE `goals` (
@@ -72,7 +75,8 @@ INSERT INTO `goals` (`id`, `goal`, `subject`, `year`, `user_id`) VALUES
 (26,	'',	'',	'',	0),
 (27,	'kristians mÃ¥l',	'Svenska',	'1-2',	6),
 (28,	'-jlnfew.m-hlkbgfer',	'Svenska',	'1-2',	9),
-(29,	'lhgbkdlqÃ¶jwohia',	'Svenska',	'1-2',	9);
+(29,	'lhgbkdlqÃ¶jwohia',	'Svenska',	'1-2',	9)
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `goal` = VALUES(`goal`), `subject` = VALUES(`subject`), `year` = VALUES(`year`), `user_id` = VALUES(`user_id`);
 
 DROP TABLE IF EXISTS `goals_use_content`;
 CREATE TABLE `goals_use_content` (
@@ -85,7 +89,8 @@ CREATE TABLE `goals_use_content` (
 
 INSERT INTO `goals_use_content` (`id`, `goal_id`, `content_id`, `user_id`) VALUES
 (46,	6,	51,	9),
-(47,	NULL,	51,	NULL);
+(47,	NULL,	51,	NULL)
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `goal_id` = VALUES(`goal_id`), `content_id` = VALUES(`content_id`), `user_id` = VALUES(`user_id`);
 
 DROP TABLE IF EXISTS `rating`;
 CREATE TABLE `rating` (
@@ -99,8 +104,8 @@ CREATE TABLE `rating` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `rating` (`id`, `content_id`, `rating`, `users_id`) VALUES
-(65,	68,	1,	9),
-(66,	71,	1,	9);
+(72,	51,	-1,	6)
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `content_id` = VALUES(`content_id`), `rating` = VALUES(`rating`), `users_id` = VALUES(`users_id`);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -113,10 +118,10 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `users` (`id`, `username`, `salt`, `password`, `level`) VALUES
-(4,	'kiss',	'|nîŽ8÷4¦ÂÛ;',	'9a9b95bcae1d4725ed531caa98c186f4602b06ad50864553958c70f63f316d90753802af01ad26fb5405dcd56b9ab63ace69f2771523c18a955db977ad9c0fb2',	'Premium'),
 (6,	'Kristian2',	'aqOj% qE¯¾MScz',	'd33d27aeea7524fb42a9ffb5149ce735cfcbb237d9f311798bae74009ff3eec5158effe8e7e7dbfa8239aeff6b218703c61941a4307d9a7a8a91e9b68dec1910',	'Premium'),
 (8,	'KlaraFree',	'r?í‚õ½ÆFx€òÛÅä²Ø',	'42e7a1ab2732128ced176f98b4adff38c844efac9355a8a8bd3af8ccd394279681d8b72bacd4929338b57ba401027a748869dcc1f7e84f1927420fd0ba978dec',	'Free'),
 (9,	'KlaraPremium',	'œ´+#¿’“Å	í»{˜‡',	'ad3ca7bd2d71f14b2a64807bab64c6b95af528647f4922ded3c36c2d088af37bd806e42e8a204452f0d871ce737626271e054626a62607dca3a81433564dad70',	'Premium'),
-(10,	'KlarasKonto',	'N‹Ív´EüÄŽƒÅÉ‘LT',	'0c171666a9a94c04ab8eb9b9eecc60551e4ec646d76c6422e26e2466e41aaddee4835bd9c732fef00900d57ca764e8972f85be37e6fa8e99b65be88e45fa8241',	'Free');
+(10,	'KlarasKonto',	'N‹Ív´EüÄŽƒÅÉ‘LT',	'0c171666a9a94c04ab8eb9b9eecc60551e4ec646d76c6422e26e2466e41aaddee4835bd9c732fef00900d57ca764e8972f85be37e6fa8e99b65be88e45fa8241',	'Free')
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `username` = VALUES(`username`), `salt` = VALUES(`salt`), `password` = VALUES(`password`), `level` = VALUES(`level`);
 
--- 2016-01-22 14:40:34
+-- 2016-01-22 15:21:01
