@@ -206,9 +206,9 @@ class ContentModel{
 	$mysqli = DB::getInstance();
 	$query = "select content.author_id as user, content.title, count(content.id) as uses
 			from content
-			left join users
+			join users
 			on content.author_id = users.id
-			left join goals_use_content
+			join goals_use_content
 			on content.id = goals_use_content.content_id
 			group by content.id
 			";

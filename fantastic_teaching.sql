@@ -38,9 +38,7 @@ CREATE TABLE `content` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `content` (`id`, `title`, `subject`, `year`, `estimate`, `text`, `file`, `timestamp`, `video`, `author_id`) VALUES
-(50,	'nyaste',	'Svenska',	'1-2',	'6',	'nwd,qank',	'',	'2016-01-13 14:46:46',	'',	9),
-(51,	'SKÃ–Ã–Ã–Ã–Ã–N titel',	'Geografi',	'8-9',	'1',	'OskÃ¶n text',	'5697bb3002bd8.png',	'2016-01-14 15:13:52',	'Rn5HZKgZl7Y',	9),
-(52,	'snyggaste inlÃ¤gget om eddie murphy',	'Matte',	'6-7',	'5',	'vad Ã¤r eddie 1 upphÃ¶jt till 2',	'',	'2016-01-14 15:15:50',	'',	9);
+(51,	'SKÃ–Ã–Ã–Ã–Ã–N titel',	'Geografi',	'8-9',	'1',	'OskÃ¶n text',	'5697bb3002bd8.png',	'2016-01-14 15:13:52',	'Rn5HZKgZl7Y',	9);
 
 DROP TABLE IF EXISTS `goals`;
 CREATE TABLE `goals` (
@@ -54,26 +52,40 @@ CREATE TABLE `goals` (
 
 INSERT INTO `goals` (`id`, `goal`, `subject`, `year`, `user_id`) VALUES
 (6,	'FÃ¶rsta mÃ¥let',	'Svenska',	'1-2',	9),
-(7,	'nytt mÃ¥l',	'Svenska',	'1-2',	9);
+(8,	'',	'',	'',	0),
+(9,	'Klaras mÃ¥l',	'Svenska',	'1-2',	0),
+(10,	'',	'',	'',	0),
+(11,	'',	'',	'',	0),
+(12,	'',	'',	'',	0),
+(13,	'',	'',	'',	0),
+(14,	'',	'',	'',	0),
+(15,	'',	'',	'',	0),
+(16,	'',	'',	'',	0),
+(17,	'',	'',	'',	0),
+(18,	'',	'',	'',	0),
+(19,	'',	'',	'',	0),
+(20,	'',	'',	'',	0),
+(22,	'',	'',	'',	0),
+(23,	'',	'',	'',	0),
+(24,	'',	'',	'',	0),
+(25,	'',	'',	'',	0),
+(26,	'',	'',	'',	0),
+(27,	'kristians mÃ¥l',	'Svenska',	'1-2',	6),
+(28,	'-jlnfew.m-hlkbgfer',	'Svenska',	'1-2',	9),
+(29,	'lhgbkdlqÃ¶jwohia',	'Svenska',	'1-2',	9);
 
 DROP TABLE IF EXISTS `goals_use_content`;
 CREATE TABLE `goals_use_content` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `goal_id` int(10) unsigned NOT NULL,
+  `goal_id` int(10) unsigned DEFAULT NULL,
   `content_id` int(10) unsigned NOT NULL,
-  `user_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `goals_use_content` (`id`, `goal_id`, `content_id`, `user_id`) VALUES
-(20,	6,	49,	9),
-(21,	6,	49,	9),
-(23,	6,	50,	9),
-(24,	6,	50,	9),
-(25,	6,	50,	9),
-(28,	7,	49,	9),
-(29,	6,	48,	9),
-(30,	6,	48,	9);
+(46,	6,	51,	9),
+(47,	NULL,	51,	NULL);
 
 DROP TABLE IF EXISTS `rating`;
 CREATE TABLE `rating` (
@@ -87,10 +99,8 @@ CREATE TABLE `rating` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `rating` (`id`, `content_id`, `rating`, `users_id`) VALUES
-(49,	48,	1,	9),
-(50,	52,	1,	9),
-(51,	51,	1,	9),
-(52,	50,	-1,	9);
+(65,	68,	1,	9),
+(66,	71,	1,	9);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -106,6 +116,7 @@ INSERT INTO `users` (`id`, `username`, `salt`, `password`, `level`) VALUES
 (4,	'kiss',	'|nîŽ8÷4¦ÂÛ;',	'9a9b95bcae1d4725ed531caa98c186f4602b06ad50864553958c70f63f316d90753802af01ad26fb5405dcd56b9ab63ace69f2771523c18a955db977ad9c0fb2',	'Premium'),
 (6,	'Kristian2',	'aqOj% qE¯¾MScz',	'd33d27aeea7524fb42a9ffb5149ce735cfcbb237d9f311798bae74009ff3eec5158effe8e7e7dbfa8239aeff6b218703c61941a4307d9a7a8a91e9b68dec1910',	'Premium'),
 (8,	'KlaraFree',	'r?í‚õ½ÆFx€òÛÅä²Ø',	'42e7a1ab2732128ced176f98b4adff38c844efac9355a8a8bd3af8ccd394279681d8b72bacd4929338b57ba401027a748869dcc1f7e84f1927420fd0ba978dec',	'Free'),
-(9,	'KlaraPremium',	'Ïô®WQGøêezVá÷Ç®',	'04f071db62fa07a106ec8af876ae0e9416de6e0a3b53aff9a9b4b3aff9416439d415e47506da98b9a8d306d3115e731f821721cbbf3fe5d1fb2cf87b8dd8d2fe',	'Premium');
+(9,	'KlaraPremium',	'œ´+#¿’“Å	í»{˜‡',	'ad3ca7bd2d71f14b2a64807bab64c6b95af528647f4922ded3c36c2d088af37bd806e42e8a204452f0d871ce737626271e054626a62607dca3a81433564dad70',	'Premium'),
+(10,	'KlarasKonto',	'N‹Ív´EüÄŽƒÅÉ‘LT',	'0c171666a9a94c04ab8eb9b9eecc60551e4ec646d76c6422e26e2466e41aaddee4835bd9c732fef00900d57ca764e8972f85be37e6fa8e99b65be88e45fa8241',	'Free');
 
--- 2016-01-14 15:38:54
+-- 2016-01-22 14:40:34

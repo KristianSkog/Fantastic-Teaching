@@ -110,7 +110,7 @@ class AccountModel{
 
 		//hashes our cleaned password with added salt:
 		$safeUpdatedPassword = hash("sha512", "$newSalt"."$cleanUpdatedPassword");
-		$queryChangePassword ="
+		$queryChangePassword = "
 		UPDATE users
 		SET password='".$safeUpdatedPassword."', salt='".$newSalt."'
 		WHERE users.id=".$userToChange.";

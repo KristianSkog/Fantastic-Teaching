@@ -127,15 +127,14 @@ class GoalsModel{
 		$cleanConnectionID = Cleaner::cleanVar($dirtyConnectionID);
 		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
 
-
 		$mysqli = DB::getInstance();
 
 	    $query = "
-	    DELETE
-	    FROM goals_use_content
-	    WHERE goals_use_content.id = '".$cleanConnectionID."'
-	    AND goals_use_content.user_id = '".$cleanUserID."'
-	    ";
+	    UPDATE goals_use_content
+		SET user_id = NULL, goal_id = NULL
+		WHERE goals_use_content.id = '".$cleanConnectionID."'
+		AND goals_use_content.user_id = '".$cleanUserID."'
+		";
 
 	    $mysqli->query($query);
 	}
