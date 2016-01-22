@@ -3,8 +3,8 @@ session_start();
 require_once("classes/DB.class.php");
 
 	if (!isset($_GET) || count($_GET)<=0) {
-		//$class = "Account";
-		//$method = "login";
+		$class = "Page";
+		$method = "start";
 	}else{
 		$url_parts = getUrlParts($_GET); 
 
@@ -13,16 +13,18 @@ require_once("classes/DB.class.php");
 	}
 
 	# Hämta in filen för den klass vi ska anrop 
-	if($class == 'Account' && ($method == 'login' || $method == 'create')){
+	if($class == 'Page' && ($method == 'start' || $method == 'create')){
 		require_once("classes/".$class.".controller.php");
 		$data = $class::$method($url_parts);
+
 	}elseif($_SESSION['userID']){
 		require_once("classes/".$class.".controller.php");
 		$data = $class::$method($url_parts);
 	}else{
 		$data = array(
-			'templates'=>array('header.html','login.html','footer.html')
+			'templates'=>array('header.html','login.html','footer.html')	
 		);
+		var_dump($_SESSION['userID']) ;
 		//ska istället köra en header() till /homepage
 	}
 	
