@@ -12,7 +12,7 @@ class Page {
 	}
 	return
 		$data = array(
-			'templates'=>array('header.html','login.html','footer.html','menu.html')
+			'templates'=>array('header.html','login.html','footer.html')
 		);
 	}
 	public static function create() {

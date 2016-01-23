@@ -24,7 +24,7 @@ require_once("classes/DB.class.php");
 		$data = array(
 			'templates'=>array('header.html','login.html','footer.html')	
 		);
-		var_dump($_SESSION['userID']) ;
+		
 		//ska istället köra en header() till /homepage
 	}
 	
