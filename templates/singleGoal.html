@@ -1,4 +1,8 @@
-<div class="col-xs-12">
+<div class="row content-background border-bottom-radius">
+<div class="col-xs-2">
+<h4>Single Goal:</h4>
+</div>
+<div class="col-xs-10">
 	{% include 'deleteGoalBtn.html' %}
  	<h4>{{ singleGoal.goal }}</h4>
  	<p>Subject: {{ singleGoal.goal_subject }}</p>
@@ -10,5 +14,5 @@
 			{% endif %}
 		{% endfor %}
 	{% include 'viewAllGoalsBtn.html' %}
-	<hr>
+</div>
 </div>

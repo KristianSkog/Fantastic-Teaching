@@ -1,7 +1,7 @@
 {% for row in content %}
-<div class="row">							
+<div class="row ">							
 <div class="col-xs-12">
-	<div class="thumbnail">
+	<div class="thumbnail content-margin content-background">
 		{% if row.file %}
 		<img src="http://192.168.33.10/Fantastic-Teaching/uploads/{{ row.file|e }}" alt="article image">
 		{% endif %}
@@ -22,18 +22,18 @@
 			</div>
 		{% endif %}
 	<div class="row">
-		<div class="col-xs-12 col-sm-4">
+		<div class="col-xs-12 col-sm-2">
 		{% include 'expandContentBtn.html' %}
 		{% include 'contentBtns.html' %}
 		</div>
-		<div class="col-xs-12 col-sm-8">
+		<div class="col-xs-12 col-sm-10">
 			<div class="caption">
-				<h4>{{row.title|e}}</h4>
+				<h3>{{row.title|e}}</h3>
 				<p class="grayText"><i>Published {{row.timestamp|e}} Author: {{row.username}}</i></p>
 				<p>Subject: {{row.subject|e}}</p>
 				<p>Recommended for year: {{row.year|e}}</p>
-				<p>Estimated teaching hours: {{row.estimate|e}}</p>
-				<p>{{row.text|e}}. . .</p>
+				<p>Estimated teaching hours: {{row.estimate|e}}</p><br>
+				<p>{{row.text|e}}. . .</p><br>
 				{% if row.video %}
 				<div class="embed-responsive embed-responsive-16by9">
 					<iframe width="560" height="315" src="https://www.youtube.com/embed/{{row.video|raw}}" frameborder="0" allowfullscreen></iframe>

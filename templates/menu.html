@@ -1,8 +1,8 @@
-<div class="row">
+<div class="row content-background">
 <!-- NEW CONTENT -->
 	<div class="col-xs-12 col-sm-2 form-group">
 		<form method="post" action="/fantastic-teaching/?/Content/contentForm">
-			<button class="transparentbtn" type="submit" name="publishNew" value="publish"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Content</button>
+			<button class="transparentbtn menu-buttons" type="submit" name="publishNew" value="publish"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Content</button>
 		</form>
 	</div>
 
@@ -10,7 +10,7 @@
 	{% if userLevel == 'Premium' %}
 		<div class="col-xs-12 col-sm-2 form-group">
 			<form method="post" action="/fantastic-teaching/?/GoalsController/goalsForm">
-				<button class="transparentbtn" type="submit" name="newGoal" value="{{userID}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Goal</button>
+				<button class="transparentbtn menu-buttons" type="submit" name="newGoal" value="{{userID}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Goal</button>
 			</form>
 		</div>
 	{% endif %}
@@ -18,19 +18,19 @@
 <!-- CHANGE PASSWORD -->
 	<div class="col-xs-12 col-sm-2 form-group">
 		<form method="post" action="/fantastic-teaching/?/User/changePassword">
-			<button class="transparentbtn" type="submit" name="changePassword" value="{{userID}}"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Password</button>
+			<button class="transparentbtn menu-buttons" type="submit" name="changePassword" value="{{userID}}"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Password</button>
 		</form>
 	</div>
 
 <!-- USER PROFILE -->
 	<div class="col-xs-12 col-sm-2 form-group">
-		<a href="/fantastic-teaching/?/User/profile"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Profile</a>
+		<a class="menu-buttons" href="/fantastic-teaching/?/User/profile"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Profile</a>
 	</div>
 
 <!-- LOG OUT -->
 	<div class="col-xs-12 col-sm-4 form-group">
 		<form method="post" action="/fantastic-teaching/?/Account/logout">
-			<button class="transparentbtn" type="submit" name="logout" value="{{userID}}">
+			<button class="transparentbtn menu-buttons" type="submit" name="logout" value="{{userID}}">
 			<span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> Log out <b>{{user}}</b></button>
 		</form>
 	</div>
