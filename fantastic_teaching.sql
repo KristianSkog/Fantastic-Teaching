@@ -20,7 +20,8 @@ INSERT INTO `allowed_accounts` (`id`, `email`) VALUES
 (1,	'd805ddd4cd620561635b001020373b3fe7945e9ab116e0701a6ec02b0b39203cc47cee927c4c5a336a1a3050980cb99bbb32bd7ace31c55e23c3486f3059b1d7'),
 (2,	'f638b0dd412a7de0fc17612db3271543e48a74070ff31312444e621c2c0160d1bdfbb5e511126c83eccf1534dd5567e4232b6e3c936fb53355a8eae47d6738e4'),
 (3,	'b8cba57da356b0f18e7245cee154e6f1a5182e26e5eaee5b8b3cb1eb990219b135c9663f8f32c2c03938ed6afb63233bf530914edf1b10ceb60e1894c765663a'),
-(4,	'8cf0d552d9620083dfc508138bb66355af53b75bab61ba08eefae22ef8b1507b49316793fdd08002163abefa7a30048a1e12d60015748f0f6b0bd9e6738dce43');
+(4,	'8cf0d552d9620083dfc508138bb66355af53b75bab61ba08eefae22ef8b1507b49316793fdd08002163abefa7a30048a1e12d60015748f0f6b0bd9e6738dce43')
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `email` = VALUES(`email`);
 
 DROP TABLE IF EXISTS `content`;
 CREATE TABLE `content` (
@@ -46,7 +47,12 @@ INSERT INTO `content` (`id`, `title`, `subject`, `year`, `estimate`, `text`, `fi
 (85,	'afrika',	'Geografi',	'1-2',	'3',	'Afrika Ã¤r jordens nÃ¤st stÃ¶rsta kontinent (efter Eurasien) och Ã¤ven jordens nÃ¤st stÃ¶rsta vÃ¤rldsdel efter Asien, bÃ¥de vad gÃ¤ller areal och folkmÃ¤ngd. Med vÃ¤rldsdelens Ã¶ar inrÃ¤knade mÃ¤ter Afrika 30 244 050 kmÂ², vilket motsvarar 20,3 % av jordens landmassa eller cirka 6 % av jordens totala area. Omkring 22 miljoner kmÂ² av dessa ligger i tropikerna vilket gÃ¶r den afrikanska kontinenten till vÃ¤rldens varmaste kontinent. I Afrika bor det ungefÃ¤r 1 miljard mÃ¤nniskor i 55 lÃ¤nder â€“ en sjundedel av jordens befolkning. Dess lÃ¤ngd i nordlig-sydlig riktning Ã¤r omkring 8 000 km och dess stÃ¶rsta bredd omkring 7 800 km.\r\nlÃ¤nk: https://sv.wikipedia.org/wiki/Afrika',	'56a3bdb64e233.png',	'2016-01-23 17:51:50',	'',	15),
 (86,	'asien',	'Geografi',	'1-2',	'4',	'Asien Ã¤r jordens stÃ¶rsta och mest folkrika vÃ¤rldsdel. Sedan 1700-talet har grÃ¤nsen mellan Europa och Asien vanligen ansetts gÃ¥ genom Uralbergen, Uralfloden, Kaspiska havet, Kaukasus, Svarta havet, Bosporen, MarmarasjÃ¶n och Dardanellerna. GrÃ¤nsen mellan Asien och Afrika anses normalt vara SueznÃ¤set och RÃ¶da havet. Omkring 60 % av vÃ¤rldens befolkning bor i Asien, varav enbart kring 2 % bor i norra och innersta delen, det vill sÃ¤ga Mongoliet, de centralasiatiska lÃ¤nderna Kazakstan, Uzbekistan, Turkmenistan, Kirgizistan och Tadzjikistan, de kinesiska provinserna Xinjiang, Tibet, Qinghai och ryska Sibirien.\r\n\r\nDÃ¥ vÃ¤rldsdelar delvis definieras genom kulturgeografi, det vill sÃ¤ga pÃ¥ grundval av kulturell samhÃ¶righet, och inte genom geologi, rÃ¥der det en skillnad mellan Asien som vÃ¤rldsdel och som geografisk kontinent. Asien och Europa befinner sig pÃ¥ samma kontinent och denna heter Eurasien. VÃ¤rldsdelen Asien omfattar en del av den Eurasiatiska kontinenten, nÃ¤rmare bestÃ¤mt ett omrÃ¥de frÃ¥n SinaihalvÃ¶n, Turkiet och Uralbergen i vÃ¤ster till Berings Sund, Japan, Taiwan, Filippinerna och Indonesien i Ã¶ster.\r\n\r\nIdÃ©n om att den gamla vÃ¤rlden har tre kontinenter gÃ¥r tillbaka till antiken. Namnet Asien hÃ¤rleds frÃ¥n de urÃ¥ldriga civilisationerna i MellanÃ¶stern. Asien var under Romarriket benÃ¤mning pÃ¥ en romersk provins som lÃ¥g i dagens Turkiet. Betydelsen fÃ¶r namnet Asien har senare kommit att utstrÃ¤ckas till att omfatta hela omrÃ¥det frÃ¥n SinaihalvÃ¶n, Turkiet och Uralbergen i vÃ¤ster till Berings sund, Japan, Taiwan, Filippinerna och Indonesien i Ã¶ster.',	'56a3beea6f90f.png',	'2016-01-23 17:56:58',	'',	15),
 (89,	'dalmÃ¥l',	'Svenska',	'6-7',	'1',	'dialektmysterier med fredrik lindstrÃ¶m',	'',	'2016-01-23 18:05:29',	'V1YqXOSoDmc',	15),
-(90,	'gnÃ¤llbÃ¤ltet',	'Svenska',	'3-5',	'2',	'dialektmysterier med Fredrik LindstrÃ¶m',	'',	'2016-01-23 18:06:43',	'R8skbVy4GVQ',	15);
+(90,	'gnÃ¤llbÃ¤ltet',	'Svenska',	'3-5',	'2',	'dialektmysterier med Fredrik LindstrÃ¶m',	'',	'2016-01-23 18:06:43',	'R8skbVy4GVQ',	15),
+(93,	'Pythagoras sats - INTRO',	'Matte',	'8-9',	'2',	'Pythagoras sats Ã¤r en av matematikens mest kÃ¤nda satser. Enligt Pythagoras sats sÃ¥ gÃ¤ller fÃ¶r en rÃ¤tvinklig triangels sidor att\r\n\r\nKvadraten pÃ¥ hypotenusan Ã¤r lika med summan av kvadraterna pÃ¥ kateterna.\r\nHypotenusan Ã¤r den lÃ¤ngsta sidan i en rÃ¤tvinklig triangel och Ã¤r motstÃ¥ende sida till den rÃ¤ta vinkeln. Katet Ã¤r benÃ¤mningen pÃ¥ var och en av de tvÃ¥ sidor vilka bildar den rÃ¤ta vinkeln.\r\n\r\nSambandet i Pythagoras sats kan skrivas som Pythagoras ekvation:\r\n\r\na^2 + b^2 = c^2\r\ndÃ¤r a, b och c Ã¤r sidornas lÃ¤ngder fÃ¶r en rÃ¤tvinklig triangel och c Ã¤r hypotenusans lÃ¤ngd.\r\n\r\nSatsens namn kommer frÃ¥n den grekiske matematikern Pythagoras (580 f.kr â€“ 495 f.kr) som brukar tillskrivas det fÃ¶rsta beviset fÃ¶r satsen, men satsen var fÃ¶rmodligen redan tidigare kÃ¤nd i Babylonien.\r\nCosinussatsen[redigera | redigera wikitext]\r\nPythagoras sats kan ses som ett specialfall av cosinussatsen, vilken gÃ¤ller fÃ¶r alla trianglar.\r\n\r\nLÃ¥t a, b och c vara sidolÃ¤ngderna hos en triangel och lÃ¥t Î¸ vara vinkeln mellan tvÃ¥ av sidorna, a och b. Sambandet mellan triangelns sidor och vinkeln Ã¤r dÃ¥\r\n\r\nc^2 = a^2 + b^2 - 2ab \\,\\cos\\theta\r\nOm vinkeln Î¸ Ã¤r lika med 90 grader Ã¤r cos Î¸ = 0 och Pythagoras sats fÃ¶ljer.\r\n\r\nEgyptiska trianglar och pythagoreiska tripler[redigera | redigera wikitext]\r\nEn egyptisk triangel Ã¤r en rÃ¤tvinklig triangel vars sidolÃ¤ngder fÃ¶rhÃ¥ller sig till varandra som talen 3, 4 och 5. FÃ¶r en sÃ¥dan triangel kan sidorna betecknas med 3n, 4n och 5n, dÃ¤r n Ã¤r ett positivt heltal. Enligt Pythagoras sats gÃ¤ller dÃ¥ att\r\n\r\n(3n)^2 + (4n)^2 = (5n)^2 \\Rightarrow 9 n^2 + 16 n^2 = 25 n^2\r\nvilket visar att satsen gÃ¤ller fÃ¶r alla egyptiska trianglar.\r\n\r\nTre positiva heltal, a, b och c, kallas fÃ¶r en pythagoreisk trippel (a,b,c), om a2 + b2 = c2. Enligt en formel angiven av Euklides kan talen i en pythagoreisk trippel bildas med hjÃ¤lp av uttrycken m2 - n2, 2mn och m2 + n2, dÃ¤r m och n Ã¤r positiva heltal och m > n enligt\r\n\r\n a = k\\cdot(m^2 - n^2)   ,\\ \\, b = k\\cdot(2mn) ,\\ \\, c = k\\cdot(m^2 + n^2)\r\ndÃ¤r k Ã¤r ett positivt heltal.\r\n\r\nExempel pÃ¥ pythagoreiska tripler som inte svarar mot egyptiska trianglar Ã¤r triplerna (5, 12, 13), (8, 15, 17) och (7, 24, 25).\r\n\r\nAv resultat ovan fÃ¶ljer ocksÃ¥ att det finns lika mÃ¥nga pythagoreiska tripler som det finns positiva heltal.',	'56a520c7ebb70.png',	'2016-01-24 19:06:47',	'uaj0XcLtN5c',	16),
+(94,	'Oregelbundna verb',	'Svenska',	'3-5',	'2',	'Oregelbundna verb Ã¤r verb som inte fÃ¶ljer de regler som gÃ¤ller fÃ¶r regelbundna verb vid konjugation. Olika sprÃ¥k har olika regler.\r\n\r\nRegelbundenhet/oregelbundenhet hos verb avser hur verbet bÃ¶js nÃ¤r man tar tema pÃ¥ det, dvs man skriver det i infinitiv, imperfekt, supinum och presens particip . Exempel: arbeta - arbetade - arbetat.\r\n\r\nEtt regelbundet verbs grundform (till exempel arbeta, bÃ¶ja, mÃ¥) bÃ¶js genom en fÃ¶rutsÃ¤gbar regel. Man kan gruppera regelbundna verb i grupper som bÃ¶js pÃ¥ liknande sÃ¤tt. En sÃ¥dan grupp kallas konjugation. I svenskan har vi fyra konjugationer (dvs fyra grupper av regelbundna verb med sin respektive uppsÃ¤ttning regler). Exempel: den fÃ¶rsta konjugationen pÃ¥ svenska innebÃ¤r att man till grundformen lÃ¤gger -r, -de, -t:\r\n\r\nJag arbetar hela dagen.\r\nJag arbetade pÃ¥ X igÃ¥r.\r\nJag har arbetat hÃ¥rt.\r\nIbland tror man att tex springa Ã¤r oregelbundet (springa â€“ sprang â€“ sprungit) men det fÃ¶ljer faktiskt en regel och hÃ¶r till fjÃ¤rde konjugationen. FjÃ¤rde konjugationen utgÃ¶rs av s.k. starka verb:\r\n\r\nJag springer.\r\nJag sprang till X igÃ¥r.\r\nJag har sprungit.\r\nEtt oregelbundet verb (till exempel gÃ¥) fÃ¶ljer inte dessa regler och hÃ¶r dÃ¤rfÃ¶r inte till nÃ¥gon konjugation:\r\n\r\nJag gÃ¥r\r\nJag gick till X igÃ¥r.\r\nJag har gÃ¥tt.\r\nSe Ã¤ven[redigera | redigera wikitext]\r\nRegelbundet verb\r\nStarka verb\r\nSvaga verb',	'',	'2016-01-24 19:10:44',	'',	16),
+(95,	'Gustav Vasa',	'Historia',	'3-5',	'2',	'Gustav Vasa eller Gustav I[1], sannolikt fÃ¶dd 12 maj 1496, dÃ¶d 29 september 1560[2], var kung av Sverige 1523â€“1560 och riksfÃ¶restÃ¥ndare 1521â€“1523, under det pÃ¥gÃ¥ende befrielsekriget. Hans makttilltrÃ¤de, inlett som ett uppror mot unionskungen Kristian II efter Stockholms blodbad innebar slutet fÃ¶r Kalmarunionen. Gustav tillhÃ¶rde VasaÃ¤tten, som genom honom blev den fÃ¶rsta monarkiska dynastin som regerade ett enat svenskt kungadÃ¶me som ett arvrike. Hans regering kÃ¤nnetecknas av infÃ¶randet av ett starkt centralstyre i hela riket med en effektiv byrÃ¥krati och en evangelisk statskyrka grundad pÃ¥ Luthers lÃ¤ra.\r\n\r\nGustavs roll i infÃ¶randet av en svensk arvmonarki ses i dag som grundandet av den moderna nationalstaten Sverige, och det Ã¤r den 6 juni â€“ datumet dÃ¥ han valdes till kung av riksdagen 1523 â€“ som Ã¤r Sveriges nationaldag. Han har senare, sÃ¤rskilt frÃ¥n det sena 1800-talet, upphÃ¶jts till landsfader och har dÃ¤rmed blivit en viktig nationell symbol. I modern historiesyn har Gustav I utsatts fÃ¶r en mer kritisk analys dÃ¤r man poÃ¤ngterat hur han med brutala metoder och intensiv propaganda befÃ¤ste sin makt och rÃ¶jde motstÃ¥ndare ur vÃ¤gen. Historikern Lars-Olof Larsson har pekat pÃ¥ att Gustav med hÃ¤nsynslÃ¶shet och maktlystnad i kombination med politisk skicklighet i mycket upptrÃ¤dde i enlighet med den italienske politiske filosofen NiccolÃ² Machiavellis principer fÃ¶r en furstes befÃ¤stande av sin makt, nÃ¥got som den svenska historieskrivningen ofta uteslutit.[3]',	'56a522291610e.jpg',	'2016-01-24 19:12:41',	'',	16),
+(96,	'Stockholms blodbad',	'Historia',	'3-5',	'4',	'Stockholms blodbad var den rannsakning och efterfÃ¶ljande avrÃ¤ttningar som Ã¤gde rum i Stockholm den 7â€“9 november 1520. HÃ¤ndelserna inleddes direkt efter Kristian II:s (som efter blodbadet blev kÃ¤nd som Kristian Tyrann i Sverige[1]) krÃ¶ning till svensk kung nÃ¤r gÃ¤sterna pÃ¥ krÃ¶ningsfesten kallades till ett mÃ¶te pÃ¥ slottet. Ã„rkebiskop Gustav Trolles krav pÃ¥ ekonomisk kompensation fÃ¶r bland annat StÃ¤kets rivning ledde till frÃ¥gan om den tidigare riksfÃ¶restÃ¥ndaren Sten Sture den yngre och hans anhÃ¤ngare hade gjort sig skyldiga till kÃ¤tteri. Med stÃ¶d i kanonisk rÃ¤tt avrÃ¤ttades nÃ¤rmare 100 personer[2] de fÃ¶ljande dagarna. Bland de avrÃ¤ttade Ã¥terfanns mÃ¥nga inom aristokratin som hade givit sitt stÃ¶d Ã¥t Sturepartiet under de fÃ¶regÃ¥ende Ã¥ren.',	'56a52521289db.jpg',	'2016-01-24 19:25:21',	'',	16)
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `title` = VALUES(`title`), `subject` = VALUES(`subject`), `year` = VALUES(`year`), `estimate` = VALUES(`estimate`), `text` = VALUES(`text`), `file` = VALUES(`file`), `timestamp` = VALUES(`timestamp`), `video` = VALUES(`video`), `author_id` = VALUES(`author_id`);
 
 DROP TABLE IF EXISTS `goals`;
 CREATE TABLE `goals` (
@@ -59,7 +65,6 @@ CREATE TABLE `goals` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `goals` (`id`, `goal`, `subject`, `year`, `user_id`) VALUES
-(6,	'FÃ¶rsta mÃ¥let',	'Svenska',	'1-2',	9),
 (8,	'',	'',	'',	0),
 (9,	'Klaras mÃ¥l',	'Svenska',	'1-2',	0),
 (10,	'',	'',	'',	0),
@@ -79,11 +84,13 @@ INSERT INTO `goals` (`id`, `goal`, `subject`, `year`, `user_id`) VALUES
 (25,	'',	'',	'',	0),
 (26,	'',	'',	'',	0),
 (27,	'kristians mÃ¥l',	'Svenska',	'1-2',	6),
-(28,	'-jlnfew.m-hlkbgfer',	'Svenska',	'1-2',	9),
-(29,	'lhgbkdlqÃ¶jwohia',	'Svenska',	'1-2',	9),
 (30,	'Teach some stuff',	'Historia',	'6-7',	12),
 (31,	'LÃ¤ra ut lite andra saker',	'Geografi',	'1-2',	12),
-(32,	'klass 5c vecka 7',	'Matte',	'1-2',	15);
+(32,	'klass 5c vecka 7',	'Matte',	'1-2',	15),
+(34,	'Addition',	'Matte',	'1-2',	9),
+(35,	'Historia Ã¥r 3',	'Historia',	'3-5',	9),
+(36,	'Historia Ã¥r 3',	'Historia',	'3-5',	16)
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `goal` = VALUES(`goal`), `subject` = VALUES(`subject`), `year` = VALUES(`year`), `user_id` = VALUES(`user_id`);
 
 DROP TABLE IF EXISTS `goals_use_content`;
 CREATE TABLE `goals_use_content` (
@@ -103,7 +110,15 @@ INSERT INTO `goals_use_content` (`id`, `goal_id`, `content_id`, `user_id`) VALUE
 (51,	32,	84,	15),
 (52,	32,	82,	15),
 (53,	32,	78,	15),
-(54,	32,	89,	15);
+(54,	32,	89,	15),
+(55,	NULL,	92,	NULL),
+(56,	NULL,	90,	NULL),
+(57,	34,	76,	9),
+(58,	34,	77,	9),
+(59,	35,	95,	9),
+(60,	36,	95,	16),
+(61,	36,	96,	16)
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `goal_id` = VALUES(`goal_id`), `content_id` = VALUES(`content_id`), `user_id` = VALUES(`user_id`);
 
 DROP TABLE IF EXISTS `rating`;
 CREATE TABLE `rating` (
@@ -125,7 +140,15 @@ INSERT INTO `rating` (`id`, `content_id`, `rating`, `users_id`) VALUES
 (81,	82,	89,	15),
 (82,	78,	5,	15),
 (83,	77,	23,	15),
-(84,	76,	45,	15);
+(84,	76,	45,	15),
+(85,	92,	1,	9),
+(86,	90,	1,	9),
+(87,	89,	-1,	9),
+(88,	86,	1,	9),
+(89,	84,	-1,	9),
+(90,	95,	1,	9),
+(91,	95,	1,	16)
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `content_id` = VALUES(`content_id`), `rating` = VALUES(`rating`), `users_id` = VALUES(`users_id`);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -139,9 +162,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `username`, `salt`, `password`, `level`) VALUES
 (6,	'Kristian2',	'aqOj% qE¯¾MScz',	'd33d27aeea7524fb42a9ffb5149ce735cfcbb237d9f311798bae74009ff3eec5158effe8e7e7dbfa8239aeff6b218703c61941a4307d9a7a8a91e9b68dec1910',	'Premium'),
-(8,	'KlaraFree',	'r?í‚õ½ÆFx€òÛÅä²Ø',	'42e7a1ab2732128ced176f98b4adff38c844efac9355a8a8bd3af8ccd394279681d8b72bacd4929338b57ba401027a748869dcc1f7e84f1927420fd0ba978dec',	'Free'),
-(9,	'KlaraPremium',	'œ´+#¿’“Å	í»{˜‡',	'ad3ca7bd2d71f14b2a64807bab64c6b95af528647f4922ded3c36c2d088af37bd806e42e8a204452f0d871ce737626271e054626a62607dca3a81433564dad70',	'Premium'),
-(10,	'KlarasKonto',	'N‹Ív´EüÄŽƒÅÉ‘LT',	'0c171666a9a94c04ab8eb9b9eecc60551e4ec646d76c6422e26e2466e41aaddee4835bd9c732fef00900d57ca764e8972f85be37e6fa8e99b65be88e45fa8241',	'Free'),
-(15,	'eriklovenstad',	',pç‘ï@d¡U	;Åœà',	'0cfcd70bcfd5996709f271035d96a147a42ec1d5e43c34dd560c62f37ac5778e748a91d9dffeee23972dc109067b538ef710c958350aa54f6d44ca938eaa280c',	'Premium');
+(15,	'eriklovenstad',	',pç‘ï@d¡U	;Åœà',	'0cfcd70bcfd5996709f271035d96a147a42ec1d5e43c34dd560c62f37ac5778e748a91d9dffeee23972dc109067b538ef710c958350aa54f6d44ca938eaa280c',	'Premium'),
+(16,	'KlaraKollerstrom',	'À„¾)&^§ÕÝ¶!çŠ',	'07992091b2013fd2dcf8fae664814c861e0274619e70cb887a57499d08b8daec4c5bf9b827770da057896a55b0b9168940acb185df18b1bc2ed7bea04388a0b5',	'Premium')
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `username` = VALUES(`username`), `salt` = VALUES(`salt`), `password` = VALUES(`password`), `level` = VALUES(`level`);
 
--- 2016-01-23 18:12:49
+-- 2016-01-24 19:29:36
