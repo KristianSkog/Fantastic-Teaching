@@ -215,26 +215,4 @@ class ContentModel{
 		return $array;
 	}
 
-	static function viewArticleUses(){
-	// looks in database how many times a content.id reccurs and then displays it.
-	// it reccurs when someone uses that content in table goals_use_content.
-
-	$mysqli = DB::getInstance();
-	$query = "select content.id, content.author_id as user, content.title, count(content.id) as uses
-			from content
-			join users
-			on content.author_id = users.id
-			join goals_use_content
-			on content.id = goals_use_content.content_id
-			group by content.id
-			";
-	$result = $mysqli->query($query);
-		$viewArticleUses = array();
-		while ($row = $result->fetch_assoc()) {
-			$viewArticleUses[] = $row;
-		}
-
-		return $viewArticleUses;
-	}
-
 }

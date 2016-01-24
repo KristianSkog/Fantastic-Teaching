@@ -24,14 +24,14 @@ class User {
 
 	public static function profile() {
 			require_once('Goals.model.php');
-			require_once('Content.model.php');
+			require_once('Using.model.php');
 			$goalsMdl = new GoalsModel();
-			$contentMdl = new ContentModel();
+			$usingMdl = new UsingModel();
 			if ($_SESSION['userLevel']== "Premium") {
 				$data = array(
 					'templates'=>array('header.html','menu.html','admin.html','goals.html','viewArticleUses.html','footer.html'),
 					'goals' => $goalsMdl->viewGoals($_SESSION['userID']),
-					'viewArticleUses' => $contentMdl->viewArticleUses($_SESSION['userID']),	
+					'viewArticleUses' => $usingMdl->viewArticleUses($_SESSION['userID']),	
 					'userID' => $_SESSION['userID'],
 					'user' => $_SESSION['username'],
 					'userLevel' => $_SESSION['userLevel']
@@ -49,10 +49,7 @@ class User {
 	}
 
 	public static function changePassword() {
-			require_once('Goals.model.php');
-			require_once('Content.model.php');
-			$contentMdl = new ContentModel();
-		
+			
 			$data = array(
 				'templates'=>array('header.html','menu.html', 'changeUser.html','footer.html'),
 				'userID' => $_SESSION['userID'],

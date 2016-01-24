@@ -70,21 +70,4 @@ class GoalsController {
 		return $data;
 	}
 
-	public static function createConnection() {
-	// gives useContent method in goals.model goalID, contentID and userID.
-		require_once('Goals.model.php');
-		$goalsMdl = new GoalsModel();
-		$goalsMdl->useContent($_POST['connectedGoalID'], $_POST['connectedContentID'], $_SESSION['userID'] );
-		header('Location: /Fantastic-Teaching/?/GoalsController/singleGoal/'.$_POST['connectedGoalID'].'');
-		
-	}
-
-	public static function deleteConnection() {
-	// gives deleteConntection in Goals.model content id and user id and deletes it from database.
-		require_once('Goals.model.php');
-		$goalsMdl = new GoalsModel();
-		$goalsMdl->deleteConnection($_POST['deleteConnectionID'], $_SESSION['userID']);
-		header('Location: /Fantastic-Teaching/?/User/profile');
-		
-	}
 }
