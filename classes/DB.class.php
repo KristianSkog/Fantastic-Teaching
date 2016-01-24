@@ -1,6 +1,7 @@
 <?php
 
 class DB{
+	// creates a connection to database.
 	
 	private static $instance;
 

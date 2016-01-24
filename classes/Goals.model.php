@@ -2,26 +2,27 @@
 class GoalsModel{
 
 	static function addGoal($dirtyGoal, $dirtySubject, $dirtyYear, $dirtyUserID){
+	// takes post from goal, subject, year and Userid from session. and puts it into database. 
 		
-		//instans av db-uppkoppling
+
 		$mysqli = DB::getInstance();
 
-		//Washes those dirty variables
 		$cleanGoal = Cleaner::cleanVar($dirtyGoal);
 		$cleanSubject = Cleaner::cleanVar($dirtySubject);
 		$cleanYear = Cleaner::cleanVar($dirtyYear);
 		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
 
-	    // LÄGGER TILL I DATABASEN PÅ VALDA POSITIONER
 	    $query = 
 	    "INSERT INTO goals (goal, subject, year, user_id) 
 	    VALUES ('$cleanGoal','$cleanSubject','$cleanYear','$cleanUserID')";
 	    $mysqli->query($query);
 
-	}//stänger funktion
+	}
 
 
 	static function viewGoals($dirtyUserID){
+		// takes session userID and selects goals that has the same userID
+
 		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
 
 		$mysqli = DB::getInstance();
@@ -44,6 +45,8 @@ class GoalsModel{
 
 
 	static function deleteGoal($dirtyGoalID, $dirtyUserID){
+	// takes goalID and session userID and deletes from database that row that contains both of the values. no action if only one of them is found.
+
 		$cleanGoalID = Cleaner::cleanVar($dirtyGoalID);
 		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
 
@@ -60,6 +63,7 @@ class GoalsModel{
 	}
 
 	static function useContent($dirtyGoalID, $dirtyContentID, $dirtyUserID){
+	// takes POST about goalID and contentID and session userID and insert that into database.
 		$cleanGoalID = Cleaner::cleanVar($dirtyGoalID);
 		$cleanContentID = Cleaner::cleanVar($dirtyContentID);
 		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
@@ -74,6 +78,7 @@ class GoalsModel{
 	    $mysqli->query($query);
 	}
 	static function showSingleGoal($dirtyGoalID, $dirtyUserID){
+	// takes POST about goalID and session userID and shows goal that contains both from database.
 		$cleanGoalID = Cleaner::cleanVar($dirtyGoalID);
 		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
 
@@ -101,6 +106,8 @@ class GoalsModel{
 	}
 
 	static function showConnectedContent($dirtyGoalID, $dirtyUserID){
+		// takes POST about goalID and userID and shows the content that has both values
+
 		$cleanGoalID = Cleaner::cleanVar($dirtyGoalID);
 		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
 
@@ -124,6 +131,8 @@ class GoalsModel{
 	}
 
 	static function deleteConnection($dirtyConnectionID, $dirtyUserID){
+		// takes connectionID and userID and deletes that row from database that contains both.
+
 		$cleanConnectionID = Cleaner::cleanVar($dirtyConnectionID);
 		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
 
@@ -140,6 +149,7 @@ class GoalsModel{
 	}
 
 	static function sumEstimate($dirtyGoalID, $dirtyUserID){
+	// takes goalID and userID and shows the sum from all rows regarding time estimate. 
 		$cleanGoalID = Cleaner::cleanVar($dirtyGoalID);
 		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
 		$mysqli = DB::getInstance();

@@ -3,6 +3,7 @@
 class Content {
 
 	public static function contentForm() {
+	//method returns what templates to load and some twig variables for index.html and the templates to read. 
 
 			$data = array(
 				'templates'=>array('header.html','menu.html', 'publishNew.html','footer.html'),
@@ -15,6 +16,8 @@ class Content {
 	}
 
 	public static function add($url_parts) {
+	//method returns what templates to load and some twig variables for index.html and the templates to read. 
+	//sends info to add method in content.model on what content to add into database
 		require_once('Content.model.php');
 		$contentMdl = new ContentModel();
 		$id = $url_parts[0];
@@ -32,6 +35,7 @@ class Content {
 	}
 
 	public static function delete() {
+	// sends info to deleteContent method in content.model on what to delete.
 		require_once('Content.model.php');
 		$contentMdl = new ContentModel();
 		$deleteContent = $contentMdl->deleteContent($_POST['deleteContentID'], $_SESSION['userID']);
@@ -42,6 +46,7 @@ class Content {
 	}
 
 	public static function rate() {
+	// sends info to rating method in content.model on what to rate on what rating.
 		require_once('Content.model.php');
 		$contentMdl = new ContentModel();
 		
@@ -53,6 +58,7 @@ class Content {
 	}
 	
 	public static function view($url_parts) {
+	//method returns what templates to load and some twig variables for index.html and the templates to read. 
 		require_once('Content.model.php');
 		require_once('Goals.model.php');
 		$contentMdl = new ContentModel();
@@ -73,6 +79,7 @@ class Content {
 	}
 
 		public static function search($url_parts) {
+	// sends info to search method in content.model on what to search for
 		require_once('Content.model.php');
 		$contentMdl = new ContentModel();
 				

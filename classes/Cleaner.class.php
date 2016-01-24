@@ -1,5 +1,6 @@
 <?php
 class Cleaner{
+	// recieves something from $dirtyVar and returns it clean as $cleanVar using real_escape_string.
 
 	static function cleanVar($dirtyVar){
 		$mysqli = DB::getInstance();

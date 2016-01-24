@@ -2,7 +2,8 @@
 class ContentModel{
 
 	function addContent($dirtyTitle, $dirtySubject, $dirtyYear, $dirtyEstimate, $dirtyText, $fileToUpload, $dirtyVideo, $dirtyAuthorID){
-		//instans av db-uppkoppling
+		//takes variables from form and insert into database.
+
 		$mysqli = DB::getInstance();
 
 		//Washes those dirty variables
@@ -14,29 +15,33 @@ class ContentModel{
 		$cleanVideo = Cleaner::cleanVar($dirtyVideo);
 		$cleanAuthorID = Cleaner::cleanVar($dirtyAuthorID);
 
-
+	//on video it separates whatever comes after "=" and puts it into videoID which is inserted into twigtemplate later.
 		$videoAdress = explode('=', $cleanVideo);
 		$videoID = $videoAdress[1];
 
 
-		//ladda upp fil
+	// takes the complete filename from $fileToUpload['name'] and separates the file-extension
+	//then gives it a new name from uniqid()and then adds the extension. 
 		if(!empty($fileToUpload['tmp_name'])){
 			$originalFileName = basename($fileToUpload['name']);
 			$fileExtension = pathinfo($originalFileName, PATHINFO_EXTENSION);
 			$newFileName = uniqid().'.'.$fileExtension;
+
+	// the file goes through a few checks before it is moved to the server folder. 
+	// if it passes all tests and return true, it will be uploaded. otherwise not.
 
 			$target_dir = "uploads/";
 			$target_file = $target_dir . $newFileName;
 			$uploadCheck = TRUE;
 			$imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
 
-	    if(!empty($fileToUpload['tmp_name'])) {
-	    $check = getimagesize($fileToUpload['tmp_name']);
-	    if($check !== FALSE) {
-        $uploadCheck = TRUE;
-	    } else {
-        $uploadCheck = FALSE;
-		    }
+		    if(!empty($fileToUpload['tmp_name'])) {
+		    $check = getimagesize($fileToUpload['tmp_name']);
+		    if($check !== FALSE) {
+	        $uploadCheck = TRUE;
+		    } else {
+	        $uploadCheck = FALSE;
+			   	}
 			}
 
 			// Allow certain file formats, Check file size
@@ -44,16 +49,16 @@ class ContentModel{
 			&& $imageFileType != "gif" && $fileToUpload['size'] > 50000000) {
 			    $uploadCheck = FALSE;
 			}
-			// Check if $uploadCheck is set to 0 by an error
+
 			if ($uploadCheck == TRUE) {
 				move_uploaded_file($fileToUpload['tmp_name'], $target_file);
 			}
-		}//stänger ifsats om $fileToUpload är tom.
+		}
 		else{
 			$newFileName == NULL;
 		}
 
-		// LÄGGER TILL I DATABASEN PÅ VALDA POSITIONER
+		// adds into database.
 	    $query = "
 	    INSERT INTO content (title, subject, year, estimate, text, file, video, author_id)
 	    VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanEstimate','$cleanText','$newFileName','$videoID','$cleanAuthorID')
@@ -61,9 +66,11 @@ class ContentModel{
 
 	    $mysqli->query($query);
 
-	}//stänger addContent funktion
+	}
 
 	function viewSingleContent($dirtyContentID){
+	// takes contentID and looks for it in the database. if found return array value. 
+
 		$cleanContentID = Cleaner::cleanVar($dirtyContentID);
 
 		$mysqli = DB::getInstance();
@@ -82,9 +89,10 @@ class ContentModel{
 	  	$array[] = $row;
 	  }
 	  return $array;
-	} // stänger viewContent funktion
+	} 
 
 	function viewContent(){
+	// returns selected columns from content and limit the character to 150.
 		$mysqli = DB::getInstance();
 
 		$query = "
@@ -92,7 +100,7 @@ class ContentModel{
 		content.subject, content.year, content.estimate,
 		content.file, content.video,
 		content.author_id,
-		substring(content.text,1,50) as text,
+		substring(content.text,1,150) as text,
 		users.username
 		FROM content
 		JOIN users
@@ -106,9 +114,10 @@ class ContentModel{
 	  	$array[] = $row;
 	  }
 	  return $array;
-	} // stänger viewContent funktion
+	}
 
 	function searchContent($dirtySearch, $dirtySubject, $dirtyYear){
+	// takes post from searchform and search the database.
 		$cleanSubject = Cleaner::cleanVar($dirtySubject);
 		$cleanSearch = Cleaner::cleanVar($dirtySearch);
 		$cleanYear = Cleaner::cleanVar($dirtyYear);
@@ -124,7 +133,7 @@ class ContentModel{
 		content.video,
 		content.author_id,
 		content.text as 'fulltext',
-		substring(content.text,1,50) as 'text',
+		substring(content.text,1,150) as 'text',
 		users.username
 		FROM users
 		JOIN content
@@ -144,11 +153,13 @@ class ContentModel{
 	}// stänger searchContent funktion
 
 	function deleteContent($dirtyContentID, $dirtyUserID){
+	// takes contentID and userID and deletes it from database.
+	//it will only delete rows containg both userID and contentID so that one cant delete someone elses content.
 		$cleanContentID = Cleaner::cleanVar($dirtyContentID);
 		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
 
 		$mysqli = DB::getInstance();
-//LÄGG in ev kontroll så man bara kan ta bort egna publicerade artikler
+
 	    $query = "
 	    DELETE
 	    FROM content
@@ -160,6 +171,8 @@ class ContentModel{
 	}
 
 	function rating($dirtyContentID,$dirtyUserId,$dirtyRating){
+	// takes contentID, userID and rating containing 1 or -1 and insert it into database.
+	// it checks if that userID has rated on that content before. if no, it will insert rating into database.
 
 		$cleanContentID = Cleaner::cleanVar($dirtyContentID);
 		$cleanUserId = Cleaner::cleanVar($dirtyUserId);
@@ -186,6 +199,7 @@ class ContentModel{
 
 
 	function viewRating(){
+	// sums the rating and displays it.
 		$mysqli = DB::getInstance();
 		$query = "
 			select content_id, sum(rating) as rating
@@ -202,6 +216,8 @@ class ContentModel{
 	}
 
 	static function viewArticleUses(){
+	// looks in database how many times a content.id reccurs and then displays it.
+	// it reccurs when someone uses that content in table goals_use_content.
 
 	$mysqli = DB::getInstance();
 	$query = "select content.author_id as user, content.title, count(content.id) as uses
@@ -219,6 +235,6 @@ class ContentModel{
 		}
 
 		return $viewArticleUses;
-	}//stänger ArticleUses
+	}
 
-}//Close class
+}
