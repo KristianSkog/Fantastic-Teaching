@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(0);
 require_once("classes/DB.class.php");
 
 	if (!isset($_GET) || count($_GET)<=0) {
