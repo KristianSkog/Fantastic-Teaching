@@ -6,24 +6,8 @@
 			<label for="title">Title:</label>
 			<input class="form-control" autofocus required type='text' name='title' placeholder='Add title...'>
 		</div>
-		<div class="form-group">
-			<label for="subject">Subject:</label>
-			<select class="form-control" name='subject'>
-			<option value="Svenska">Svenska</option>
-			<option value="Geografi">Geografi</option>
-			<option value="Historia">Historia</option>
-			<option value="Matte">Matte</option>
-			</select>
-		</div>
-		<div class="form-group">
-			<label for="year">Suitable for year:</label>
-			<select class="form-control" name='year'>
-			<option value="1-2">1-2</option>
-			<option value="3-5">3-5</option>
-			<option value="6-7">6-7</option>
-			<option value="8-9">8-9</option>
-			</select>
-		</div>
+		{% include 'dropdownSubject.html' %}
+		{% include 'dropdownYear.html' %}
 		<div class="form-group">
 			<label for="estimate">Estimated teaching hours this exercise might need in class:</label>
 			<select class="form-control" name='estimate'>

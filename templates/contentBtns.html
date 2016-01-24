@@ -1,14 +1,4 @@
-<!-- DELETE BTN -->
 <div class="row">
-	<div class="col-xs-12">
-		{% if row.username == user %}
-		<div class="form-group">
-			<form method="post" action="/Fantastic-Teaching/?/Content/delete">
-				<button class="transparentbtn centered" type="submit" name="deleteContentID" value="{{row.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete</button>
-			</form>
-		</div>
-		{% endif %}
-	</div>
 
 	<!-- RATING BTNS -->
 	<div class="col-xs-12">
@@ -25,5 +15,16 @@
 				<button type="submit" name="submitDown" value="-1" class="glyphicon glyphicon-menu-down btn-md ratingButton ratingWidth" aria-hidden="true"></button>
 			</form>
 		</div>
+	</div>
+
+	<!-- DELETE BTN -->
+	<div class="col-xs-12">
+		{% if row.username == user %}
+		<div class="form-group">
+			<form method="post" action="/Fantastic-Teaching/?/Content/delete">
+				<button class="transparentbtn centered" type="submit" name="deleteContentID" value="{{row.id}}"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span> Delete</button>
+			</form>
+		</div>
+		{% endif %}
 	</div>
 </div>

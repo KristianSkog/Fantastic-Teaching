@@ -1,32 +1,16 @@
 <div class="row content-background border-bottom-radius">
-<div class="col-xs-12">
-<h3>Teaching Goals:</h3>
-<form method='post' action="?/GoalsController/add">
-	<div class="form-group">
-		<label for="title">Goal:</label>
-		<input class="form-control" autofocus required type='text' name='goal' placeholder="What's your goal?">
+	<div class="col-xs-12">
+	<h3>Teaching Goals:</h3>
+	<form method='post' action="?/GoalsController/add">
+		<div class="form-group">
+			<label for="title">Goal:</label>
+			<input class="form-control" autofocus required type='text' name='goal' placeholder="What's your goal?">
+		</div>
+		{% include 'dropdownSubject.html' %}
+		{% include 'dropdownYear.html' %}
+		<div class="form-group">
+			<button class="transparentbtn" type="submit" name="goalUserID" value="{{userID}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add goal</button>
+		</div>
+	</form>
 	</div>
-	<div class="form-group">
-		<label for="subject">Belongs in subject:</label>
-		<select class="form-control" name='subject'>
-		<option value="Svenska">Svenska</option>
-		<option value="Geografi">Geografi</option>
-		<option value="Historia">Historia</option>
-		<option value="Matte">Matte</option>
-		</select>
-	</div>
-	<div class="form-group">
-		<label for="year">Teaching in year:</label>
-		<select class="form-control" name='year'>
-		<option value="1-2">1-2</option>
-		<option value="3-5">3-5</option>
-		<option value="6-7">6-7</option>
-		<option value="8-9">8-9</option>
-		</select>
-	</div>
-	<div class="form-group">
-		<button class="transparentbtn" type="submit" name="goalUserID" value="{{userID}}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add goal</button>
-	</div>
-</form>
-</div>
 </div>
