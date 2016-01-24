@@ -89,27 +89,27 @@ class GoalsModel{
 		return ['items' => $array, 'goal' => $array[0]['goal'], 'goal_subject' => $array[0]['goal_subject'], 'goal_year' => $array[0]['goal_year'],'goal_id' => $array[0]['goal_id']];
 
 	}
-
-	static function sumEstimate($dirtyGoalID, $dirtyUserID){
-	// takes goalID and userID and shows the sum from all rows regarding time estimate. 
-		$cleanGoalID = Cleaner::cleanVar($dirtyGoalID);
-		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
-		$mysqli = DB::getInstance();
-		$query = "
-			SELECT *, SUM(content.estimate) as estimate
-			FROM content, goals_use_content
-			WHERE goals_use_content.goal_id = '".$cleanGoalID."'
-			AND goals_use_content.user_id = '".$cleanUserID."'
-			AND content.id = goals_use_content.content_id
-			";
+// function to be implemented later that sums the time for your goal.
+	// static function sumEstimate($dirtyGoalID, $dirtyUserID){
+	// // takes goalID and userID and shows the sum from all rows regarding time estimate. 
+	// 	$cleanGoalID = Cleaner::cleanVar($dirtyGoalID);
+	// 	$cleanUserID = Cleaner::cleanVar($dirtyUserID);
+	// 	$mysqli = DB::getInstance();
+	// 	$query = "
+	// 		SELECT *, SUM(content.estimate) as estimate
+	// 		FROM content, goals_use_content
+	// 		WHERE goals_use_content.goal_id = '".$cleanGoalID."'
+	// 		AND goals_use_content.user_id = '".$cleanUserID."'
+	// 		AND content.id = goals_use_content.content_id
+	// 		";
 		
-		$result = $mysqli->query($query);
-		$array = array();
-		while ($row = $result->fetch_assoc()) {
-			$array[] = $row;
-		}
-		return $array;
+	// 	$result = $mysqli->query($query);
+	// 	$array = array();
+	// 	while ($row = $result->fetch_assoc()) {
+	// 		$array[] = $row;
+	// 	}
+	// 	return $array;
 		
-	}
+	// }
 
 }
