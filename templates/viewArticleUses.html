@@ -6,8 +6,8 @@
 				{% if row.user ==  userID %}
 					<li class="list-group-item">
 					<span class="badge">{{row.uses|e}}</span>
-					{{row.title|e}}
-					</li>
+					<a href="/Fantastic-Teaching/?/Content/view/{{row.id}}">{{row.title|e}}
+					</a></li>
 					{% endif %}
 			{% endfor %}
 		</ul>

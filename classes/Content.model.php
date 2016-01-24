@@ -220,7 +220,7 @@ class ContentModel{
 	// it reccurs when someone uses that content in table goals_use_content.
 
 	$mysqli = DB::getInstance();
-	$query = "select content.author_id as user, content.title, count(content.id) as uses
+	$query = "select content.id, content.author_id as user, content.title, count(content.id) as uses
 			from content
 			join users
 			on content.author_id = users.id
