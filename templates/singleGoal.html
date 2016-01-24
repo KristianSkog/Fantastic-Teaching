@@ -1,6 +1,6 @@
 <div class="row content-background border-bottom-radius">
 <div class="col-xs-2">
-<h4>Single Goal:</h4>
+<h4>Plans for goal:</h4>
 </div>
 <div class="col-xs-10">
 	{% include 'deleteGoalBtn.html' %}
@@ -13,6 +13,7 @@
 			<li>{{row.title|e}} - {{row.estimate|e}} h {% include 'deleteConnBtn.html' %}</li>
 			{% endif %}
 		{% endfor %}
+	<hr>
 	{% include 'viewAllGoalsBtn.html' %}
 </div>
 </div>
