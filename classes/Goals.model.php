@@ -19,6 +19,23 @@ class GoalsModel{
 
 	}
 
+	static function deleteGoal($dirtyGoalID, $dirtyUserID){
+	// takes goalID and session userID and deletes from database that row that contains both of the values. no action if only one of them is found.
+
+		$cleanGoalID = Cleaner::cleanVar($dirtyGoalID);
+		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
+
+		$mysqli = DB::getInstance();
+	    //check session['userID'] if you are the creator of the goal that you are trying to delete.
+	    $query = "
+	    DELETE
+	    FROM goals
+	    WHERE goals.id = '".$cleanGoalID."'
+	    AND goals.user_id = '".$cleanUserID."'
+	    ";
+
+	    $mysqli->query($query);
+	}
 
 	static function viewGoals($dirtyUserID){
 		// takes session userID and selects goals that has the same userID
@@ -41,25 +58,6 @@ class GoalsModel{
 	       $array[] = $rowGoals;
 	    }
 	    return $array;
-	}
-
-
-	static function deleteGoal($dirtyGoalID, $dirtyUserID){
-	// takes goalID and session userID and deletes from database that row that contains both of the values. no action if only one of them is found.
-
-		$cleanGoalID = Cleaner::cleanVar($dirtyGoalID);
-		$cleanUserID = Cleaner::cleanVar($dirtyUserID);
-
-		$mysqli = DB::getInstance();
-	    //check session['userID'] if you are the creator of the goal that you are trying to delete.
-	    $query = "
-	    DELETE
-	    FROM goals
-	    WHERE goals.id = '".$cleanGoalID."'
-	    AND goals.user_id = '".$cleanUserID."'
-	    ";
-
-	    $mysqli->query($query);
 	}
 
 	static function showSingleGoal($dirtyGoalID, $dirtyUserID){

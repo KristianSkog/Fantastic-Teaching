@@ -23,7 +23,7 @@ class GoalsController {
 	// method sends information to Goals.model when a form sends post here.
 		require_once('Goals.model.php');
 		$goalsMdl = new GoalsModel();
-		$create = $goalsMdl->addGoal($_POST['goal'], $_POST['subject'], $_POST['year'], $_POST['goalUserID']);
+		$goalsMdl->addGoal($_POST['goal'], $_POST['subject'], $_POST['year'], $_POST['goalUserID']);
 		header('Location: /Fantastic-Teaching/?/User/profile');
 		
 	}
@@ -32,7 +32,7 @@ class GoalsController {
 	// method sends information to goals.model when a form sends posts here.
 		require_once('Goals.model.php');
 		$goalsMdl = new GoalsModel();
-		$delete = $goalsMdl->deleteGoal($_POST['deleteGoalID'], $_SESSION['userID']);
+		$goalsMdl->deleteGoal($_POST['deleteGoalID'], $_SESSION['userID']);
 		header('Location: /Fantastic-Teaching/?/User/profile');
 		
 	}
@@ -62,7 +62,6 @@ class GoalsController {
 
 		$data = array(
 				'templates' => array('header.html','menu.html','singleGoal.html','footer.html'),
-				'goals' => $goalsMdl->viewGoals($_SESSION['userID']),	
 				'userID' => $_SESSION['userID'],
 				'userLevel' => $_SESSION['userLevel'],
 				'singleGoal' => $goalsMdl->showSingleGoal($id, $_SESSION['userID'])

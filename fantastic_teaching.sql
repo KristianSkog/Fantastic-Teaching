@@ -20,7 +20,8 @@ INSERT INTO `allowed_accounts` (`id`, `email`) VALUES
 (1,	'd805ddd4cd620561635b001020373b3fe7945e9ab116e0701a6ec02b0b39203cc47cee927c4c5a336a1a3050980cb99bbb32bd7ace31c55e23c3486f3059b1d7'),
 (2,	'f638b0dd412a7de0fc17612db3271543e48a74070ff31312444e621c2c0160d1bdfbb5e511126c83eccf1534dd5567e4232b6e3c936fb53355a8eae47d6738e4'),
 (3,	'b8cba57da356b0f18e7245cee154e6f1a5182e26e5eaee5b8b3cb1eb990219b135c9663f8f32c2c03938ed6afb63233bf530914edf1b10ceb60e1894c765663a'),
-(4,	'8cf0d552d9620083dfc508138bb66355af53b75bab61ba08eefae22ef8b1507b49316793fdd08002163abefa7a30048a1e12d60015748f0f6b0bd9e6738dce43');
+(4,	'8cf0d552d9620083dfc508138bb66355af53b75bab61ba08eefae22ef8b1507b49316793fdd08002163abefa7a30048a1e12d60015748f0f6b0bd9e6738dce43')
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `email` = VALUES(`email`);
 
 DROP TABLE IF EXISTS `content`;
 CREATE TABLE `content` (
@@ -53,7 +54,8 @@ INSERT INTO `content` (`id`, `title`, `subject`, `year`, `estimate`, `text`, `fi
 (96,	'Stockholms blodbad',	'Historia',	'3-5',	'4',	'Stockholms blodbad var den rannsakning och efterfÃ¶ljande avrÃ¤ttningar som Ã¤gde rum i Stockholm den 7â€“9 november 1520. HÃ¤ndelserna inleddes direkt efter Kristian II:s (som efter blodbadet blev kÃ¤nd som Kristian Tyrann i Sverige[1]) krÃ¶ning till svensk kung nÃ¤r gÃ¤sterna pÃ¥ krÃ¶ningsfesten kallades till ett mÃ¶te pÃ¥ slottet. Ã„rkebiskop Gustav Trolles krav pÃ¥ ekonomisk kompensation fÃ¶r bland annat StÃ¤kets rivning ledde till frÃ¥gan om den tidigare riksfÃ¶restÃ¥ndaren Sten Sture den yngre och hans anhÃ¤ngare hade gjort sig skyldiga till kÃ¤tteri. Med stÃ¶d i kanonisk rÃ¤tt avrÃ¤ttades nÃ¤rmare 100 personer[2] de fÃ¶ljande dagarna. Bland de avrÃ¤ttade Ã¥terfanns mÃ¥nga inom aristokratin som hade givit sitt stÃ¶d Ã¥t Sturepartiet under de fÃ¶regÃ¥ende Ã¥ren.',	'56a52521289db.jpg',	'2016-01-24 19:25:21',	'',	16),
 (97,	'infinity',	'Matte',	'8-9',	'2',	'Sometimes infinity is even bigger than you think... Dr James Grime explains with a little help from Georg Cantor.',	'',	'2016-01-24 20:47:12',	'elvOZm0d4H0',	15),
 (98,	'arabic numerals',	'Matte',	'3-5',	'1',	'Hank unravels the fascinating yarn of how the world came to use so-called Arabic numerals -- from the scholarship of ancient Hindu mathematicians, to Muslim scientist Al-Khwarizmi, to the merchants of medieval Italy. \r\n',	'',	'2016-01-24 20:54:28',	'Ar7CNsJUm58',	15),
-(99,	'Europas historia',	'Geografi',	'1-2',	'1',	'Denna artikel skildrar Europas historia.\r\n\r\nDe fÃ¶rsta fÃ¶r-mÃ¤nniskorna kom till Europa fÃ¶r cirka 800 000 Ã¥r sedan som ett resultat av att Homo erectus spred sig Ã¶ver jorden. Medan den moderna mÃ¤nniskan (Homo sapiens) fortfarande utvecklades i Afrika levde Homo heidelbergensis och Homo neanderthalensis (neandertalmÃ¤nniska) i Europa.\r\n\r\nDe fÃ¶rsta moderna mÃ¤nniskorna utvecklades i Afrika fÃ¶r omkring 200 000 Ã¥r sedan och kom till Europa fÃ¶r cirka 40 000 Ã¥r sedan.[1] Det var endast en liten grupp afrikaner som fÃ¶r kanske 60 000 Ã¥r sedan tog sig Ã¶ver till SinaihalvÃ¶n, och som blev fÃ¶rfÃ¤der till alla mÃ¤nniskor utom de svarta afrikaner som stannade i Afrika.[1][2] Forskarna tvistar Ã¤nnu om vÃ¤gen till Europa har gÃ¥tt direkt norrut genom det som idag Ã¤r Israel, Libanon och Syrien, eller om vÃ¥ra fÃ¶rfÃ¤der tog sig vidare Ã¶ver till Arabiska halvÃ¶n och sedan fÃ¶ljde Indiska oceanens kust tills de stÃ¶tte pÃ¥ floder som de fÃ¶ljde norrut. I bÃ¤gge fallen bÃ¶r Homo sapiens i sin fÃ¶rsta inflyttningsvÃ¥g till Europa fÃ¶r 40 000 Ã¥r sedan ha tagit sig till Europa via det som idag Ã¤r Anatolien (Turkiska halvÃ¶n), dÃ¤r mycket gamla fynd har hittats, och vidare Ã¶ver Bosporen.[3][1]\r\n\r\nAnsiktsbenen frÃ¥n den hittills Ã¤ldsta \"europÃ©n\" â€“ en 40 000 Ã¥r gamla fossil frÃ¥n en tonÃ¥ring â€“ har hittats i en grotta i RumÃ¤nien, och Richard Neave, brittisk kriminaltekniker har Ã¥terskapat ansiktet med hjÃ¤lp av kopior av skallbenen. En mÃ¶rkhyad, men inte svart, person med ansiktsdrag som inte Ã¶verensstÃ¤mmer helt med nÃ¥gon nu levande folkgrupp blev resultatet. (Den ljusa hudfÃ¤rgen antas ha utvecklats som ett resultat av mÃ¤nniskans behov av vitamin D.) Neave talar om ett ansikte som tycks befinna sig i \"flux\" â€“ i ett tillstÃ¥nd av fÃ¶rÃ¤ndring mot vilken som helst av de folkgrupper som idag finns i vÃ¤rlden.[4] Omkring tio procent av dagens europÃ©er bÃ¤r pÃ¥ gener frÃ¥n dessa fÃ¶rsta europÃ©er.[3] EuropÃ©erna Ã¤r dock ingen folkgrupp avskild frÃ¥n andra pÃ¥ jorden. Om vi moderna mÃ¤nniskor jÃ¤mfÃ¶r oss med varandra Ã¤r en person, vilken som helst, till 99,9 procent genetiskt identisk med en slumpvis utvald mÃ¤nniska var som helst pÃ¥ jorden. Enligt nya rÃ¶n bÃ¤r dessutom alla mÃ¤nniskor pÃ¥ jorden utom svarta afrikaner pÃ¥ en liten mÃ¤ngd genetiskt material som Ã¤r unikt fÃ¶r neandertalmÃ¤nniskan.[2]\r\n\r\nDe sista neandertalmÃ¤nniskorna dog ut fÃ¶r cirka 30 000 Ã¥r sedan. FÃ¶r cirka 25 000 Ã¥r sedan svepte vÃ¥gor av invandrare frÃ¥n Asien in i Europa, och kom att dominera kontinenten. Att likadana konstfÃ¶remÃ¥l hittats frÃ¥n dagens Frankrike till omrÃ¥det kring Kaspiska havet tyder pÃ¥ ett socialt nÃ¤tverk och mÃ¤nniskor med en Ã¶vergripande gemensam kultur.[3]',	'56a53a7521a94.png',	'2016-01-24 20:56:21',	'',	15);
+(99,	'Europas historia',	'Geografi',	'1-2',	'1',	'Denna artikel skildrar Europas historia.\r\n\r\nDe fÃ¶rsta fÃ¶r-mÃ¤nniskorna kom till Europa fÃ¶r cirka 800 000 Ã¥r sedan som ett resultat av att Homo erectus spred sig Ã¶ver jorden. Medan den moderna mÃ¤nniskan (Homo sapiens) fortfarande utvecklades i Afrika levde Homo heidelbergensis och Homo neanderthalensis (neandertalmÃ¤nniska) i Europa.\r\n\r\nDe fÃ¶rsta moderna mÃ¤nniskorna utvecklades i Afrika fÃ¶r omkring 200 000 Ã¥r sedan och kom till Europa fÃ¶r cirka 40 000 Ã¥r sedan.[1] Det var endast en liten grupp afrikaner som fÃ¶r kanske 60 000 Ã¥r sedan tog sig Ã¶ver till SinaihalvÃ¶n, och som blev fÃ¶rfÃ¤der till alla mÃ¤nniskor utom de svarta afrikaner som stannade i Afrika.[1][2] Forskarna tvistar Ã¤nnu om vÃ¤gen till Europa har gÃ¥tt direkt norrut genom det som idag Ã¤r Israel, Libanon och Syrien, eller om vÃ¥ra fÃ¶rfÃ¤der tog sig vidare Ã¶ver till Arabiska halvÃ¶n och sedan fÃ¶ljde Indiska oceanens kust tills de stÃ¶tte pÃ¥ floder som de fÃ¶ljde norrut. I bÃ¤gge fallen bÃ¶r Homo sapiens i sin fÃ¶rsta inflyttningsvÃ¥g till Europa fÃ¶r 40 000 Ã¥r sedan ha tagit sig till Europa via det som idag Ã¤r Anatolien (Turkiska halvÃ¶n), dÃ¤r mycket gamla fynd har hittats, och vidare Ã¶ver Bosporen.[3][1]\r\n\r\nAnsiktsbenen frÃ¥n den hittills Ã¤ldsta \"europÃ©n\" â€“ en 40 000 Ã¥r gamla fossil frÃ¥n en tonÃ¥ring â€“ har hittats i en grotta i RumÃ¤nien, och Richard Neave, brittisk kriminaltekniker har Ã¥terskapat ansiktet med hjÃ¤lp av kopior av skallbenen. En mÃ¶rkhyad, men inte svart, person med ansiktsdrag som inte Ã¶verensstÃ¤mmer helt med nÃ¥gon nu levande folkgrupp blev resultatet. (Den ljusa hudfÃ¤rgen antas ha utvecklats som ett resultat av mÃ¤nniskans behov av vitamin D.) Neave talar om ett ansikte som tycks befinna sig i \"flux\" â€“ i ett tillstÃ¥nd av fÃ¶rÃ¤ndring mot vilken som helst av de folkgrupper som idag finns i vÃ¤rlden.[4] Omkring tio procent av dagens europÃ©er bÃ¤r pÃ¥ gener frÃ¥n dessa fÃ¶rsta europÃ©er.[3] EuropÃ©erna Ã¤r dock ingen folkgrupp avskild frÃ¥n andra pÃ¥ jorden. Om vi moderna mÃ¤nniskor jÃ¤mfÃ¶r oss med varandra Ã¤r en person, vilken som helst, till 99,9 procent genetiskt identisk med en slumpvis utvald mÃ¤nniska var som helst pÃ¥ jorden. Enligt nya rÃ¶n bÃ¤r dessutom alla mÃ¤nniskor pÃ¥ jorden utom svarta afrikaner pÃ¥ en liten mÃ¤ngd genetiskt material som Ã¤r unikt fÃ¶r neandertalmÃ¤nniskan.[2]\r\n\r\nDe sista neandertalmÃ¤nniskorna dog ut fÃ¶r cirka 30 000 Ã¥r sedan. FÃ¶r cirka 25 000 Ã¥r sedan svepte vÃ¥gor av invandrare frÃ¥n Asien in i Europa, och kom att dominera kontinenten. Att likadana konstfÃ¶remÃ¥l hittats frÃ¥n dagens Frankrike till omrÃ¥det kring Kaspiska havet tyder pÃ¥ ett socialt nÃ¤tverk och mÃ¤nniskor med en Ã¶vergripande gemensam kultur.[3]',	'56a53a7521a94.png',	'2016-01-24 20:56:21',	'',	15)
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `title` = VALUES(`title`), `subject` = VALUES(`subject`), `year` = VALUES(`year`), `estimate` = VALUES(`estimate`), `text` = VALUES(`text`), `file` = VALUES(`file`), `timestamp` = VALUES(`timestamp`), `video` = VALUES(`video`), `author_id` = VALUES(`author_id`);
 
 DROP TABLE IF EXISTS `goals`;
 CREATE TABLE `goals` (
@@ -66,24 +68,6 @@ CREATE TABLE `goals` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 INSERT INTO `goals` (`id`, `goal`, `subject`, `year`, `user_id`) VALUES
-(8,	'',	'',	'',	0),
-(9,	'Klaras mÃ¥l',	'Svenska',	'1-2',	0),
-(10,	'',	'',	'',	0),
-(11,	'',	'',	'',	0),
-(12,	'',	'',	'',	0),
-(13,	'',	'',	'',	0),
-(14,	'',	'',	'',	0),
-(15,	'',	'',	'',	0),
-(16,	'',	'',	'',	0),
-(17,	'',	'',	'',	0),
-(18,	'',	'',	'',	0),
-(19,	'',	'',	'',	0),
-(20,	'',	'',	'',	0),
-(22,	'',	'',	'',	0),
-(23,	'',	'',	'',	0),
-(24,	'',	'',	'',	0),
-(25,	'',	'',	'',	0),
-(26,	'',	'',	'',	0),
 (27,	'kristians mÃ¥l',	'Svenska',	'1-2',	6),
 (30,	'Teach some stuff',	'Historia',	'6-7',	12),
 (31,	'LÃ¤ra ut lite andra saker',	'Geografi',	'1-2',	12),
@@ -91,7 +75,8 @@ INSERT INTO `goals` (`id`, `goal`, `subject`, `year`, `user_id`) VALUES
 (34,	'Addition',	'Matte',	'1-2',	9),
 (35,	'Historia Ã¥r 3',	'Historia',	'3-5',	9),
 (36,	'Historia Ã¥r 3',	'Historia',	'3-5',	16),
-(37,	'Klass 3e vecka 13',	'Geografi',	'3-5',	15);
+(37,	'Klass 3e vecka 13',	'Geografi',	'3-5',	15)
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `goal` = VALUES(`goal`), `subject` = VALUES(`subject`), `year` = VALUES(`year`), `user_id` = VALUES(`user_id`);
 
 DROP TABLE IF EXISTS `goals_use_content`;
 CREATE TABLE `goals_use_content` (
@@ -121,7 +106,8 @@ INSERT INTO `goals_use_content` (`id`, `goal_id`, `content_id`, `user_id`) VALUE
 (61,	36,	96,	16),
 (62,	37,	96,	15),
 (63,	37,	90,	15),
-(64,	32,	99,	15);
+(64,	32,	99,	15)
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `goal_id` = VALUES(`goal_id`), `content_id` = VALUES(`content_id`), `user_id` = VALUES(`user_id`);
 
 DROP TABLE IF EXISTS `rating`;
 CREATE TABLE `rating` (
@@ -155,7 +141,9 @@ INSERT INTO `rating` (`id`, `content_id`, `rating`, `users_id`) VALUES
 (93,	94,	1,	15),
 (94,	99,	1,	15),
 (95,	98,	1,	15),
-(96,	97,	1,	15);
+(96,	97,	1,	15),
+(97,	99,	1,	16)
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `content_id` = VALUES(`content_id`), `rating` = VALUES(`rating`), `users_id` = VALUES(`users_id`);
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
@@ -170,6 +158,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `salt`, `password`, `level`) VALUES
 (6,	'Kristian2',	'aqOj% qE¯¾MScz',	'd33d27aeea7524fb42a9ffb5149ce735cfcbb237d9f311798bae74009ff3eec5158effe8e7e7dbfa8239aeff6b218703c61941a4307d9a7a8a91e9b68dec1910',	'Premium'),
 (15,	'eriklovenstad',	',pç‘ï@d¡U	;Åœà',	'0cfcd70bcfd5996709f271035d96a147a42ec1d5e43c34dd560c62f37ac5778e748a91d9dffeee23972dc109067b538ef710c958350aa54f6d44ca938eaa280c',	'Premium'),
-(16,	'KlaraKollerstrom',	'À„¾)&^§ÕÝ¶!çŠ',	'07992091b2013fd2dcf8fae664814c861e0274619e70cb887a57499d08b8daec4c5bf9b827770da057896a55b0b9168940acb185df18b1bc2ed7bea04388a0b5',	'Premium');
+(16,	'KlaraKollerstrom',	'À„¾)&^§ÕÝ¶!çŠ',	'07992091b2013fd2dcf8fae664814c861e0274619e70cb887a57499d08b8daec4c5bf9b827770da057896a55b0b9168940acb185df18b1bc2ed7bea04388a0b5',	'Premium')
+ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `username` = VALUES(`username`), `salt` = VALUES(`salt`), `password` = VALUES(`password`), `level` = VALUES(`level`);
 
--- 2016-01-24 20:58:24
+-- 2016-01-24 23:06:31
