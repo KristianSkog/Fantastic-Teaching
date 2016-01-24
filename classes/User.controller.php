@@ -1,6 +1,10 @@
 <?php
 
 class User {
+	//Page to load depending on get veriable.
+	// Each method returns what templates to load and some twig variables for index.html and the templates to read.
+
+
 	public static function home() {
 			require_once('Goals.model.php');
 			require_once('Content.model.php');

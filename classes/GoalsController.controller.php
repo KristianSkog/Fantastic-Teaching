@@ -1,8 +1,12 @@
 <?php
 
 class GoalsController {
+	// Page to load depending on GET variable.
+
 
 	public static function goalsForm() {
+			//method returns what templates to load and some twig variables for index.html and the templates to read.
+
 			require_once('Goals.model.php');
 			$goalsMdl = new GoalsModel();
 			$data = array(
@@ -16,6 +20,7 @@ class GoalsController {
 	}
 
 	public static function add() {
+	// method sends information to Goals.model when a form sends post here.
 		require_once('Goals.model.php');
 		$goalsMdl = new GoalsModel();
 		$create = $goalsMdl->addGoal($_POST['goal'], $_POST['subject'], $_POST['year'], $_POST['goalUserID']);
@@ -24,6 +29,7 @@ class GoalsController {
 	}
 
 	public static function delete() {
+	// method sends information to goals.model when a form sends posts here.
 		require_once('Goals.model.php');
 		$goalsMdl = new GoalsModel();
 		$delete = $goalsMdl->deleteGoal($_POST['deleteGoalID'], $_SESSION['userID']);
@@ -32,6 +38,7 @@ class GoalsController {
 	}
 
 	public static function goals() {
+	//method returns what templates to load and some twig variables for index.html and the templates to read.
 		require_once('Goals.model.php');
 		$goalsMdl = new GoalsModel();
 		
@@ -46,6 +53,9 @@ class GoalsController {
 	}
 
 	public static function singleGoal($url_parts) {
+	//method returns what templates to load and some twig variables for index.html and the templates to read. 
+	// compares what userID you have and returns goals connected to that userID
+	//gives singlegoal method an content id from GET and the userID from session and puts what it returns in 'singleGoal' 
 		require_once('Goals.model.php');
 		$goalsMdl = new GoalsModel();
 		$id = $url_parts[0];
@@ -61,17 +71,19 @@ class GoalsController {
 	}
 
 	public static function createConnection() {
+	// gives useContent method in goals.model goalID, contentID and userID.
 		require_once('Goals.model.php');
 		$goalsMdl = new GoalsModel();
-		$createConnection = $goalsMdl->useContent($_POST['connectedGoalID'], $_POST['connectedContentID'], $_SESSION['userID'] );
+		$goalsMdl->useContent($_POST['connectedGoalID'], $_POST['connectedContentID'], $_SESSION['userID'] );
 		header('Location: /Fantastic-Teaching/?/GoalsController/singleGoal/'.$_POST['connectedGoalID'].'');
 		
 	}
 
 	public static function deleteConnection() {
+	// gives deleteConntection in Goals.model content id and user id and deletes it from database.
 		require_once('Goals.model.php');
 		$goalsMdl = new GoalsModel();
-		$deleteConnection = $goalsMdl->deleteConnection($_POST['deleteConnectionID'], $_SESSION['userID']);
+		$goalsMdl->deleteConnection($_POST['deleteConnectionID'], $_SESSION['userID']);
 		header('Location: /Fantastic-Teaching/?/User/profile');
 		
 	}

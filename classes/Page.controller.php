@@ -1,5 +1,5 @@
 <?php
-
+// functionality to login or create an account which is called on if you have no userID from session
 class Page {
 
 

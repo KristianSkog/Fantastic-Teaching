@@ -1,32 +1,18 @@
 <?php
 
 class Account {
-
-	// public static function login() {
-	// 	require_once("classes/Account.model.php");
-	// 	require_once("classes/Cleaner.class.php");
-	// 	$login = AccountModel::logIn($_POST['username'], $_POST['password']);
-	// 	if($login){
-	// 	header('Location: /Fantastic-Teaching/?/User/home');
-	// }
-	
-	// }
-
-	// public static function create() {
-	// 	require_once("classes/Account.model.php");
-	// 	require_once("classes/Cleaner.class.php");
-	// 	$create = AccountModel::createAccount($_POST['newUsername'], $_POST['newPassword'], $_POST['allowedEmail']);
-	// 	return header('Location: /Fantastic-Teaching/?/User/home');
-	// }
+	// Function to change password and logout.
 
 	public static function change() {
+		//this method calls on changsPassword in account.model and updates the database with the new password.
 		require_once("classes/Account.model.php");
 		require_once("classes/Cleaner.class.php");
-		$create = AccountModel::changePassword($_POST['userForUpdate'], $_POST['updatedPassword']);
+		AccountModel::changePassword($_POST['userForUpdate'], $_POST['updatedPassword']);
 		return header('Location: /Fantastic-Teaching/?/User/home');
 	}
 
 	public static function logout() {
+		//this method unsets the session 
 		if (isset($_POST['logout'])) session_unset();
 		return header('Location: /Fantastic-Teaching/');
 	}

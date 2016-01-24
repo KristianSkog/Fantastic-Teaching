@@ -1,6 +1,6 @@
 <?php
 class AccountModel{
-	
+	//takes username password and email from form. Cleans it using the cleaner class. 
 	static function createAccount($dirtyNewUsername, $dirtyNewPassword, $dirtyNewEmail) {
 
 		//cleans our parameters:
@@ -12,7 +12,7 @@ class AccountModel{
 		$size = mcrypt_get_iv_size(MCRYPT_CAST_256, MCRYPT_MODE_CFB);
 		$salt = mcrypt_create_iv($size);
 
-		//hashes our cleaned password with added salt:
+		//hashes our cleaned password with added salt and creates a uniqe combination with them two. 
 		$safeNewPassword = hash("sha512", "$salt"."$cleanNewPassword");
 		
 		//verify e-mail to match with allowed acoounts
@@ -26,7 +26,7 @@ class AccountModel{
 		$resultEmailCheck = $mysqli->query($queryEmailCheck);
 		$rowEmailCheck = $resultEmailCheck->fetch_assoc();
 
-		//Kontroll - unikt användarnamn
+		//checks if username exists in database
 		//instans av db-uppkoppling
 		$mysqli = DB::getInstance();
 		$queryUsernameCheck = "
@@ -50,9 +50,10 @@ class AccountModel{
 			your chosen username is already used by someone else. Some lucky bastard.. Try another one :)";
 		}
 	}
-
 	static function logIn($dirtyUsername, $dirtyPassword) {
-		//instans av db-uppkoppling
+		//recives username and Password from form. then checks it with database. puts id, username and userLevel in a SESSION. if it returns TRUE the user can see website.
+
+
 		$mysqli = DB::getInstance();
 
 		//clean parameters
@@ -75,7 +76,7 @@ class AccountModel{
 		//hashes our cleaned password input with retrieved salt to match with database:
 		$safePassword = hash("sha512", "$userSalt"."$cleanPassword");
 		
-		// fråga till sql-db med tvättade variabler
+		// query to database and checks if user and password is the same.
 		$queryGetUserMatch = "
 		SELECT users.id, users.username, users.level
 		FROM users 
@@ -100,7 +101,8 @@ class AccountModel{
 	}
 
 	static function changePassword($userToChange, $dirtyUpdatedPassword){
-		//instans av db-uppkoppling
+		//Recieves new password. hashes with Salt. Updates database with new password. 
+
 		$mysqli = DB::getInstance();
 		$cleanUpdatedPassword = Cleaner::cleanVar($dirtyUpdatedPassword);
 		

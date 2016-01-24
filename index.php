@@ -2,46 +2,48 @@
 session_start();
 error_reporting(0);
 require_once("classes/DB.class.php");
-
+// if GET isnt set or doesnt contain anything give $class and $method the values Page and start.
 	if (!isset($_GET) || count($_GET)<=0) {
 		$class = "Page";
 		$method = "start";
 	}else{
+// if the first wasnt true, give $class and $method the values it finds in URL.
 		$url_parts = getUrlParts($_GET); 
 
-		$class = array_shift($url_parts); # tar ut första värdet och lägger den i $class, i vårt exempel ovan "Posts"
-		$method = array_shift($url_parts); # tar ut andra värdet och lägger den i $method, i vårt exempel ovan "single"
+		$class = array_shift($url_parts); // takes the first value from GET and puts it in $$class
+		$method = array_shift($url_parts); // takes the second value from GET and puts it in $method
 	}
 
-	# Hämta in filen för den klass vi ska anrop 
+// if $class and is Page and $method is start or create go to that class and method and put what it returns in $data.
 	if($class == 'Page' && ($method == 'start' || $method == 'create')){
 		require_once("classes/".$class.".controller.php");
 		$data = $class::$method($url_parts);
-
+// if first isnt true and it excists an $_SESSION containging a userID you are allowed to visit and put what it returns in $data
 	}elseif($_SESSION['userID']){
 		require_once("classes/".$class.".controller.php");
 		$data = $class::$method($url_parts);
 	}else{
+//if no $_SESSION userID excists load the templates below.
 		$data = array(
 			'templates'=>array('header.html','login.html','footer.html')	
 		);
 		
-		//ska istället köra en header() till /homepage
+//ska istället köra en header() till /homepage
 	}
 	
-	//data är resultatet av class/method/parametern som startades via URLen
+	// if there is an redirect go there, otherwise render the page it gets from $template and $data.
 
 	if(isset($data['redirect'])){
-	// om $data fick en 'redirect' från metoden vi kört
+
 		header("Location: ".$data['redirect']); 
 	}else{
-	// om $data INTE har 'redirect'
+
 			$twig = startTwig();
 	 		$template = 'index.html';
 			echo $twig->render($template, $data);
 	}
 
-//Delar URL till class/method/parameter i array
+//shares URL to Class/method/parameter and puts it in an array.
 function getUrlParts($get){
 	$get_params = array_keys($get);	
 	$url = $get_params[0];
@@ -56,7 +58,7 @@ function getUrlParts($get){
 	return $url_parts; 
 }
 
-//Laddar o startar Twig-objekt
+//Loads and starts twig object
 function startTwig(){
 	require_once('Twig/lib/Twig/Autoloader.php');
 	Twig_Autoloader::register();
