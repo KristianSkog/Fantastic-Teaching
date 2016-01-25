@@ -10,7 +10,7 @@
 	<h5>Connected to this goal:</h5>
 		{% for row in singleGoal.items %}
 			{% if row.title %}
-			<li><a href="/Fantastic-Teaching/?/Content/view/{{row.id}}">{{row.title|e}} - {{row.estimate|e}} h </a>
+			<li><a class="menu-buttons" href="/Fantastic-Teaching/?/Content/view/{{row.id}}">{{row.title|e}} - {{row.estimate|e}} h </a>
 			{% include 'deleteConnBtn.html' %}</li>
 			{% endif %}
 		{% endfor %}

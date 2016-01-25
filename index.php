@@ -17,13 +17,13 @@ require_once("classes/DB.class.php");
 // if $class and is Page and $method is start or create go to that class and method and put what it returns in $data.
 	if($class == 'Page' && ($method == 'start' || $method == 'create')){
 		require_once("classes/".$class.".controller.php");
-		$data = $class::$method($url_parts);
-// if first isnt true and it excists an $_SESSION containging a userID you are allowed to visit and put what it returns in $data
+		$data = $class::$method();
+// if first isnt true and it exists, an $_SESSION containging a userID you are allowed to visit and put what it returns in $data
 	}elseif($_SESSION['userID']){
 		require_once("classes/".$class.".controller.php");
 		$data = $class::$method($url_parts);
 	}else{
-//if no $_SESSION userID excists load the templates below.
+//if no $_SESSION userID exists, load the templates below.
 		$data = array(
 			'templates'=>array('header.html','login.html','footer.html')	
 		);
@@ -38,9 +38,9 @@ require_once("classes/DB.class.php");
 		header("Location: ".$data['redirect']); 
 	}else{
 
-			$twig = startTwig();
-	 		$template = 'index.html';
-			echo $twig->render($template, $data);
+		$twig = startTwig();
+	 	$template = 'index.html';
+		echo $twig->render($template, $data);
 	}
 
 //shares URL to Class/method/parameter and puts it in an array.

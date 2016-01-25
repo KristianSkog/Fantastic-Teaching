@@ -37,11 +37,11 @@ class ContentModel{
 
 		    if(!empty($fileToUpload['tmp_name'])) {
 		    $check = getimagesize($fileToUpload['tmp_name']);
-		    if($check !== FALSE) {
-	        $uploadCheck = TRUE;
-		    } else {
-	        $uploadCheck = FALSE;
-			   	}
+		     if($check !== FALSE) {
+	        	$uploadCheck = TRUE;
+		     } else {
+	        	$uploadCheck = FALSE;
+			 }
 			}
 
 			// Allow certain file formats, Check file size
@@ -60,8 +60,8 @@ class ContentModel{
 
 		// adds into database.
 	    $query = "
-	    INSERT INTO content (title, subject, year, estimate, text, file, video, author_id)
-	    VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanEstimate','$cleanText','$newFileName','$videoID','$cleanAuthorID')
+		    INSERT INTO content (title, subject, year, estimate, text, file, video, author_id)
+		    VALUES ('$cleanTitle','$cleanSubject','$cleanYear','$cleanEstimate','$cleanText','$newFileName','$videoID','$cleanAuthorID')
 	    ";
 
 	    $mysqli->query($query);
@@ -76,11 +76,11 @@ class ContentModel{
 		$mysqli = DB::getInstance();
 
 		$query = "
-		SELECT content.*, users.username
-		FROM content
-		JOIN users
-		ON content.author_id = users.id
-		WHERE content.id = ".$cleanContentID;
+			SELECT content.*, users.username
+			FROM content
+			JOIN users
+			ON content.author_id = users.id
+			WHERE content.id = ".$cleanContentID;
 
    		$result = $mysqli->query($query);
 		$array = array();
@@ -96,16 +96,16 @@ class ContentModel{
 		$mysqli = DB::getInstance();
 
 		$query = "
-		SELECT content.id, content.title,
-		content.subject, content.year, content.estimate,
-		content.file, content.video,
-		content.author_id,
-		substring(content.text,1,150) as text,
-		users.username
-		FROM content
-		JOIN users
-		ON content.author_id = users.id
-		ORDER BY content.timestamp DESC
+			SELECT content.id, content.title,
+			content.subject, content.year, content.estimate,
+			content.file, content.video,
+			content.author_id,
+			substring(content.text,1,150) as text,
+			users.username
+			FROM content
+			JOIN users
+			ON content.author_id = users.id
+			ORDER BY content.timestamp DESC
 		";
    		$result = $mysqli->query($query);
 		$array = array();
@@ -124,24 +124,24 @@ class ContentModel{
 		$mysqli = DB::getInstance();
 
 		$query = "
-		SELECT content.id,
-		content.title,
-		content.subject,
-		content.year,
-		content.estimate,
-		content.file,
-		content.video,
-		content.author_id,
-		content.text as 'fulltext',
-		substring(content.text,1,150) as 'text',
-		users.username
-		FROM users
-		JOIN content
-		ON users.id = content.author_id
-		WHERE CONCAT(content.subject, content.year) LIKE '%".$cleanSubject.$cleanYear."%'
-		HAVING content.title LIKE '%".$cleanSearch."%'
-		OR content.text  LIKE '%".$cleanSearch."%'
-		ORDER BY content.timestamp DESC
+			SELECT content.id,
+			content.title,
+			content.subject,
+			content.year,
+			content.estimate,
+			content.file,
+			content.video,
+			content.author_id,
+			content.text as 'fulltext',
+			substring(content.text,1,150) as 'text',
+			users.username
+			FROM users
+			JOIN content
+			ON users.id = content.author_id
+			WHERE CONCAT(content.subject, content.year) LIKE '%".$cleanSubject.$cleanYear."%'
+			HAVING content.title LIKE '%".$cleanSearch."%'
+			OR content.text  LIKE '%".$cleanSearch."%'
+			ORDER BY content.timestamp DESC
 		";
 
 		$result = $mysqli->query($query);
@@ -161,10 +161,10 @@ class ContentModel{
 		$mysqli = DB::getInstance();
 
 	    $query = "
-	    DELETE
-	    FROM content
-	    WHERE content.id = '".$cleanContentID."'
-	    AND content.author_id = '".$cleanUserID."'
+		    DELETE
+		    FROM content
+		    WHERE content.id = '".$cleanContentID."'
+		    AND content.author_id = '".$cleanUserID."'
 	    ";
 	    
 	    $mysqli->query($query);
@@ -188,8 +188,8 @@ class ContentModel{
 	  		if($row['ratingExists'] == 0){
 
 			  	$query = "
-				INSERT INTO rating (content_id, users_id, rating)
-				VALUES ('$cleanContentID', '$cleanUserId', '$cleanRating')
+					INSERT INTO rating (content_id, users_id, rating)
+					VALUES ('$cleanContentID', '$cleanUserId', '$cleanRating')
 				";
 
 				$mysqli->query($query);

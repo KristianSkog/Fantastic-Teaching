@@ -15,17 +15,15 @@ class Content {
 			return $data;
 	}
 
-	public static function add($url_parts) {
+	public static function add() {
 	//method returns what templates to load and some twig variables for index.html and the templates to read. 
 	//sends info to add method in content.model on what content to add into database
 		require_once('Content.model.php');
 		$contentMdl = new ContentModel();
-		$id = $url_parts[0];
+		$contentMdl->addContent($_POST['title'], $_POST['subject'], $_POST['year'], $_POST['estimate'], $_POST['text'], $_FILES["fileToUpload"], $_POST['video'], $_SESSION['userID']);
 				
 		$data = array(
 				'templates'=>array('header.html','menu.html', 'searchForm.html','footer.html'),
-				'article' => $contentMdl->addContent($_POST['title'], $_POST['subject'], $_POST['year'], $_POST['estimate'], $_POST['text'], $_FILES["fileToUpload"], $_POST['video'], $_SESSION['userID']),
-				'userLevel' => $_SESSION['userLevel'],
 				'user' => $_SESSION['username'],
 				'userID' => $_SESSION['userID']
 				);
@@ -38,7 +36,7 @@ class Content {
 	// sends info to deleteContent method in content.model on what to delete.
 		require_once('Content.model.php');
 		$contentMdl = new ContentModel();
-		$deleteContent = $contentMdl->deleteContent($_POST['deleteContentID'], $_SESSION['userID']);
+		$contentMdl->deleteContent($_POST['deleteContentID'], $_SESSION['userID']);
 		
 
 		header('Location: /Fantastic-Teaching/?/User/home');
@@ -78,7 +76,7 @@ class Content {
 		return $data;
 	}
 
-		public static function search($url_parts) {
+		public static function search() {
 	// sends info to search method in content.model on what to search for
 		require_once('Content.model.php');
 		$contentMdl = new ContentModel();
