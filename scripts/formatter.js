@@ -1,3 +1,6 @@
+//The formatter is a work in progress!
+
+
 //ADD <br> WHEN ENTER IS CLICKED
 
 $('textarea').keypress(function (e){
